@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BuddyListFragment">
+    tools:context=".buddy.lists.BuddyListFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/backArrowBtn"
+        android:layout_width="@dimen/back_arrow"
+        android:layout_height="@dimen/back_arrow"
+        android:src="@drawable/back_arrow_icon"/>
+
     <TextView
+        android:id="@+id/screenHeading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="@string/buddies" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/requestBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/requests" />
+
+    <TextView
+        android:id="@+id/matchesHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/matches" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/matchesFragmentContainerView"
+        android:name="edu.sjsu.sase.android.roots.buddy.lists.MatchFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/friendsHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/friends" />
+
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="temporary home button" />
+
+
+</LinearLayout>
