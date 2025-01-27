@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/buddyListFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/buddyProfileFragment"
-        android:name="edu.sjsu.sase.android.roots.BuddyProfileFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.BuddyProfileFragment"
         android:label="fragment_buddy_profile"
         tools:layout="@layout/fragment_buddy_profile" >
         <action
@@ -91,7 +91,7 @@
     </fragment>
     <fragment
         android:id="@+id/buddySystemFragment"
-        android:name="edu.sjsu.sase.android.roots.BuddySystemFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.BuddySystemFragment"
         android:label="fragment_buddy_system"
         tools:layout="@layout/fragment_buddy_system" >
         <action
@@ -109,7 +109,7 @@
     </fragment>
     <fragment
         android:id="@+id/buddyListFragment"
-        android:name="edu.sjsu.sase.android.roots.BuddyListFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.lists.BuddyListFragment"
         android:label="fragment_buddy_list"
         tools:layout="@layout/fragment_buddy_list" >
         <action

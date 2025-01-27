@@ -2,4 +2,10 @@
     <string name="app_name">Roots</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id">625155307432-kjtq911qaladhrksfp5p3k8ks8kgo6mv.apps.googleusercontent.com</string>
+    <string name = "buddies">buddies</string>
+    <string name = "requests">requests</string>
+    <string name = "matches">matches</string>
+    <string name = "friends">friends</string>
+
 </resources>
