@@ -18,7 +18,7 @@ import java.util.List;
  * Creates view for each Match in Matches List of the Buddies List screen
  */
 public class MatchRecyclerViewAdapter extends RecyclerView.Adapter<MatchRecyclerViewAdapter.ViewHolder> {
-
+    // TODO: Create User class and convert mValues into a List<User>
     private final List<String> mValues;
 
     public MatchRecyclerViewAdapter(List<String> items) {
@@ -34,9 +34,7 @@ public class MatchRecyclerViewAdapter extends RecyclerView.Adapter<MatchRecycler
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         return new ViewHolder(FragmentMatchBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
     }
 
     /**

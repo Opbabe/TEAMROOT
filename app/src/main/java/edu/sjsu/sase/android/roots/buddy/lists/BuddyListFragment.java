@@ -23,7 +23,7 @@ public class BuddyListFragment extends Fragment {
     private RecyclerView matchesRecyclerView;
 
     /**
-     * Mandatory empty contructor for the fragment manager to instantiate the
+     * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
     public BuddyListFragment() {
@@ -38,10 +38,6 @@ public class BuddyListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     /**
@@ -65,12 +61,18 @@ public class BuddyListFragment extends Fragment {
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
         Button requestBtn = view.findViewById(R.id.requestBtn);
+        // TODO: replace with BottomNavigationView
         Button homeBtn = view.findViewById(R.id.homeBtn);
+        Button buddiesBtn = view.findViewById(R.id.buddiesBtn);
+        Button profileBtn = view.findViewById(R.id.userProfileBtn);
 
         // setOnClickListeners
         backArrow.setOnClickListener(this::onClickBackArrow);
         requestBtn.setOnClickListener(this::onClickRequests);
+        // TODO: replace with BottomNavigationView
         homeBtn.setOnClickListener(this::onClickHome);
+        buddiesBtn.setOnClickListener(this::onClickBuddies);
+        profileBtn.setOnClickListener(this::onClickUserProfile);
 
         return view;
     }
@@ -93,6 +95,8 @@ public class BuddyListFragment extends Fragment {
         controller.navigate(R.id.action_buddyListFragment_to_friendRequestsFragment);
     }
 
+    // BOTTOM NAVIGATION BUTTONS
+
     /**
      * Navigates to Home screen.
      * @param view
@@ -100,5 +104,23 @@ public class BuddyListFragment extends Fragment {
     private void onClickHome(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_buddyListFragment_to_homeFragment);
+    }
+
+    /**
+     * Navigates to Buddy System screen.
+     * @param view
+     */
+    private void onClickBuddies(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_buddyListFragment_to_buddySystemFragment);
+    }
+
+    /**
+     * Navigates to User Profile screen.
+     * @param view
+     */
+    private void onClickUserProfile(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_buddyListFragment_to_userProfileFragment);
     }
 }
