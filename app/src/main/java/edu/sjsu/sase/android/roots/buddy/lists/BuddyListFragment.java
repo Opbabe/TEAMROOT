@@ -20,7 +20,6 @@ import edu.sjsu.sase.android.roots.R;
  * and a button to view friend requests
  */
 public class BuddyListFragment extends Fragment {
-    private RecyclerView matchesRecyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
