@@ -59,6 +59,7 @@ public class BuddyListFragment extends Fragment {
 
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
+        Button searchBtn = view.findViewById(R.id.searchBtn);
         Button requestBtn = view.findViewById(R.id.requestBtn);
         // TODO: replace with BottomNavigationView
         Button homeBtn = view.findViewById(R.id.homeBtn);
@@ -67,6 +68,7 @@ public class BuddyListFragment extends Fragment {
 
         // setOnClickListeners
         backArrow.setOnClickListener(this::onClickBackArrow);
+        searchBtn.setOnClickListener(this::onClickSearch);
         requestBtn.setOnClickListener(this::onClickRequests);
         // TODO: replace with BottomNavigationView
         homeBtn.setOnClickListener(this::onClickHome);
@@ -83,6 +85,15 @@ public class BuddyListFragment extends Fragment {
     private void onClickBackArrow(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_buddyListFragment_to_buddySystemFragment);
+    }
+
+    /**
+     * Navigates to User Listing screen.
+     * @param view
+     */
+    private void onClickSearch(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_buddyListFragment_to_userListingFragment);
     }
 
     /**

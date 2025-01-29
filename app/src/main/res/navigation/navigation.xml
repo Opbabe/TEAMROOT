@@ -113,12 +113,6 @@
         android:label="fragment_buddy_list"
         tools:layout="@layout/fragment_buddy_list" >
         <action
-            android:id="@+id/action_buddyListFragment_to_userListingFragment"
-            app:destination="@id/userListingFragment" />
-        <action
-            android:id="@+id/action_buddyListFragment_to_friendRequestsFragment"
-            app:destination="@id/friendRequestsFragment" />
-        <action
             android:id="@+id/action_buddyListFragment_to_buddyProfileFragment"
             app:destination="@id/buddyProfileFragment" />
         <action
@@ -133,6 +127,12 @@
         <action
             android:id="@+id/action_buddyListFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_buddyListFragment_to_userListingFragment"
+            app:destination="@id/userListingFragment" />
+        <action
+            android:id="@+id/action_buddyListFragment_to_friendRequestsFragment"
+            app:destination="@id/friendRequestsFragment" />
     </fragment>
     <fragment
         android:id="@+id/friendRequestsFragment"
