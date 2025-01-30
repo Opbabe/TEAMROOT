@@ -1,11 +1,9 @@
 package edu.sjsu.sase.android.roots.buddy.lists;
 
-import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,13 +13,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import edu.sjsu.sase.android.roots.R;
-import edu.sjsu.sase.android.roots.buddy.lists.placeholder.PlaceholderContent;
+
 
 /**
  * A fragment representing a list of friends.
  */
 public class FriendFragment extends Fragment {
     ArrayList<String> data = new ArrayList<>();
+    int navigationId;
     FriendRecyclerViewAdapter adapter;
     RecyclerView recyclerView;
 
@@ -61,6 +60,7 @@ public class FriendFragment extends Fragment {
 
         // pass data as argument to construct adapter
         adapter = new FriendRecyclerViewAdapter(data);
+        adapter.setNavigationId(navigationId);
         // cast view to RecyclerView and set adapter for RecyclerView
         recyclerView = (RecyclerView) view;
         recyclerView.setAdapter(adapter);
@@ -74,4 +74,13 @@ public class FriendFragment extends Fragment {
     public void setData(ArrayList<String> data) {
         this.data = data;
     }
+
+    /**
+     * Set the navigation id to the specified value.
+     * @param resId an action id or destination id to navigation to
+     */
+    public void setNavigation(@IdRes int resId) {
+        this.navigationId = resId;
+    }
+
 }

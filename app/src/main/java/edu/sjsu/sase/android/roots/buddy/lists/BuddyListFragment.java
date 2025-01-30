@@ -73,6 +73,7 @@ public class BuddyListFragment extends Fragment {
         }
         FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.friendsFragment);
         friendFragment.setData(friendsList);
+        friendFragment.setNavigation(R.id.action_buddyListFragment_to_buddyProfileFragment);
 
 
         // buttons (retrieve from view)

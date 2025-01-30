@@ -1,18 +1,15 @@
 package edu.sjsu.sase.android.roots.buddy.lists;
 
+import androidx.annotation.IdRes;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import edu.sjsu.sase.android.roots.R;
-import edu.sjsu.sase.android.roots.buddy.lists.placeholder.PlaceholderContent.PlaceholderItem;
 import edu.sjsu.sase.android.roots.databinding.FragmentFriendBinding;
-import edu.sjsu.sase.android.roots.databinding.FragmentMatchBinding;
 
 import java.util.List;
 
@@ -22,6 +19,8 @@ import java.util.List;
 public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecyclerViewAdapter.ViewHolder> {
     // TODO: Create User class and convert mValues into a List<User>
     private final List<String> mValues;
+    private int navigationId;
+    private boolean navigationSet = false;
 
     public FriendRecyclerViewAdapter(List<String> items) {
         mValues = items;
@@ -70,11 +69,22 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
             this.binding = binding;
 
             // The root represents one row
-            // When the row is clicked, navigate to match's buddy profile
+            // When the row is clicked, navigate to the appropriate page
             this.binding.getRoot().setOnClickListener(view -> {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_buddyListFragment_to_buddyProfileFragment);
+                if (navigationSet == true){
+                    NavController controller = Navigation.findNavController(view);
+                    controller.navigate(navigationId);
+                }
             });
         }
+    }
+
+    /**
+     * Set the navigation id to the specified value.
+     * @param resId an action id or destination id to navigation to
+     */
+    public void setNavigationId(@IdRes int resId) {
+        this.navigationId = resId;
+        navigationSet = true;
     }
 }

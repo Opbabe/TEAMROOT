@@ -11,10 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
+import edu.sjsu.sase.android.roots.buddy.lists.FriendFragment;
+
 /**
  * A fragment representing the user listing screen where all users can be found
  */
 public class UserListingFragment extends Fragment {
+    ArrayList<String> usersList = new ArrayList<>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,6 +56,14 @@ public class UserListingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_listing, container, false);
+
+        // friends list: placeholder hardcoded data
+        for (int i = 0; i < 15; i++) {
+            usersList.add(String.valueOf(i));
+        }
+        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
+        friendFragment.setData(usersList);
+        friendFragment.setNavigation(R.id.action_userListingFragment_to_userProfileFragment);
 
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
