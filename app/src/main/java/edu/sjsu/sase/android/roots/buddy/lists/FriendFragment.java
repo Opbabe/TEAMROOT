@@ -59,15 +59,19 @@ public class FriendFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
 
-        // placeholder hardcoded data
-        for (int i = 1; i <= 10; i++) {
-            data.add(String.valueOf(i));
-        }
         // pass data as argument to construct adapter
         adapter = new FriendRecyclerViewAdapter(data);
         // cast view to RecyclerView and set adapter for RecyclerView
         recyclerView = (RecyclerView) view;
         recyclerView.setAdapter(adapter);
         return view;
+    }
+
+    /**
+     * Sets the friend list data to the specified ArrayList of data
+     * @param data ArrayList of data
+     */
+    public void setData(ArrayList<String> data) {
+        this.data = data;
     }
 }

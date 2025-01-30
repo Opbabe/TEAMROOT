@@ -5,13 +5,14 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 import edu.sjsu.sase.android.roots.R;
 
@@ -20,6 +21,8 @@ import edu.sjsu.sase.android.roots.R;
  * and a button to view friend requests
  */
 public class BuddyListFragment extends Fragment {
+    ArrayList<String> matchesList = new ArrayList<>();
+    ArrayList<String> friendsList = new ArrayList<>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -56,6 +59,21 @@ public class BuddyListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment (initializes layout (UI) for fragment)
         View view = inflater.inflate(R.layout.fragment_buddy_list, container, false);
+
+        // matches list: placeholder hardcoded data
+        for (int i = 1; i <= 8; i++) {
+            matchesList.add("Match " + i);
+        }
+        MatchFragment matchFragment = (MatchFragment)  getChildFragmentManager().findFragmentById(R.id.matchesFragment);
+        matchFragment.setData(matchesList);
+
+        // friends list: placeholder hardcoded data
+        for (int i = 1; i <= 10; i++) {
+            friendsList.add(String.valueOf(i));
+        }
+        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.friendsFragment);
+        friendFragment.setData(friendsList);
+
 
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);

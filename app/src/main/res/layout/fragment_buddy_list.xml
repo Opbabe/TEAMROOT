@@ -38,7 +38,7 @@
         android:text="@string/matches" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/matchesFragmentContainerView"
+        android:id="@+id/matchesFragment"
         android:name="edu.sjsu.sase.android.roots.buddy.lists.MatchFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -50,7 +50,7 @@
         android:text="@string/friends" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/friendsFragment"
         android:name="edu.sjsu.sase.android.roots.buddy.lists.FriendFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
