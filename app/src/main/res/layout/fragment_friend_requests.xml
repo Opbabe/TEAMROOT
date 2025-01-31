@@ -14,7 +14,14 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="friend requests page" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/userListingFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.lists.FriendFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
