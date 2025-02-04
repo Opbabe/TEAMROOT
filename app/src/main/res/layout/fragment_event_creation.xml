@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EventCreationFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/profileBttn2"
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:text="@string/profileButton_nav"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/homeButtn2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/homeButtn2" />
+
+    <Button
+        android:id="@+id/buddyBttn2"
+        android:layout_width="85dp"
+        android:layout_height="96dp"
+        android:text="@string/buddiesButton_nav"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/homeButtn2"
+        app:layout_constraintTop_toTopOf="@+id/homeButtn2" />
+
+    <Button
+        android:id="@+id/homeButtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:text="@string/home_screen_fragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="123dp"
+        android:layout_marginEnd="165dp"
+        android:text="CreateEvent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/postBttn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post Event"
+        tools:layout_editor_absoluteX="284dp"
+        tools:layout_editor_absoluteY="113dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

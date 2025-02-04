@@ -3,10 +3,13 @@ package edu.sjsu.sase.android.roots;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +62,69 @@ public class EventCreationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event_creation, container, false);
+        View view = inflater.inflate(R.layout.fragment_event_creation, container, false);
+        Button profileBttn = view.findViewById(R.id.profileBttn2);
+        Button buddyBttn = view.findViewById(R.id.buddyBttn2);
+        Button homeButtn = view.findViewById(R.id.homeButtn2);
+
+        profileBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToProfile(view);
+            }
+        });
+
+        buddyBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToBuddySystem(view);
+            }
+        });
+
+        homeButtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goHome(view);
+            }
+        });
+
+        Button postEvent = view.findViewById(R.id.postBttn);
+
+        postEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSingleEvent(view);
+            }
+        });
+
+        return view;
+    }
+//    TODO add nav from a "Post Event Button" to a single event page
+//    private goToSingleEvent(View view){
+//        NavController controller = Navigation.findNavController(view);
+//        controller.navigate(R.id.ac);
+//
+//    }
+
+    private void goToProfile(View view){
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_eventCreationFragment_to_userProfileFragment);
+    }
+
+    private void goToBuddySystem(View view){
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_eventCreationFragment_to_buddySystemFragment);
+
+    }
+
+    private void goHome(View view){
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_eventCreationFragment_to_homeFragment);
+
+    }
+
+    private void goToSingleEvent(View view){
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_eventCreationFragment_to_singleEventFragment);
     }
 }

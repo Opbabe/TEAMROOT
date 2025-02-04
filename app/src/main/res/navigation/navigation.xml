@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -52,6 +52,15 @@
         <action
             android:id="@+id/action_homeFragment_to_buddySystemFragment"
             app:destination="@id/buddySystemFragment" />
+        <argument
+            android:name="myText"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_homeFragment_to_singleEventFragment"
+            app:destination="@id/singleEventFragment" />
+        <action
+            android:id="@+id/action_homeFragment_self"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
@@ -169,6 +178,9 @@
         <action
             android:id="@+id/action_eventCreationFragment_to_buddySystemFragment"
             app:destination="@id/buddySystemFragment" />
+        <action
+            android:id="@+id/action_eventCreationFragment_to_singleEventFragment"
+            app:destination="@id/singleEventFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventListingFragment"
@@ -187,6 +199,9 @@
         <action
             android:id="@+id/action_eventListingFragment_to_buddySystemFragment"
             app:destination="@id/buddySystemFragment" />
+        <action
+            android:id="@+id/action_eventListingFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleEventFragment"
