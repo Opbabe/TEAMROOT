@@ -3,10 +3,13 @@ package edu.sjsu.sase.android.roots;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +62,50 @@ public class SingleEventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_single_event, container, false);
+        View view = inflater.inflate(R.layout.fragment_single_event, container, false);
+        Button singleEhome = view.findViewById(R.id.singleEhome);
+        Button singleEprofile = view.findViewById(R.id.singleEprofile);
+        Button singleEbud = view.findViewById(R.id.singleEbud);
+
+        singleEprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goProfile(view);
+            }
+        });
+
+        singleEbud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goBuddy(view);
+            }
+        });
+
+        singleEhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goHome(view);
+            }
+        });
+
+        return view;
+
     }
+
+    private void goHome(View view){
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_singleEventFragment_to_homeFragment);
+
+    }
+
+    private void goProfile(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_singleEventFragment_to_userProfileFragment);
+    }
+
+    private void goBuddy(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_singleEventFragment_to_buddySystemFragment);
+    }
+
 }

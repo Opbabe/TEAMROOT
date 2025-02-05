@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -52,9 +52,15 @@
         <action
             android:id="@+id/action_homeFragment_to_buddySystemFragment"
             app:destination="@id/buddySystemFragment" />
+        <argument
+            android:name="myText"
+            app:argType="string" />
         <action
             android:id="@+id/action_homeFragment_to_singleEventFragment"
             app:destination="@id/singleEventFragment" />
+        <action
+            android:id="@+id/action_homeFragment_self"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
