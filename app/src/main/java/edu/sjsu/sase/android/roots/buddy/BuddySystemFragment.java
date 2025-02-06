@@ -3,10 +3,15 @@ package edu.sjsu.sase.android.roots.buddy;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import edu.sjsu.sase.android.roots.R;
 
 import edu.sjsu.sase.android.roots.R;
 
@@ -61,6 +66,22 @@ public class BuddySystemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_buddy_system, container, false);
+        View view = inflater.inflate(R.layout.fragment_buddy_system, container, false);
+
+        Button bud = view.findViewById(R.id.button);
+
+        bud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToList(view);
+            }
+        });
+
+        return view;
+    }
+
+    private void goToList(View view){
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_buddySystemFragment_to_buddyListFragment);
     }
 }

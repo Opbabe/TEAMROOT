@@ -3,9 +3,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_web_client_id">625155307432-kjtq911qaladhrksfp5p3k8ks8kgo6mv.apps.googleusercontent.com</string>
-    <string name = "buddies">buddies</string>
-    <string name = "requests">requests</string>
-    <string name = "matches">matches</string>
-    <string name = "friends">friends</string>
-
+    <string name="matches">Matches</string>
+    <string name="requests">Requests</string>
+    <string name="buddies">Buddies</string>
+    <string name="friends">Friends</string>
+    <string name="welcome_home">Hello from Home Page</string>
+    <string name="home_screen_fragment">HOME</string>
+    <string name="createEvent_nav">Create Event</string>
+    <string name="eventListing_nav">Event Listing</string>
+    <string name="profileButton_nav">Profile</string>
+    <string name="buddiesButton_nav">Buddies</string>
+    <string name="listingDetails">This will hold info on each event</string>
+    <string name="category_title_txt">Categories</string>
+    <string name="your_events_list">Your Events</string>
 </resources>

@@ -2,9 +2,8 @@ package edu.sjsu.sase.android.roots.buddy.lists;
 
 import android.os.Bundle;
 
+import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,21 +14,22 @@ import java.util.ArrayList;
 
 import edu.sjsu.sase.android.roots.R;
 
+
 /**
- * A fragment representing a list of matches.
+ * A fragment representing a list of friends.
  */
-public class MatchFragment extends Fragment {
+public class FriendFragment extends Fragment {
     ArrayList<String> data = new ArrayList<>();
-    MatchRecyclerViewAdapter adapter;
+    int navigationId;
+    FriendRecyclerViewAdapter adapter;
     RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MatchFragment() {
+    public FriendFragment() {
     }
-
 
     /**
      * Starting point for the fragment.
@@ -39,7 +39,6 @@ public class MatchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     /**
@@ -57,10 +56,11 @@ public class MatchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_match_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
 
         // pass data as argument to construct adapter
-        adapter = new MatchRecyclerViewAdapter(data);
+        adapter = new FriendRecyclerViewAdapter(data);
+        adapter.setNavigationId(navigationId);
         // cast view to RecyclerView and set adapter for RecyclerView
         recyclerView = (RecyclerView) view;
         recyclerView.setAdapter(adapter);
@@ -68,10 +68,19 @@ public class MatchFragment extends Fragment {
     }
 
     /**
-     * Sets the matches list data to the specified ArrayList of data
+     * Sets the friend list data to the specified ArrayList of data
      * @param data ArrayList of data
      */
     public void setData(ArrayList<String> data) {
         this.data = data;
     }
+
+    /**
+     * Set the navigation id to the specified value.
+     * @param resId an action id or destination id to navigation to
+     */
+    public void setNavigation(@IdRes int resId) {
+        this.navigationId = resId;
+    }
+
 }
