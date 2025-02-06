@@ -66,6 +66,7 @@ public class SingleEventFragment extends Fragment {
         Button singleEhome = view.findViewById(R.id.singleEhome);
         Button singleEprofile = view.findViewById(R.id.singleEprofile);
         Button singleEbud = view.findViewById(R.id.singleEbud);
+        Button singleElogin = view.findViewById(R.id.singleElogin);
 
         singleEprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +89,14 @@ public class SingleEventFragment extends Fragment {
             }
         });
 
+        singleElogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goLogin(view);
+            }
+        });
+
+
         return view;
 
     }
@@ -104,6 +113,11 @@ public class SingleEventFragment extends Fragment {
     }
 
     private void goBuddy(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_singleEventFragment_to_buddySystemFragment);
+    }
+
+    private void goLogin(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_singleEventFragment_to_buddySystemFragment);
     }

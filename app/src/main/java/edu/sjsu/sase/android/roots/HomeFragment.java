@@ -64,10 +64,16 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-//        TODO make NavBar!!!
+
         Button profileBttn = view.findViewById(R.id.profileBttn);
         Button buddyBttn = view.findViewById(R.id.buddyBttn);
         Button homeButtn = view.findViewById(R.id.homeButtn);
+        Button loginBttn = view.findViewById(R.id.loginBttn);
+        Button createEventBttn = view.findViewById(R.id.createBttn);
+        ImageButton listingBttn1 = view.findViewById(R.id.eventListing1);
+        ImageButton listingBttn2 = view.findViewById(R.id.eventListing2);
+        ImageButton listingBttn3 = view.findViewById(R.id.eventListing3);
+        ImageButton myEventsBttn = view.findViewById(R.id.myEventCard);
 
         profileBttn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +96,19 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        loginBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToLogin(view);
+            }
+        });
 
-        Button createEventBttn = view.findViewById(R.id.createBttn);
-        ImageButton listingBttn1 = view.findViewById(R.id.eventListing1);
-        ImageButton listingBttn2 = view.findViewById(R.id.eventListing2);
-        ImageButton listingBttn3 = view.findViewById(R.id.eventListing3);
-        ImageButton myEventsBttn = view.findViewById(R.id.myEventCard);
+        createEventBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToEventCreation(view);
+            }
+        });
 
         listingBttn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,15 +138,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        createEventBttn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToEventCreation(view);
-            }
-        });
-
         return view;
     }
+
 
 
     private void gotToUserProfile(View view){
@@ -149,6 +156,11 @@ public class HomeFragment extends Fragment {
     private void goHome(View view){
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_homeFragment_self);
+    }
+
+    private void goToLogin(View view){
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_homeFragment_to_loginFragment);
     }
 
     private void goToEventListing(View view){
