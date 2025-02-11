@@ -13,6 +13,8 @@ import android.widget.Button;
 
 import edu.sjsu.sase.android.roots.R;
 
+import edu.sjsu.sase.android.roots.R;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link BuddySystemFragment#newInstance} factory method to

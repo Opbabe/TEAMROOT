@@ -52,6 +52,10 @@
         <action
             android:id="@+id/action_homeFragment_to_buddySystemFragment"
             app:destination="@id/buddySystemFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+
         <argument
             android:name="myText"
             app:argType="string" />
@@ -178,6 +182,9 @@
         <action
             android:id="@+id/action_eventCreationFragment_to_buddySystemFragment"
             app:destination="@id/buddySystemFragment" />
+        <action
+            android:id="@+id/action_eventCreationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_eventCreationFragment_to_singleEventFragment"
             app:destination="@id/singleEventFragment" />

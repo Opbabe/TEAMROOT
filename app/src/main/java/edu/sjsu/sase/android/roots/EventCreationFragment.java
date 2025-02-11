@@ -66,6 +66,7 @@ public class EventCreationFragment extends Fragment {
         Button profileBttn = view.findViewById(R.id.profileBttn2);
         Button buddyBttn = view.findViewById(R.id.buddyBttn2);
         Button homeButtn = view.findViewById(R.id.homeButtn2);
+        Button loginBttn = view.findViewById(R.id.loginBttn);
 
         profileBttn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +86,13 @@ public class EventCreationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 goHome(view);
+            }
+        });
+
+        loginBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToLogin(view);
             }
         });
 
@@ -109,6 +117,11 @@ public class EventCreationFragment extends Fragment {
     private void goToProfile(View view){
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_eventCreationFragment_to_userProfileFragment);
+    }
+
+    private void goToLogin(View view){
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_eventCreationFragment_to_loginFragment);
     }
 
     private void goToBuddySystem(View view){
