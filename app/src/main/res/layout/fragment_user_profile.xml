@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/profileScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/llContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <!-- Profile Picture -->
+        <ImageView
+            android:id="@+id/profilePic"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_profile"
+            android:contentDescription="@string/profile_pic_desc"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop" />
+
+        <!-- Username -->
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Full Name (First Name/Last Name) -->
+        <TextView
+            android:id="@+id/tvFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FirstName LastName"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Bio -->
+        <TextView
+            android:id="@+id/tvBio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This is the user bio. A brief description can go here."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="16dp" />
+
+        <!-- Social Media Links -->
+        <LinearLayout
+            android:id="@+id/socialLinksLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <!-- Instagram Social Icon -->
+            <ImageButton
+                android:id="@+id/btnInstagram"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_instagram"
+                android:contentDescription="Instagram"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <!-- Twitter Social Icon -->
+            <ImageButton
+                android:id="@+id/btnTwitter"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_twitter"
+                android:contentDescription="Twitter"
+                android:layout_marginStart="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <!-- Add more social icons as needed -->
+        </LinearLayout>
+
+        <!-- Buttons: Buddy Profile Creation and Friend Request -->
+        <LinearLayout
+            android:id="@+id/buttonsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="24dp">
+
+            <Button
+                android:id="@+id/btnBuddyProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Buddy Profile" />
+
+            <Button
+                android:id="@+id/btnFriendRequest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send Friend Request"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <!-- Friends Following Section -->
+        <TextView
+            android:id="@+id/tvFriendsFollowingLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Friends Following"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp" />
+
+        <!-- Horizontal ScrollView for Friend Icons -->
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollFriends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <LinearLayout
+                android:id="@+id/llFriends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Friend icon examples (using ic_profile as a placeholder) -->
+                <ImageView
+                    android:id="@+id/friend1"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_profile"
+                    android:contentDescription="Friend 1"
+                    android:layout_marginRight="8dp" />
+
+                <ImageView
+                    android:id="@+id/friend2"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_profile"
+                    android:contentDescription="Friend 2"
+                    android:layout_marginRight="8dp" />
+
+                <ImageView
+                    android:id="@+id/friend3"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_profile"
+                    android:contentDescription="Friend 3"
+                    android:layout_marginRight="8dp" />
+
+                <!-- Add additional friends as needed -->
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+</ScrollView>

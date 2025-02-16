@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "625155307432",
+    "project_id": "teamroots",
+    "storage_bucket": "teamroots.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625155307432:android:ce59c1e577d13cb0e40f9d",
+        "android_client_info": {
+          "package_name": "edu.sjsu.sase.android.roots"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625155307432-8sessiqokbnft1ca1heqdcvk71jfr5pq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.sjsu.sase.android.roots",
+            "certificate_hash": "2c47daeb7f134f6b5f1d4ab1e8aea501bf6e617b"
+          }
+        },
+        {
+          "client_id": "625155307432-kjtq911qaladhrksfp5p3k8ks8kgo6mv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8r6Yyp8XEcKadXur5QuXJtRS7Pa6g-7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625155307432-kjtq911qaladhrksfp5p3k8ks8kgo6mv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

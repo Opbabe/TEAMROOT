@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollViewEventCreation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/llEventCreation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvEventCreationTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Event"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Event Name -->
+        <EditText
+            android:id="@+id/eventNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Event Name"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- Event Date and Time -->
+        <LinearLayout
+            android:id="@+id/llDateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <EditText
+                android:id="@+id/eventDateEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Date (MM/DD/YYYY)"
+                android:padding="12dp"
+                android:background="@android:drawable/edit_text" />
+
+            <EditText
+                android:id="@+id/eventTimeEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Time (HH:MM AM/PM)"
+                android:padding="12dp"
+                android:layout_marginStart="8dp"
+                android:background="@android:drawable/edit_text" />
+        </LinearLayout>
+
+        <!-- Event Details -->
+        <EditText
+            android:id="@+id/eventDetailsEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Event Details"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- Event Tags -->
+        <EditText
+            android:id="@+id/eventTagsEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Event Tags (comma separated)"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:drawable/edit_text" />
+
+        <!-- Pics/Videos Section -->
+        <TextView
+            android:id="@+id/tvMediaSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Pictures/Videos"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <!-- Media Preview Container -->
+        <FrameLayout
+            android:id="@+id/mediaContainer"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Media Preview"
+                android:gravity="center"
+                android:textColor="@android:color/white" />
+        </FrameLayout>
+
+        <!-- Post Event Button -->
+        <Button
+            android:id="@+id/btnPostEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Post Event"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:textColor="@android:color/white"
+            android:padding="12dp" />
+
+    </LinearLayout>
+</ScrollView>
