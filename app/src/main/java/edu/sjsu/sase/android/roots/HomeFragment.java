@@ -68,7 +68,6 @@ public class HomeFragment extends Fragment {
         Button profileBttn = view.findViewById(R.id.profileBttn);
         Button buddyBttn = view.findViewById(R.id.buddyBttn);
         Button homeButtn = view.findViewById(R.id.homeButtn);
-        Button loginBttn = view.findViewById(R.id.loginBttn);
         Button createEventBttn = view.findViewById(R.id.createBttn);
         ImageButton listingBttn1 = view.findViewById(R.id.eventListing1);
         ImageButton listingBttn2 = view.findViewById(R.id.eventListing2);
@@ -93,13 +92,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 goHome(view);
-            }
-        });
-
-        loginBttn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToLogin(view);
             }
         });
 
@@ -156,11 +148,6 @@ public class HomeFragment extends Fragment {
     private void goHome(View view){
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_homeFragment_self);
-    }
-
-    private void goToLogin(View view){
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_homeFragment_to_loginFragment);
     }
 
     private void goToEventListing(View view){

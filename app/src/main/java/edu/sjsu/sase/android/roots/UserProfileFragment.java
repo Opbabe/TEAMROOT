@@ -3,10 +3,14 @@ package edu.sjsu.sase.android.roots;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +63,50 @@ public class UserProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
+
+        // buttons (retrieve from view)
+        Button logoutBtn = view.findViewById(R.id.logoutBtn);
+        // TODO: replace with BottomNavigationView
+        Button homeBtn = view.findViewById(R.id.homeBtn);
+        Button buddiesBtn = view.findViewById(R.id.buddySystemBtn);
+
+        // setOnClickListeners
+        logoutBtn.setOnClickListener(this::onClickLogout);
+        // TODO: replace with BottomNavigationView
+        homeBtn.setOnClickListener(this::onClickHome);
+        buddiesBtn.setOnClickListener(this::onClickBuddySystem);
+
+        return view;
     }
+
+    /**
+     * Navigates to start screen.
+     * @param view
+     */
+    private void onClickLogout(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_userProfileFragment_to_startFragment);
+    }
+
+    // BOTTOM NAVIGATION BUTTONS
+
+    /**
+     * Navigates to Home screen.
+     * @param view
+     */
+    private void onClickHome(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_userProfileFragment_to_homeFragment);
+    }
+
+    /**
+     * Navigates to Buddy System screen.
+     * @param view
+     */
+    private void onClickBuddySystem(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_userProfileFragment_to_buddySystemFragment);
+    }
+
 }

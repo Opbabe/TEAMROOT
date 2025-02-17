@@ -68,14 +68,17 @@ public class BuddySystemFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_buddy_system, container, false);
 
-        Button bud = view.findViewById(R.id.button);
+        //buttons
+        Button bud = view.findViewById(R.id.buddiesBtn);
+        // TODO: replace with BottomNavigationView
+        Button homeBtn = view.findViewById(R.id.homeBtn);
+        Button profileBtn = view.findViewById(R.id.userProfileBtn);
 
-        bud.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToList(view);
-            }
-        });
+        // setOnClickListeners
+        bud.setOnClickListener(this::goToList);
+        // TODO: replace with BottomNavigationView
+        homeBtn.setOnClickListener(this::onClickHome);
+        profileBtn.setOnClickListener(this::onClickUserProfile);
 
         return view;
     }
@@ -83,5 +86,25 @@ public class BuddySystemFragment extends Fragment {
     private void goToList(View view){
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_buddySystemFragment_to_buddyListFragment);
+    }
+
+    // BOTTOM NAVIGATION BUTTONS
+
+    /**
+     * Navigates to Home screen.
+     * @param view
+     */
+    private void onClickHome(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_buddySystemFragment_to_homeFragment);
+    }
+
+    /**
+     * Navigates to User Profile screen.
+     * @param view
+     */
+    private void onClickUserProfile(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_buddySystemFragment_to_userProfileFragment);
     }
 }
