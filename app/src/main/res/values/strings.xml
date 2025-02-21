@@ -18,4 +18,7 @@
     <string name="listingDetails">This will hold info on each event</string>
     <string name="category_title_txt">Categories</string>
     <string name="your_events_list">Your Events</string>
+    <!-- Added content descriptions to avoid resource errors -->
+    <string name="event_listing_desc">Event Listing</string>
+    <string name="my_event_desc">My Event Card</string>
 </resources>
