@@ -1,0 +1,10 @@
+<resources>
+    <!-- Other styles may already be here -->
+
+    <!-- Style for making an ImageView circular -->
+    <style name="CircleImageView">
+        <!-- These attributes make the image corners 50%, creating a circle -->
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+</resources> 
