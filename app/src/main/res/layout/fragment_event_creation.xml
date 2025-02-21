@@ -1,73 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/scrollViewEventCreation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventCreationFragment">
+    android:fillViewport="true"
+    android:background="@color/background_color">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <Button
-        android:id="@+id/profileBttn2"
-        android:layout_width="wrap_content"
-        android:layout_height="96dp"
-        android:text="@string/profileButton_nav"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/homeButtn2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/homeButtn2" />
-
-    <Button
-        android:id="@+id/buddyBttn2"
-        android:layout_width="85dp"
-        android:layout_height="96dp"
-        android:text="@string/buddiesButton_nav"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/homeButtn2"
-        app:layout_constraintTop_toTopOf="@+id/homeButtn2" />
-
-    <Button
-        android:id="@+id/homeButtn2"
-        android:layout_width="wrap_content"
-        android:layout_height="96dp"
-        android:text="@string/home_screen_fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/loginBttn"
-        android:layout_width="85dp"
-        android:layout_height="96dp"
-        android:text="@string/loginButton_nav"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/homeButtn2"
-        app:layout_constraintTop_toTopOf="@+id/homeButtn2" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clEventCreation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="123dp"
-        android:layout_marginEnd="165dp"
-        android:text="CreateEvent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="24dp">
 
-    <Button
-        android:id="@+id/postBttn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="16dp"
-        android:text="Post Event"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvEventCreationTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Create Event"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Event Name Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEventName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tvEventCreationTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Name"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Event Date Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEventDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tilEventName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tilEventTime"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEventDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Date (MM/DD/YYYY)"
+                android:inputType="date"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Event Time Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEventTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tilEventName"
+            app:layout_constraintStart_toEndOf="@id/tilEventDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEventTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Time (HH:MM AM/PM)"
+                android:inputType="time"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Event Details Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEventDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tilEventDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEventDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Details"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:gravity="top"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Event Tags Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEventTags"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tilEventDetails"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEventTags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Tags (comma separated)"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Media Section Title -->
+        <TextView
+            android:id="@+id/tvMediaSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Pictures/Videos"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tilEventTags"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Media Preview Container -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvMediaContainer"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tvMediaSection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <FrameLayout
+                android:id="@+id/flMediaPreview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/media_preview_background">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Media Preview"
+                    android:textColor="@color/text_secondary"
+                    android:layout_gravity="center" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabAddMedia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/ic_add_photo"
+                    app:fabSize="mini" />
+            </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Post Event Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPostEvent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Post Event"
+            android:textColor="@color/white"
+            android:padding="12dp"
+            android:layout_marginTop="24dp"
+            app:cornerRadius="8dp"
+            app:layout_constraintTop_toBottomOf="@id/cvMediaContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
