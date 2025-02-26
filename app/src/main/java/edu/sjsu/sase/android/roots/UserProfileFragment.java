@@ -13,9 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * A fragment representing a user's profile screen.
  */
 public class UserProfileFragment extends Fragment {
 
@@ -32,7 +30,7 @@ public class UserProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
+    /*
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
@@ -66,18 +64,29 @@ public class UserProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
         // buttons (retrieve from view)
+        Button editProfileBtn = view.findViewById(R.id.btnBuddyProfile);
         Button logoutBtn = view.findViewById(R.id.logoutBtn);
         // TODO: replace with BottomNavigationView
         Button homeBtn = view.findViewById(R.id.homeBtn);
         Button buddiesBtn = view.findViewById(R.id.buddySystemBtn);
 
         // setOnClickListeners
+        editProfileBtn.setOnClickListener(this::onClickEditProfile);
         logoutBtn.setOnClickListener(this::onClickLogout);
         // TODO: replace with BottomNavigationView
         homeBtn.setOnClickListener(this::onClickHome);
         buddiesBtn.setOnClickListener(this::onClickBuddySystem);
 
         return view;
+    }
+
+    /**
+     * Navigates to edit profile screen.
+     * @param view
+     */
+    private void onClickEditProfile(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_userProfileFragment_to_editProfileFragment);
     }
 
     /**

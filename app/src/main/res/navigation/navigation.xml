@@ -86,27 +86,27 @@
         <action
             android:id="@+id/action_userProfileFragment_to_startFragment"
             app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/buddyProfileFragment"
-        android:name="edu.sjsu.sase.android.roots.buddy.BuddyProfileFragment"
+        android:id="@+id/editProfileFragment"
+        android:name="edu.sjsu.sase.android.roots.EditProfileFragment"
         android:label="fragment_buddy_profile"
-        tools:layout="@layout/fragment_buddy_profile" >
+        tools:layout="@layout/fragment_edit_profile" >
         <action
-            android:id="@+id/action_buddyProfileFragment_to_homeFragment"
+            android:id="@+id/action_editProfileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_buddyProfileFragment_to_buddySystemFragment"
+            android:id="@+id/action_editProfileFragment_to_buddySystemFragment"
             app:destination="@id/buddySystemFragment" />
         <action
-            android:id="@+id/action_buddyProfileFragment_to_userProfileFragment"
+            android:id="@+id/action_editProfileFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />
         <action
-            android:id="@+id/action_buddyProfileFragment_to_eventCreationFragment"
+            android:id="@+id/action_editProfileFragment_to_eventCreationFragment"
             app:destination="@id/eventCreationFragment" />
-        <action
-            android:id="@+id/action_buddyProfileFragment_to_buddyListFragment"
-            app:destination="@id/buddyListFragment" />
     </fragment>
     <fragment
         android:id="@+id/buddySystemFragment"
@@ -131,9 +131,6 @@
         android:name="edu.sjsu.sase.android.roots.buddy.lists.BuddyListFragment"
         android:label="fragment_buddy_list"
         tools:layout="@layout/fragment_buddy_list" >
-        <action
-            android:id="@+id/action_buddyListFragment_to_buddyProfileFragment"
-            app:destination="@id/buddyProfileFragment" />
         <action
             android:id="@+id/action_buddyListFragment_to_homeFragment"
             app:destination="@id/homeFragment" />

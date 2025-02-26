@@ -1,4 +1,4 @@
-package edu.sjsu.sase.android.roots.buddy;
+package edu.sjsu.sase.android.roots;
 
 import android.os.Bundle;
 
@@ -11,18 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import edu.sjsu.sase.android.roots.R;
-
 /**
- * A fragment representing the buddy profile screen.
+ * A fragment representing the screen where users can edit their user profile.
  */
-public class BuddyProfileFragment extends Fragment {
+public class EditProfileFragment extends Fragment {
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public BuddyProfileFragment() {
+    public EditProfileFragment() {
         // Required empty public constructor
     }
 
@@ -52,7 +50,7 @@ public class BuddyProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_buddy_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
@@ -69,6 +67,6 @@ public class BuddyProfileFragment extends Fragment {
      */
     private void onClickBackArrow(View view) {
         NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_buddyProfileFragment_to_buddyListFragment);
+        controller.navigate(R.id.action_editProfileFragment_to_userProfileFragment);
     }
 }

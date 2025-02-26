@@ -81,6 +81,8 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
 
     /**
      * Set the navigation id to the specified value.
+     * Use this method because multiple pages use the FriendsFragment class,
+     *  so they have different resID.
      * @param resId an action id or destination id to navigation to
      */
     public void setNavigationId(@IdRes int resId) {

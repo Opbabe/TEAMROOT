@@ -73,10 +73,10 @@ public class MatchRecyclerViewAdapter extends RecyclerView.Adapter<MatchRecycler
             this.binding = binding;
 
             // The root represents one row
-            // When the row is clicked, navigate to match's buddy profile
+            // When the row is clicked, navigate to match's user profile
             this.binding.getRoot().setOnClickListener(view -> {
                 NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_buddyListFragment_to_buddyProfileFragment);
+                controller.navigate(R.id.action_buddyListFragment_to_userProfileFragment);
             });
         }
     }
