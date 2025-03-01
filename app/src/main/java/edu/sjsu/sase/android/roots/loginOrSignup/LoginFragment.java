@@ -1,4 +1,4 @@
-package edu.sjsu.sase.android.roots;
+package edu.sjsu.sase.android.roots.loginOrSignup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +22,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 import com.google.android.gms.common.SignInButton;
+
+import edu.sjsu.sase.android.roots.R;
 
 /**
  * A fragment representing the Login screen

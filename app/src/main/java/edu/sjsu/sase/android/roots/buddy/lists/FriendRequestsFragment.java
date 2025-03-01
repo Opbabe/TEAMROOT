@@ -1,4 +1,4 @@
-package edu.sjsu.sase.android.roots;
+package edu.sjsu.sase.android.roots.buddy.lists;
 
 import android.os.Bundle;
 
@@ -9,19 +9,23 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
+import edu.sjsu.sase.android.roots.R;
+
 /**
- * A fragment representing the signup screen
+ * A fragment representing the friend requests screen
  */
-public class SignupFragment extends Fragment {
+public class FriendRequestsFragment extends Fragment {
+    ArrayList<String> usersList = new ArrayList<>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public SignupFragment() {
+    public FriendRequestsFragment() {
         // Required empty public constructor
     }
 
@@ -51,34 +55,31 @@ public class SignupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_signup, container, false);
+        View view = inflater.inflate(R.layout.fragment_friend_requests, container, false);
 
-        // back button
-        ImageView backArrowBtn = view.findViewById(R.id.backArrowBtn);
-        backArrowBtn.setOnClickListener(this::onClickBackArrow);
+        // requests list: placeholder hardcoded data
+        for (int i = 0; i < 12; i++) {
+            usersList.add(String.valueOf(i));
+        }
+        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
+        friendFragment.setData(usersList);
+        friendFragment.setNavigation(R.id.action_friendRequestsFragment_to_userProfileFragment);
 
-        // signup button
-        Button signupBtn = view.findViewById(R.id.signupBtn);
-        signupBtn.setOnClickListener(this::onClickSignup);
+        // buttons (retrieve from view)
+        ImageView backArrow = view.findViewById(R.id.backArrowBtn);
+
+        // setOnClickListeners
+        backArrow.setOnClickListener(this::onClickBackArrow);
 
         return view;
     }
 
     /**
-     * Navigates to Start screen.
+     * Navigates to Buddy List screen.
      * @param view
      */
     private void onClickBackArrow(View view) {
         NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_signupFragment_to_startFragment);
-    }
-
-    /**
-     * Navigates to Home screen.
-     * @param view
-     */
-    private void onClickSignup(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_signupFragment_to_homeFragment);
+        controller.navigate(R.id.action_friendRequestsFragment_to_buddyListFragment);
     }
 }
