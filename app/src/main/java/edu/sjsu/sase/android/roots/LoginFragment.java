@@ -23,6 +23,18 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 import com.google.android.gms.common.SignInButton;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import javax.annotation.Nullable;
 
 /**
  * A fragment representing the Login screen
@@ -32,6 +44,8 @@ public class LoginFragment extends Fragment {
     private static final int RC_SIGN_IN = 9001;  // Request code for Google Sign-In
     private GoogleSignInClient mGoogleSignInClient;
     private Button loginBtn;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -58,6 +72,26 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        List<FirebaseApp> firebaseApps = FirebaseApp.getApps(requireContext());
+
+        if (firebaseApps.isEmpty()) {
+            Log.e("Firebase", "No Firebase apps are initialized!");
+        } else {
+            Log.d("Firebase", "Firebase Apps Initialized: " + firebaseApps.size());
+            for (FirebaseApp app : firebaseApps) {
+                Log.d("Firebase", "App Name: " + app.getName());
+            }
+        }
+
+        mAuth = FirebaseAuth.getInstance(); // This might be causing the crash
+
+        //initialize firebase and firestore
+
+        db = FirebaseFirestore.getInstance();
+
+
+
         //initialize Google Sign-In options, later ill add manual password and email
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id)) //this pulls from default webclient id, i put the client id in strings.xml
@@ -107,7 +141,7 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         //result returned from launching the sign-in
@@ -116,27 +150,64 @@ public class LoginFragment extends Fragment {
             try {
                 //success
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                handleSignInSuccess(account);
+                firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 //failure err
-                handleSignInFailure(e);
+                Log.e("LoginFragment", "Google sign-in failed" + e.getMessage());
+                Toast.makeText(getActivity(), "Google sign-in failed", Toast.LENGTH_SHORT).show();
+
             }
         }
     }
 
-    private void handleSignInSuccess(GoogleSignInAccount account) {
-        // TO DO LATER: send info to firebase or make the manual password/email option, wip
-        String displayName = account.getDisplayName();
-        String email = account.getEmail();
-        Toast.makeText(getActivity(), "Signed in as: " + displayName, Toast.LENGTH_SHORT).show();
-        loginBtn.setEnabled(true);
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                saveUserToFirestore(account);
+            } else {
+                Toast.makeText(getActivity(), "Authentication failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
-    private void handleSignInFailure(ApiException e) {
-        int statusCode = e.getStatusCode();
-        Toast.makeText(getActivity(), "Sign-in failed: " + statusCode, Toast.LENGTH_SHORT).show();
-        Log.e("LoginFragment", "Sign-in failed: " + e.getMessage() + " Status Code: " + statusCode);
+    private void saveUserToFirestore(GoogleSignInAccount account) {
+        String uid = mAuth.getCurrentUser().getUid();
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("name", account.getDisplayName());
+        user.put("email", account.getEmail());
+        user.put("profileImage", account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : "");
+
+        db.collection("users").document(uid).set(user)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getActivity(), "User signed in", Toast.LENGTH_SHORT).show();
+                    navigateToHome();
+                })
+                .addOnFailureListener(e -> Log.e("LoginFragment", "Error writing document", e));
+
     }
+
+    private void navigateToHome() {
+        NavController navController = Navigation.findNavController(requireView());
+        navController.navigate(R.id.action_loginFragment_to_homeFragment);
+    }
+
+
+//    private void handleSignInSuccess(GoogleSignInAccount account) {
+//        // TO DO LATER: send info to firebase or make the manual password/email option, wip
+//        String displayName = account.getDisplayName();
+//        String email = account.getEmail();
+//        Toast.makeText(getActivity(), "Signed in as: " + displayName, Toast.LENGTH_SHORT).show();
+//        loginBtn.setEnabled(true);
+//    }
+//
+//    private void handleSignInFailure(ApiException e) {
+//        int statusCode = e.getStatusCode();
+//        Toast.makeText(getActivity(), "Sign-in failed: " + statusCode, Toast.LENGTH_SHORT).show();
+//        Log.e("LoginFragment", "Sign-in failed: " + e.getMessage() + " Status Code: " + statusCode);
+//    }
 
     /**
      * Navigates to Start screen.

@@ -14,6 +14,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "625155307432-00o62s5cjm4k9bkbj0k85p5sl5qhe17b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.sjsu.sase.android.roots",
+            "certificate_hash": "efc4b35f3cd9c363ea896c98dd37b49bee30d0b2"
+          }
+        },
+        {
+          "client_id": "625155307432-0iu1j8u0tlorvj94jahtv73j9437iool.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.sjsu.sase.android.roots",
+            "certificate_hash": "8d49049fb3df850d73fc05660eac245757b8d513"
+          }
+        },
+        {
+          "client_id": "625155307432-0kj47ih45qftsk6kravh1sl8hsi1sa83.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.sjsu.sase.android.roots",
+            "certificate_hash": "6a109ed4705b500ebbb78760d48bd8b5935ed019"
+          }
+        },
+        {
+          "client_id": "625155307432-3b4d6qcbqr90cba9fjeb3dohf71jqks9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.sjsu.sase.android.roots",
+            "certificate_hash": "9871593339c062d9f329439dbe253d820f88c27a"
+          }
+        },
+        {
           "client_id": "625155307432-8sessiqokbnft1ca1heqdcvk71jfr5pq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
