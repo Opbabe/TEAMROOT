@@ -86,11 +86,16 @@ public class LoginFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance(); // This might be causing the crash
 
-        //initialize firebase and firestore
-
+        // Initialize Firebase Firestore
         db = FirebaseFirestore.getInstance();
 
+        if (db == null) {
+            Log.e("Firestore", "Firestore initialization failed!");
+        } else {
+            Log.d("Firestore", "Firestore initialized successfully.");
+        }
 
+        FirebaseFirestore.setLoggingEnabled(true);
 
         //initialize Google Sign-In options, later ill add manual password and email
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

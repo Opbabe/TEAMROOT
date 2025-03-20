@@ -1,4 +1,7 @@
-
+plugins {
+    alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
+}
 
 android {
     namespace = "edu.sjsu.sase.android.roots"
@@ -47,27 +50,19 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation ("com.google.gms:google-services:4.4.2")
 
     //firebase BOM
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.play.services.auth)
-    implementation (libs.firebase.auth.v2212)
-    implementation (libs.firebase.firestore)
-    implementation (libs.play.services.auth.v2070)
-
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.android.gms:play-services-auth:21.3.0")
+    implementation("com.google.firebase:firebase-auth:21.0.1")
+    implementation("com.google.firebase:firebase-firestore:24.1.0")
 
 
     //for credential management
-    implementation(libs.credentials)
+    implementation("androidx.credentials:credentials:1.5.0-rc01")
     //optional - needed for credentials support from play services, for devices running
     //Android 13 and below.
-    implementation(libs.credentials.play.services.auth)
+    implementation("androidx.credentials:credentials-play-services-auth:1.5.0-rc01")
 
-}
-
-plugins {
-    alias(libs.plugins.android.application)
-    id("com.google.gms.google-services") version "4.4.2" apply false
 }
