@@ -65,4 +65,6 @@ dependencies {
     //Android 13 and below.
     implementation("androidx.credentials:credentials-play-services-auth:1.5.0-rc01")
 
+    // to display photo urls
+    implementation("com.squareup.picasso:picasso:2.5.2")
 }

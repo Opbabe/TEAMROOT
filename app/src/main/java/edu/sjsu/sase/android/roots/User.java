@@ -7,7 +7,8 @@ public class User {
     private String id;
     private String name;
     private String email;
-    private String profileImage;
+    private String profilePicUrl;
+    private String username;
 
     /**
      * Default constructor (required for Firestore)
@@ -19,13 +20,15 @@ public class User {
      * @param id
      * @param name
      * @param email
-     * @param profileImage
+     * @param profilePicUrl
+     * @param username
      */
-    public User(String id, String name, String email, String profileImage) {
+    public User(String id, String name, String email, String profilePicUrl, String username) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.profileImage = profileImage;
+        this.profilePicUrl = profilePicUrl;
+        this.username = username;
     }
 
     /**
@@ -53,10 +56,18 @@ public class User {
     }
 
     /**
-     * Returns the user's profile image
-     * @return the user's profile image
+     * Returns the user's profile image url
+     * @return the user's profile image url
      */
-    public String getProfileImage() {
-        return profileImage;
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

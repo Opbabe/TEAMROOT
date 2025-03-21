@@ -190,10 +190,11 @@ public class LoginFragment extends Fragment {
         String uid = mAuth.getCurrentUser().getUid();
         String name = account.getDisplayName();
         String email = account.getEmail();
-        String profileImage = account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : "";
+        String profilePicUrl = account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : "";
+        String username = email.substring(0,email.indexOf("@"));
         // store as global variable in MyApplication
         // TODO: store currUser using DataStore to minimize user calls to Firestore
-        User currUser = new User(uid, name, email, profileImage);
+        User currUser = new User(uid, name, email, profilePicUrl, username);
         app.setCurrUser(currUser);
     }
 

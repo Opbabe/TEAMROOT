@@ -11,11 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * A fragment representing a user's profile screen.
  */
 public class UserProfileFragment extends Fragment {
+    private MyApplication app;
+    private User currUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,6 +56,10 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Retrieve global application of app for global variables tied to app's lifecycle
+        app = MyApplication.getInstance();
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -62,6 +71,21 @@ public class UserProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
+
+        currUser = app.getCurrUser();
+        // profile user info
+        TextView name = view.findViewById(R.id.tvFullName);
+        name.setText(currUser.getName());
+        TextView username = view.findViewById(R.id.tvUsername);
+        username.setText(currUser.getUsername());
+        ImageView profilePic = view.findViewById(R.id.profilePic);
+        String picUrl = currUser.getProfilePicUrl();
+        if (picUrl != null && !picUrl.isEmpty()) {
+            Picasso.with(getContext())
+                    .load(currUser.getProfilePicUrl())
+                    .placeholder(R.drawable.ic_profile)
+                    .into(profilePic);
+        }
 
         // buttons (retrieve from view)
         Button editProfileBtn = view.findViewById(R.id.btnBuddyProfile);
