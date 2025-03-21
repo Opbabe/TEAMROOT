@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
-    private FirebaseFirestore db;
+    public FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -46,6 +46,7 @@ public class LoginFragment extends Fragment {
     private Button loginBtn;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private MyApplication app;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -72,7 +73,10 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Retrieve global application of app for global variables tied to app's lifecycle
+        app = MyApplication.getInstance();
 
+        // Firebase
         List<FirebaseApp> firebaseApps = FirebaseApp.getApps(requireContext());
 
         if (firebaseApps.isEmpty()) {
@@ -177,17 +181,34 @@ public class LoginFragment extends Fragment {
 
     }
 
-    private void saveUserToFirestore(GoogleSignInAccount account) {
+    /**
+     * Create user object from specified account and set the appropriate variables
+     * @param account the google sign in account
+     */
+    private void setCurrUser(GoogleSignInAccount account){
+        // get user information from account
         String uid = mAuth.getCurrentUser().getUid();
+        String name = account.getDisplayName();
+        String email = account.getEmail();
+        String profileImage = account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : "";
+        // store as global variable in MyApplication
+        // TODO: store currUser using DataStore to minimize user calls to Firestore
+        User currUser = new User(uid, name, email, profileImage);
+        app.setCurrUser(currUser);
+    }
 
-        Map<String, Object> user = new HashMap<>();
-        user.put("name", account.getDisplayName());
-        user.put("email", account.getEmail());
-        user.put("profileImage", account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : "");
-
-        db.collection("users").document(uid).set(user)
+    /**
+     * Save account to Firestore as a User
+     * @param account the google sign in account
+     */
+    private void saveUserToFirestore(GoogleSignInAccount account) {
+        // set user variable in MyApplication and LoginFragment
+        setCurrUser(account);
+        User currUser = app.getCurrUser();
+        // save user to Firestore
+        db.collection("users").document(currUser.getId()).set(currUser)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(getActivity(), "User signed in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Signed in as: " + currUser.getName(), Toast.LENGTH_SHORT).show();
                     navigateToHome();
                 })
                 .addOnFailureListener(e -> Log.e("LoginFragment", "Error writing document", e));
