@@ -1,263 +1,681 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout 
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_root"
+    android:id="@+id/homeCoordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
-    <!-- Top Material Toolbar for a modern header -->
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        app:title="Home"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Collapsing toolbar header with banner image -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <!-- Login Button moved to the top right (within the toolbar height) -->
-    <Button
-         android:id="@+id/loginBttn"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="@string/loginButton_nav"
-         style="@style/Widget.MaterialComponents.Button"
-         app:layout_constraintTop_toTopOf="@id/toolbar"
-         app:layout_constraintBottom_toBottomOf="@id/toolbar"
-         app:layout_constraintEnd_toEndOf="parent"
-         android:layout_marginEnd="16dp" />
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
 
-    <!-- Scrollable content area containing all event listings and cards -->
-    <ScrollView
-         android:id="@+id/scrollView_content"
-         android:layout_width="0dp"
-         android:layout_height="0dp"
-         android:fillViewport="true"
-         app:layout_constraintTop_toBottomOf="@id/toolbar"
-         app:layout_constraintBottom_toTopOf="@id/bottomNavContainer"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintEnd_toEndOf="parent">
-        
-         <LinearLayout
-             android:id="@+id/innerLinearLayout"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="vertical"
-             android:padding="16dp">
+            <ImageView
+                android:id="@+id/headerImage"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header_event"
+                app:layout_collapseMode="parallax" />
 
-             <!-- Your Events header -->
-             <TextView
-                 android:id="@+id/yourEvents"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@string/your_events_list"
-                 android:textAppearance="?attr/textAppearanceHeadline6"
-                 android:layout_marginBottom="16dp" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:title="Discover Events"
+                app:titleTextColor="@android:color/white">
 
-             <!-- Category Title -->
-             <TextView
-                 android:id="@+id/categoryTitle"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@string/category_title_txt"
-                 android:textAppearance="?attr/textAppearanceSubtitle1"
-                 android:layout_marginBottom="24dp" />
+                <!-- Add notification bell and profile icon to toolbar -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
 
-             <!-- Event Listing 1 -->
-             <com.google.android.material.card.MaterialCardView
-                 android:id="@+id/cardEventListing1"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 app:cardCornerRadius="8dp"
-                 app:cardElevation="4dp"
-                 android:layout_marginBottom="16dp">
-                 
-                 <androidx.constraintlayout.widget.ConstraintLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:padding="16dp">
-                     
-                     <ImageButton
-                         android:id="@+id/eventListing1"
-                         android:layout_width="97dp"
-                         android:layout_height="91dp"
-                         android:contentDescription="@string/event_listing_desc"
-                         android:background="?attr/selectableItemBackgroundBorderless"
-                         tools:src="@tools:sample/avatars"
-                         app:layout_constraintTop_toTopOf="parent"
-                         app:layout_constraintBottom_toBottomOf="parent"
-                         app:layout_constraintStart_toStartOf="parent" />
-                     
-                     <TextView
-                         android:id="@+id/eventListingText1"
-                         android:layout_width="0dp"
-                         android:layout_height="wrap_content"
-                         android:text="@string/listingDetails"
-                         android:textAppearance="?attr/textAppearanceBody2"
-                         android:layout_marginStart="16dp"
-                         app:layout_constraintStart_toEndOf="@id/eventListing1"
-                         app:layout_constraintTop_toTopOf="@id/eventListing1"
-                         app:layout_constraintBottom_toBottomOf="@id/eventListing1"
-                         app:layout_constraintEnd_toEndOf="parent" />
-                 </androidx.constraintlayout.widget.ConstraintLayout>
-             </com.google.android.material.card.MaterialCardView>
+                    <ImageButton
+                        android:id="@+id/btnNotifications"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Notifications"
+                        android:src="@drawable/ic_notifications" />
 
-             <!-- Event Listing 2 -->
-             <com.google.android.material.card.MaterialCardView
-                 android:id="@+id/cardEventListing2"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 app:cardCornerRadius="8dp"
-                 app:cardElevation="4dp"
-                 android:layout_marginBottom="16dp">
-                 
-                 <androidx.constraintlayout.widget.ConstraintLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:padding="16dp">
-                     
-                     <ImageButton
-                         android:id="@+id/eventListing2"
-                         android:layout_width="97dp"
-                         android:layout_height="91dp"
-                         android:contentDescription="@string/event_listing_desc"
-                         android:background="?attr/selectableItemBackgroundBorderless"
-                         tools:src="@tools:sample/avatars"
-                         app:layout_constraintTop_toTopOf="parent"
-                         app:layout_constraintBottom_toBottomOf="parent"
-                         app:layout_constraintStart_toStartOf="parent" />
-                     
-                     <TextView
-                         android:id="@+id/eventListingText2"
-                         android:layout_width="0dp"
-                         android:layout_height="wrap_content"
-                         android:text="@string/listingDetails"
-                         android:textAppearance="?attr/textAppearanceBody2"
-                         android:layout_marginStart="16dp"
-                         app:layout_constraintStart_toEndOf="@id/eventListing2"
-                         app:layout_constraintTop_toTopOf="@id/eventListing2"
-                         app:layout_constraintBottom_toBottomOf="@id/eventListing2"
-                         app:layout_constraintEnd_toEndOf="parent" />
-                 </androidx.constraintlayout.widget.ConstraintLayout>
-             </com.google.android.material.card.MaterialCardView>
+                    <ImageView
+                        android:id="@+id/ivProfilePic"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/ic_profile"
+                        android:background="@drawable/circle_background"
+                        android:padding="4dp" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-             <!-- Event Listing 3 -->
-             <com.google.android.material.card.MaterialCardView
-                 android:id="@+id/cardEventListing3"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 app:cardCornerRadius="8dp"
-                 app:cardElevation="4dp"
-                 android:layout_marginBottom="16dp">
-                 
-                 <androidx.constraintlayout.widget.ConstraintLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:padding="16dp">
-                     
-                     <ImageButton
-                         android:id="@+id/eventListing3"
-                         android:layout_width="97dp"
-                         android:layout_height="91dp"
-                         android:contentDescription="@string/event_listing_desc"
-                         android:background="?attr/selectableItemBackgroundBorderless"
-                         tools:src="@tools:sample/avatars"
-                         app:layout_constraintTop_toTopOf="parent"
-                         app:layout_constraintBottom_toBottomOf="parent"
-                         app:layout_constraintStart_toStartOf="parent" />
-                     
-                     <TextView
-                         android:id="@+id/eventListingText3"
-                         android:layout_width="0dp"
-                         android:layout_height="wrap_content"
-                         android:text="@string/listingDetails"
-                         android:textAppearance="?attr/textAppearanceBody2"
-                         android:layout_marginStart="16dp"
-                         app:layout_constraintStart_toEndOf="@id/eventListing3"
-                         app:layout_constraintTop_toTopOf="@id/eventListing3"
-                         app:layout_constraintBottom_toBottomOf="@id/eventListing3"
-                         app:layout_constraintEnd_toEndOf="parent" />
-                 </androidx.constraintlayout.widget.ConstraintLayout>
-             </com.google.android.material.card.MaterialCardView>
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-             <!-- My Event Card with Create Event Button -->
-             <com.google.android.material.card.MaterialCardView
-                 android:id="@+id/cardMyEvent"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 app:cardCornerRadius="8dp"
-                 app:cardElevation="4dp"
-                 android:layout_marginBottom="16dp">
-                 
-                 <androidx.constraintlayout.widget.ConstraintLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:padding="16dp">
-                     
-                     <ImageButton
-                         android:id="@+id/myEventCard"
-                         android:layout_width="95dp"
-                         android:layout_height="100dp"
-                         android:contentDescription="@string/my_event_desc"
-                         android:background="?attr/selectableItemBackgroundBorderless"
-                         tools:src="@tools:sample/avatars"
-                         app:layout_constraintTop_toTopOf="parent"
-                         app:layout_constraintBottom_toBottomOf="parent"
-                         app:layout_constraintStart_toStartOf="parent" />
-                     
-                     <Button
-                         android:id="@+id/createBttn"
-                         android:layout_width="0dp"
-                         android:layout_height="wrap_content"
-                         android:text="@string/createEvent_nav"
-                         android:layout_marginStart="16dp"
-                         app:layout_constraintStart_toEndOf="@id/myEventCard"
-                         app:layout_constraintTop_toTopOf="@id/myEventCard"
-                         app:layout_constraintBottom_toBottomOf="@id/myEventCard"
-                         app:layout_constraintEnd_toEndOf="parent" />
-                 </androidx.constraintlayout.widget.ConstraintLayout>
-             </com.google.android.material.card.MaterialCardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="80dp">
 
-         </LinearLayout>
-    </ScrollView>
+            <!-- Enhanced Search Bar with filters -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
 
-    <!-- Bottom Navigation Container with buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                android:hint="Search events"
+                        app:endIconDrawable="@drawable/ic_filter"
+                        app:endIconMode="custom"
+                app:startIconDrawable="@drawable/ic_search">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Search Filters (initially hidden, toggle with filter icon) -->
+                    <LinearLayout
+                        android:id="@+id/searchFiltersLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Filter by:"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textStyle="bold" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/filterChipGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipDate"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipLocation"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Location" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipFriendsGoing"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Friends Going" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chipPrice"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Price" />
+                        </com.google.android.material.chip.ChipGroup>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="end">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnClearFilters"
+                                style="@style/Widget.MaterialComponents.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Clear" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnApplyFilters"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Apply" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Quick Access Categories with Icons -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/quickAccessMusic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardBackgroundColor="@color/categoryMusic"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="2dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_music" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Music"
+                            android:textAppearance="?attr/textAppearanceCaption" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/quickAccessArt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardBackgroundColor="@color/categoryArt"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="2dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_art" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Art"
+                            android:textAppearance="?attr/textAppearanceCaption" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/quickAccessFood"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardBackgroundColor="@color/categoryFood"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="2dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_food" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Food"
+                            android:textAppearance="?attr/textAppearanceCaption" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/quickAccessSports"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardBackgroundColor="@color/categorySports"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="2dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_sports" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Sports"
+                            android:textAppearance="?attr/textAppearanceCaption" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/quickAccessTech"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardBackgroundColor="@color/categoryTech"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="2dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_tech" />
+                        </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Tech"
+                            android:textAppearance="?attr/textAppearanceCaption" />
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Friends Going Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Friends Going"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                <TextView
+                    android:id="@+id/tvSeeAllFriends"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/friendsGoingRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_friend_going" />
+
+            <!-- Featured Events Section with header and see all button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                android:text="Featured Events"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                <TextView
+                    android:id="@+id/tvSeeAllFeatured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/featuredEventsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_event_featured" />
+
+            <!-- Nearby Events Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nearby Events"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                <TextView
+                    android:id="@+id/tvSeeAllNearby"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/nearbyEventsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_event_nearby" />
+
+            <!-- Trending Now Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Trending Now"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <TextView
+                    android:id="@+id/tvSeeAllTrending"
+                android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/trendingEventsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_event_trending" />
+
+            <!-- Upcoming Events Section with header and see all button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                android:text="Upcoming Events"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                <TextView
+                    android:id="@+id/tvSeeAllUpcoming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/upcomingEventsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_event" />
+
+            <!-- Event Groups Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Event Groups"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                <TextView
+                    android:id="@+id/tvSeeAllGroups"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/eventGroupsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_event_group" />
+
+            <!-- Categories Section with enhanced UI -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Categories"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/categoryChipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleLine="true"
+                    app:singleSelection="false" />
+            </HorizontalScrollView>
+
+            <!-- Recommended For You Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Recommended For You"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                <TextView
+                    android:id="@+id/tvSeeAllRecommended"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="?attr/colorPrimary"
+                    android:textAppearance="?attr/textAppearanceBody2" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recommendedEventsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_event" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Action Bar for quick navigation -->
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="10dp"
+        app:fabCradleVerticalOffset="0dp">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            app:menu="@menu/bottom_nav_menu" />
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <!-- Extended Floating Action Button for creating an event -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabCreateEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Create Event"
+        app:icon="@drawable/ic_add" />
+
+    <!-- Quick Action Buttons (initially hidden, shown on scroll) -->
     <LinearLayout
-         android:id="@+id/bottomNavContainer"
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:orientation="horizontal"
-         android:padding="16dp"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintEnd_toEndOf="parent">
-         
-         <Button
-            android:id="@+id/profileBttn"
-            android:layout_width="0dp"
+        android:id="@+id/quickActionButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="80dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabJoinEvent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/profileButton_nav"
-            style="@style/Widget.MaterialComponents.Button" />
-         <Button
-            android:id="@+id/homeButtn"
-            android:layout_width="0dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Join Event"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_join" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabFindFriends"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/home_screen_fragment"
-            style="@style/Widget.MaterialComponents.Button" />
-         <Button
-            android:id="@+id/buddyBttn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/buddiesButton_nav"
-            style="@style/Widget.MaterialComponents.Button" />
+            android:contentDescription="Find Friends"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_people" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

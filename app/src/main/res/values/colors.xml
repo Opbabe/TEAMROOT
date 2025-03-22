@@ -1,7 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_color">#F5F5F5</color>
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
-    <color name="media_preview_background">#E0E0E0</color>
+    <!-- Primary Green Colors -->
+    <color name="colorPrimary">#9ac262</color>
+    <!-- Dark variant: approximate darkening of #9ac262 (154,194,98) -> (123,155,78) -->
+    <color name="colorPrimaryDark">#7b9b4e</color>
+    <!-- Light variant: approximate lightening of #9ac262 (154,194,98) -> (185,234,128) -->
+    <color name="colorPrimaryLight">#b9ea80</color>
+    <color name="colorPrimaryVariant">#9ac262</color>
+
+    <!-- Secondary (Teal Blue) Colors -->
+    <color name="colorSecondary">#72cccd</color>
+    <!-- Dark variant: darken #72cccd (114,204,205) -> (91,163,164) -->
+    <color name="colorSecondaryDark">#5ba3a4</color>
+    <!-- Light variant: lighten #72cccd (approx.) -->
+    <color name="colorSecondaryLight">#8ddce0</color>
+    <color name="colorSecondaryVariant">#72cccd</color>
+
+    <!-- Accent Color (Yellow) -->
+    <color name="colorAccent">#e5c727</color>
+
+    <!-- Background and Surface (keeping background white) -->
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorSurface">#FFFFFF</color>
+
+    <!-- Error Color -->
+    <color name="colorError">#B00020</color>
+
+    <!-- Text Colors -->
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+    <color name="textColorTertiary">#9E9E9E</color>
+
+    <!-- Category Colors -->
+    <color name="categoryMusic">#95637e</color>
+    <color name="categoryArt">#9ac262</color>
+    <color name="categoryFood">#72cccd</color>
+    <color name="categorySports">#e5c727</color>
+    <color name="categoryTech">#eed3c2</color>
+
+    <!-- Additional Accent Colors (used lightly for buttons/design accents) -->
+    <color name="colorOption1">#95637e</color>
+    <color name="colorOption2">#eed3c2</color>
+
+    <!-- Missing Colors for compatibility -->
+    <color name="background_color">@color/colorBackground</color>
+    <color name="text_primary">@color/textColorPrimary</color>
+    <color name="text_secondary">@color/textColorSecondary</color>
+    <color name="media_preview_background">#EEEEEE</color>
     <color name="white">#FFFFFF</color>
+
+    <!-- Utility Colors -->
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray_light">#EEEEEE</color>
+    <color name="gray">#9E9E9E</color>
+    <color name="gray_dark">#616161</color>
 </resources>
+
+

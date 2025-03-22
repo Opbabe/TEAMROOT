@@ -63,4 +63,7 @@ dependencies {
     //Android 13 and below.
     implementation("androidx.credentials:credentials-play-services-auth:1.5.0-rc01")
 
+    // Added dependency for CircleImageView
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
 }
