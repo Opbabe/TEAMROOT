@@ -58,12 +58,12 @@ public class FriendRequestsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_friend_requests, container, false);
 
         // requests list: placeholder hardcoded data
-        for (int i = 0; i < 12; i++) {
-            usersList.add(String.valueOf(i));
-        }
-        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
-        friendFragment.setData(usersList);
-        friendFragment.setNavigation(R.id.action_friendRequestsFragment_to_userProfileFragment);
+//        for (int i = 0; i < 12; i++) {
+//            usersList.add(String.valueOf(i));
+//        }
+//        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
+//        friendFragment.setData(usersList);
+//        friendFragment.setNavigation(R.id.action_friendRequestsFragment_to_userProfileFragment);
 
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);

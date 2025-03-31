@@ -16,13 +16,14 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import edu.sjsu.sase.android.roots.R;
+import edu.sjsu.sase.android.roots.User;
 
 /**
  * A fragment representing the buddy list screen containing a matches list, a friends list,
  * and a button to view friend requests
  */
 public class BuddyListFragment extends Fragment {
-    ArrayList<String> matchesList = new ArrayList<>();
+    ArrayList<User> matchesList = new ArrayList<>();
     ArrayList<String> friendsList = new ArrayList<>();
 
     /**
@@ -61,20 +62,23 @@ public class BuddyListFragment extends Fragment {
         // Inflate the layout for this fragment (initializes layout (UI) for fragment)
         View view = inflater.inflate(R.layout.fragment_buddy_list, container, false);
 
+        String picPlaceholder = "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png";
+        User placeholderUser = new User("id", "name", "username@gmail.com", picPlaceholder, "username");;
         // matches list: placeholder hardcoded data
-        for (int i = 1; i <= 8; i++) {
-            matchesList.add("Match " + i);
-        }
-        MatchFragment matchFragment = (MatchFragment)  getChildFragmentManager().findFragmentById(R.id.matchesFragment);
-        matchFragment.setData(matchesList);
-
-        // friends list: placeholder hardcoded data
-        for (int i = 1; i <= 10; i++) {
-            friendsList.add(String.valueOf(i));
-        }
-        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.friendsFragment);
-        friendFragment.setData(friendsList);
-        friendFragment.setNavigation(R.id.action_buddyListFragment_to_userProfileFragment);
+//        for (int i = 1; i <= 8; i++) {
+//            matchesList.add("Match " + i);
+//        }
+//        matchesList.add(placeholderUser);
+//        MatchFragment matchFragment = (MatchFragment)  getChildFragmentManager().findFragmentById(R.id.matchesFragment);
+//        matchFragment.setData(matchesList);
+//
+//        // friends list: placeholder hardcoded data
+//        for (int i = 1; i <= 10; i++) {
+//            friendsList.add(String.valueOf(i));
+//        }
+//        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.friendsFragment);
+//        friendFragment.setData(friendsList);
+//        friendFragment.setNavigation(R.id.action_buddyListFragment_to_userProfileFragment);
 
 
         // buttons (retrieve from view)

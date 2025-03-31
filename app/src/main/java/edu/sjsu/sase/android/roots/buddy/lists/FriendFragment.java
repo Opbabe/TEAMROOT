@@ -6,21 +6,23 @@ import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import edu.sjsu.sase.android.roots.MyApplication;
 import edu.sjsu.sase.android.roots.R;
+import edu.sjsu.sase.android.roots.User;
 
 
 /**
  * A fragment representing a list of friends.
  */
 public class FriendFragment extends Fragment {
-    ArrayList<String> data = new ArrayList<>();
-    int navigationId;
+    ArrayList<User> data = new ArrayList<>();
     FriendRecyclerViewAdapter adapter;
     RecyclerView recyclerView;
 
@@ -60,7 +62,6 @@ public class FriendFragment extends Fragment {
 
         // pass data as argument to construct adapter
         adapter = new FriendRecyclerViewAdapter(data);
-        adapter.setNavigationId(navigationId);
         // cast view to RecyclerView and set adapter for RecyclerView
         recyclerView = (RecyclerView) view;
         recyclerView.setAdapter(adapter);
@@ -68,19 +69,20 @@ public class FriendFragment extends Fragment {
     }
 
     /**
-     * Sets the friend list data to the specified ArrayList of data
+     * Sets the adapter's friend list data to the specified ArrayList of data
      * @param data ArrayList of data
      */
-    public void setData(ArrayList<String> data) {
-        this.data = data;
+    public void setData(ArrayList<User> data) {
+        adapter.setData(data);
     }
 
     /**
-     * Set the navigation id to the specified value.
+     * Sets the adapter's navigation id to the specified value.
      * @param resId an action id or destination id to navigation to
      */
     public void setNavigation(@IdRes int resId) {
-        this.navigationId = resId;
+        Log.d("friendfrag resId", String.valueOf(resId));
+        adapter.setNavigationId(resId);
     }
 
 }

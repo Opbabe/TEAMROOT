@@ -1,9 +1,14 @@
 package edu.sjsu.sase.android.roots;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 /**
  * Represents a user
  */
-public class User {
+public class User implements Parcelable {
     private String id;
     private String name;
     private String email;
@@ -17,11 +22,11 @@ public class User {
 
     /**
      * Constructs a User, which contains a user id, name, email, and profile image link
-     * @param id
-     * @param name
-     * @param email
-     * @param profilePicUrl
-     * @param username
+     * @param id the user's unique id
+     * @param name the user's name
+     * @param email the user's email
+     * @param profilePicUrl the url to the user's profile picture
+     * @param username the user's username
      */
     public User(String id, String name, String email, String profilePicUrl, String username) {
         this.id = id;
@@ -30,6 +35,73 @@ public class User {
         this.profilePicUrl = profilePicUrl;
         this.username = username;
     }
+
+    /**
+     * Constructs a User from the specified Parcel
+     * @param in the Parcel
+     */
+    protected User(Parcel in) {
+        id = readNullableString(in);
+        name = readNullableString(in);
+        email = readNullableString(in);
+        profilePicUrl = readNullableString(in);
+        username = readNullableString(in);
+    }
+
+    /**
+     * Helper method to read strings in the Parcel
+     * @param in the Parcel
+     * @return null if the byte is 0, otherwise the string
+     */
+    private String readNullableString(Parcel in) {
+        return in.readByte() == 0 ? null : in.readString();
+    }
+
+    /**
+     * Writes the User's attributes to the specified Parcel
+     * @param dest The Parcel in which the object should be written.
+     * @param flags Additional flags about how the object should be written.
+     * May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+     */
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        writeNullableToParcel(dest, id);
+        writeNullableToParcel(dest, name);
+        writeNullableToParcel(dest, email);
+        writeNullableToParcel(dest, profilePicUrl);
+        writeNullableToParcel(dest, username);
+    }
+
+    /**
+     * Helper method to write a string to the specified Parcel
+     * @param dest the parcel
+     * @param str the string to write to the parcel
+     */
+    private void writeNullableToParcel(Parcel dest, String str) {
+        if (str == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeString(str);
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     /**
      * Returns the user's unique id

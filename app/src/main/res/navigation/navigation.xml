@@ -89,6 +89,9 @@
         <action
             android:id="@+id/action_userProfileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <argument
+            android:name="@string/user_argument_key"
+            app:argType="edu.sjsu.sase.android.roots.User" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

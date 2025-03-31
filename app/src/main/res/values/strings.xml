@@ -21,4 +21,6 @@
     <!-- Added content descriptions to avoid resource errors -->
     <string name="event_listing_desc">Event Listing</string>
     <string name="my_event_desc">My Event Card</string>
+    <!-- For navigation bundles -->
+    <string name="user_argument_key">aUser</string>
 </resources>

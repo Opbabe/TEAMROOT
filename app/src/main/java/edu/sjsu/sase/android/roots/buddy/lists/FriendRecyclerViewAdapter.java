@@ -1,29 +1,36 @@
 package edu.sjsu.sase.android.roots.buddy.lists;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
 import edu.sjsu.sase.android.roots.R;
+import edu.sjsu.sase.android.roots.User;
 import edu.sjsu.sase.android.roots.databinding.FragmentFriendBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Creates view for each Friend in Friends List of the Buddies List screen.
  */
 public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecyclerViewAdapter.ViewHolder> {
-    // TODO: Create User class and convert mValues into a List<User>
-    private final List<String> mValues;
+    private List<User> usersList;
     private int navigationId;
     private boolean navigationSet = false;
 
-    public FriendRecyclerViewAdapter(List<String> items) {
-        mValues = items;
+    public FriendRecyclerViewAdapter(ArrayList<User> items) {
+        usersList = items;
     }
 
     /**
@@ -33,8 +40,9 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
      * @param viewType The view type of the new View.
      * @return a new ViewHolder for a row
      */
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(FragmentFriendBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
@@ -46,18 +54,27 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
      */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        // Set the image as the launcher icon of Android
-        holder.binding.profilePic.setImageResource(R.mipmap.ic_launcher);
-        // Get the current data from the arraylist based on the position
-        String currentName = "Name " + mValues.get(position);
-        holder.binding.name.setText(currentName);
-        String currentUsername = "username " + mValues.get(position);
-        holder.binding.username.setText(currentUsername);
+        // profile user info
+        holder.binding.name.setText(usersList.get(position).getName());
+        holder.binding.username.setText(usersList.get(position).getUsername());
+        String picUrl = usersList.get(position).getProfilePicUrl();
+        if (picUrl != null && !picUrl.isEmpty()) {
+            Picasso.with(holder.binding.name.getContext())
+                    .load(usersList.get(position).getProfilePicUrl())
+                    .placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile)
+                    .into( holder.binding.profilePic);
+        }
+        else {
+            holder.binding.profilePic.setImageResource(R.drawable.ic_profile);
+        }
+
+
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return usersList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -71,9 +88,16 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
             // The root represents one row
             // When the row is clicked, navigate to the appropriate page
             this.binding.getRoot().setOnClickListener(view -> {
-                if (navigationSet == true){
+                int position = getLayoutPosition();
+                if (navigationSet && position != RecyclerView.NO_POSITION){
+                    // user clicked on
+                    User user = usersList.get(position);
+                    // pass user as data to the appropriate page
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(this.binding.name.getContext().getString(R.string.user_argument_key), user);
                     NavController controller = Navigation.findNavController(view);
-                    controller.navigate(navigationId);
+                    controller.navigate(navigationId, bundle);
+                    navigationSet = false;
                 }
             });
         }
@@ -88,5 +112,16 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
     public void setNavigationId(@IdRes int resId) {
         this.navigationId = resId;
         navigationSet = true;
+        Log.d("adapter resId", String.valueOf(resId));
+    }
+
+    /**
+     * Set the list of users to the specified list and refresh the UI to display the list
+     * @param data the list of users to display
+     */
+    @SuppressLint("NotifyDataSetChanged")
+    public void setData(ArrayList<User> data) {
+        usersList = data;
+        notifyDataSetChanged(); // Notify the RecyclerView to refresh the UI
     }
 }

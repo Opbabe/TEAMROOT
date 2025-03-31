@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -19,7 +23,9 @@ import edu.sjsu.sase.android.roots.buddy.lists.FriendFragment;
  * A fragment representing the user listing screen where all users can be found
  */
 public class UserListingFragment extends Fragment {
-    ArrayList<String> usersList = new ArrayList<>();
+    private FirebaseFirestore db;
+    private MyApplication app;
+    ArrayList<User> usersList = new ArrayList<>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -37,6 +43,10 @@ public class UserListingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Retrieve global application of app for global variables tied to app's lifecycle
+        app = MyApplication.getInstance();
+        // Initialize Firebase Firestore
+        db = FirebaseFirestore.getInstance();
     }
 
     /**
@@ -56,22 +66,50 @@ public class UserListingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_listing, container, false);
-
-        // friends list: placeholder hardcoded data
-        for (int i = 0; i < 15; i++) {
-            usersList.add(String.valueOf(i));
-        }
-        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
-        friendFragment.setData(usersList);
-        friendFragment.setNavigation(R.id.action_userListingFragment_to_userProfileFragment);
-
+        // Retrieve all users to display on user listing
+        fetchAllUsers();
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
-
         // setOnClickListeners
         backArrow.setOnClickListener(this::onClickBackArrow);
 
         return view;
+    }
+
+    /**
+     * Retrieve all users to display on user listing
+     * TODO: filter/sort users
+     */
+    private void fetchAllUsers() {
+        // clear list
+        usersList.clear();
+        // placeholder user
+        User testUser = new User("id", "name", "username@gmail.com", "", "username");
+        usersList.add(testUser);
+        // retrieve all users
+        db.collection("users")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document : queryDocumentSnapshots) {
+                        User user = document.toObject(User.class);
+                        usersList.add(user);
+                    }
+                    updateFriendFragment();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firestore", "Error fetching users: " + e.getMessage());
+                });
+    }
+
+    /**
+     * Update UI
+     */
+    private void updateFriendFragment() {
+        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
+        if (friendFragment != null) {
+            friendFragment.setData(usersList);
+            friendFragment.setNavigation(R.id.action_userListingFragment_to_userProfileFragment);
+        }
     }
 
     /**
