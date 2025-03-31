@@ -1,4 +1,4 @@
-package com.example.app.adapter;
+package edu.sjsu.sase.android.roots;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.app.R;
-import com.example.app.model.Event;
 import java.util.List;
 
 public class FeaturedEventsAdapter extends RecyclerView.Adapter<FeaturedEventsAdapter.ViewHolder> {
@@ -32,18 +30,18 @@ public class FeaturedEventsAdapter extends RecyclerView.Adapter<FeaturedEventsAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Event event = eventList.get(position);
-        holder.titleTextView.setText(event.getTitle());
+        holder.titleTextView.setText(event.getName());
 
         // Set the appropriate image based on the event title
-        if ("Summer Music Festival".equals(event.getTitle())) {
+        if ("Summer Music Festival".equals(event.getName())) {
             // Make sure the resource name is all lowercase in your project;
             // if the file was originally "nycSummer.png", it must be renamed to "nycsummer.png"
             holder.eventImageView.setImageResource(R.drawable.nycsummer);
-        } else if ("Art Gala".equals(event.getTitle())) {
+        } else if ("Art Gala".equals(event.getName())) {
             holder.eventImageView.setImageResource(R.drawable.nyart);
         } else {
             // Optionally, set a default image for other events
-            holder.eventImageView.setImageResource(R.drawable.default_event);
+            holder.eventImageView.setImageResource(R.drawable.default_image);
         }
     }
 
@@ -58,7 +56,7 @@ public class FeaturedEventsAdapter extends RecyclerView.Adapter<FeaturedEventsAd
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            eventImageView = itemView.findViewById(R.id.ivEventPhoto);
+//            eventImageView = itemView.findViewById(R.id.ivEventPhoto);
             titleTextView = itemView.findViewById(R.id.tvEventTitle);
         }
     }
