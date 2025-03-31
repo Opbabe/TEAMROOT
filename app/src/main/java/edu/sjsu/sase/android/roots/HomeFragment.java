@@ -23,6 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -201,7 +203,6 @@ public class HomeFragment extends Fragment {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_profile) {
-                Toast.makeText(getContext(), "Profile clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (itemId == R.id.navigation_home) {
                 Toast.makeText(getContext(), "Home clicked", Toast.LENGTH_SHORT).show();
@@ -214,6 +215,36 @@ public class HomeFragment extends Fragment {
         });
     }
 
+//    navigaton methods
+    //@TODO implement navigation methods in new buttons
+    private void gotToUserProfile(View view){
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_homeFragment_to_userProfileFragment);
+    }
+
+        private void goToBuddySystem(View view){
+            NavController controller = Navigation.findNavController(view);
+            controller.navigate(R.id.action_homeFragment_to_buddySystemFragment);
+        }
+
+        private void goHome(View view){
+            NavController controller = Navigation.findNavController(view);
+            controller.navigate(R.id.action_homeFragment_self);
+        }
+
+        private void goToEventListing(View view){
+            NavController controller = Navigation.findNavController(view);
+            controller.navigate(R.id.action_homeFragment_to_eventListingFragment);
+        }
+        private void goToEventCreation(View view){
+            NavController controller = Navigation.findNavController(view);
+            controller.navigate(R.id.action_homeFragment_to_eventCreationFragment);
+        }
+
+        private void goToSingleEvent(View view){
+            NavController controller = Navigation.findNavController(view);
+            controller.navigate(R.id.action_homeFragment_to_singleEventFragment);
+        }
     private void setupSearchBar() {
         // Setup search end icon click to toggle filters
         searchInputLayout.setEndIconOnClickListener(v -> {
