@@ -21,6 +21,18 @@ public class User implements Parcelable {
     public User(){}
 
     /**
+     * Constructs a dummy User for testing purposes.
+     * @param i an integer to differentiate between multiple dummy users
+     */
+    public User(int i) {
+        this.id = "id" + i;
+        this.name = "name" + i;
+        this.email = "username" + i + "@gmail.com";
+        this.profilePicUrl = "";
+        this.username = "username" + i;
+    }
+
+    /**
      * Constructs a User, which contains a user id, name, email, and profile image link
      * @param id the user's unique id
      * @param name the user's name

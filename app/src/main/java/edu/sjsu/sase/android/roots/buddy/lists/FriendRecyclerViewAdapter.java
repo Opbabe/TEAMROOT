@@ -112,16 +112,16 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
     public void setNavigationId(@IdRes int resId) {
         this.navigationId = resId;
         navigationSet = true;
-        Log.d("adapter resId", String.valueOf(resId));
     }
 
     /**
      * Set the list of users to the specified list and refresh the UI to display the list
-     * @param data the list of users to display
+     * @param usersList the list of users to display
      */
     @SuppressLint("NotifyDataSetChanged")
-    public void setData(ArrayList<User> data) {
-        usersList = data;
+    public void setUsersList(ArrayList<User> usersList) {
+        Log.d("friend adapter", "friends list size: " + usersList.size());
+        this.usersList = usersList;
         notifyDataSetChanged(); // Notify the RecyclerView to refresh the UI
     }
 }

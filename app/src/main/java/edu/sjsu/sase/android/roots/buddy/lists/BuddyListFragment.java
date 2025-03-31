@@ -5,8 +5,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +24,7 @@ import edu.sjsu.sase.android.roots.User;
  */
 public class BuddyListFragment extends Fragment {
     ArrayList<User> matchesList = new ArrayList<>();
-    ArrayList<String> friendsList = new ArrayList<>();
+    ArrayList<User> friendsList = new ArrayList<>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -62,8 +62,8 @@ public class BuddyListFragment extends Fragment {
         // Inflate the layout for this fragment (initializes layout (UI) for fragment)
         View view = inflater.inflate(R.layout.fragment_buddy_list, container, false);
 
-        String picPlaceholder = "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png";
-        User placeholderUser = new User("id", "name", "username@gmail.com", picPlaceholder, "username");;
+//        String picPlaceholder = "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png";
+//        User placeholderUser = new User("id", "name", "username@gmail.com", picPlaceholder, "username");;
         // matches list: placeholder hardcoded data
 //        for (int i = 1; i <= 8; i++) {
 //            matchesList.add("Match " + i);
@@ -72,13 +72,13 @@ public class BuddyListFragment extends Fragment {
 //        MatchFragment matchFragment = (MatchFragment)  getChildFragmentManager().findFragmentById(R.id.matchesFragment);
 //        matchFragment.setData(matchesList);
 //
-//        // friends list: placeholder hardcoded data
-//        for (int i = 1; i <= 10; i++) {
-//            friendsList.add(String.valueOf(i));
-//        }
-//        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.friendsFragment);
-//        friendFragment.setData(friendsList);
-//        friendFragment.setNavigation(R.id.action_buddyListFragment_to_userProfileFragment);
+        // TODO: implement mechanism to keep track of friends and replace hardcoded data
+        // friends list: placeholder hardcoded data
+        for (int i = 1; i <= 10; i++) {
+            friendsList.add(new User(i));
+        }
+        Log.d("buddy list", "friends list size on create view: " + friendsList.size());
+        updateFriendFragment();
 
 
         // buttons (retrieve from view)
@@ -100,6 +100,18 @@ public class BuddyListFragment extends Fragment {
         profileBtn.setOnClickListener(this::onClickUserProfile);
 
         return view;
+    }
+
+    /**
+     * Update UI
+     */
+    private void updateFriendFragment() {
+        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.friendsFragment);
+        if (friendFragment != null) {
+            Log.d("buddy list", "friends list size: " + friendsList.size());
+            friendFragment.setUsersList(friendsList);
+            friendFragment.setNavigationId(R.id.action_buddyListFragment_to_userProfileFragment);
+        }
     }
 
     /**

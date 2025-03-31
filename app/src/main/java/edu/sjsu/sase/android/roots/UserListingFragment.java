@@ -84,8 +84,10 @@ public class UserListingFragment extends Fragment {
         // clear list
         usersList.clear();
         // placeholder user
-        User testUser = new User("id", "name", "username@gmail.com", "", "username");
+        User testUser = new User(1);
         usersList.add(testUser);
+        User testUser2 = new User(2);
+        usersList.add(testUser2);
         // retrieve all users
         db.collection("users")
                 .get()
@@ -107,8 +109,8 @@ public class UserListingFragment extends Fragment {
     private void updateFriendFragment() {
         FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
         if (friendFragment != null) {
-            friendFragment.setData(usersList);
-            friendFragment.setNavigation(R.id.action_userListingFragment_to_userProfileFragment);
+            friendFragment.setUsersList(usersList);
+            friendFragment.setNavigationId(R.id.action_userListingFragment_to_userProfileFragment);
         }
     }
 

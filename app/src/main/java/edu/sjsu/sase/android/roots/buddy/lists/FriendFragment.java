@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import edu.sjsu.sase.android.roots.MyApplication;
 import edu.sjsu.sase.android.roots.R;
 import edu.sjsu.sase.android.roots.User;
 
@@ -22,7 +21,9 @@ import edu.sjsu.sase.android.roots.User;
  * A fragment representing a list of friends.
  */
 public class FriendFragment extends Fragment {
-    ArrayList<User> data = new ArrayList<>();
+    ArrayList<User> usersList = new ArrayList<>();
+    ArrayList<User> pendingList;
+    int pendingNavResId;
     FriendRecyclerViewAdapter adapter;
     RecyclerView recyclerView;
 
@@ -61,28 +62,53 @@ public class FriendFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
 
         // pass data as argument to construct adapter
-        adapter = new FriendRecyclerViewAdapter(data);
+        adapter = new FriendRecyclerViewAdapter(usersList);
         // cast view to RecyclerView and set adapter for RecyclerView
         recyclerView = (RecyclerView) view;
         recyclerView.setAdapter(adapter);
+
+        // set adapter's data to the pending list
+        if (pendingList != null) {
+            adapter.setUsersList(pendingList);
+            pendingList = null;
+        }
+
+        // set adapter's navigation to the pending navigation res id
+        if (pendingNavResId != 0) {
+            adapter.setNavigationId(pendingNavResId);
+            pendingNavResId = 0;
+        }
+
         return view;
     }
 
     /**
      * Sets the adapter's friend list data to the specified ArrayList of data
-     * @param data ArrayList of data
+     * @param usersList ArrayList of data
      */
-    public void setData(ArrayList<User> data) {
-        adapter.setData(data);
+    public void setUsersList(ArrayList<User> usersList) {
+        if (adapter != null) {
+            Log.d("friend frag", "friends list size: " + usersList.size());
+            adapter.setUsersList(usersList);
+        }
+        else {
+            // temporarily store list until adapter is created
+            pendingList = usersList;
+        }
     }
 
     /**
      * Sets the adapter's navigation id to the specified value.
      * @param resId an action id or destination id to navigation to
      */
-    public void setNavigation(@IdRes int resId) {
-        Log.d("friendfrag resId", String.valueOf(resId));
-        adapter.setNavigationId(resId);
+    public void setNavigationId(@IdRes int resId) {
+        if (adapter != null) {
+            adapter.setNavigationId(resId);
+        }
+        else {
+            // temporarily store resId until adapter is created
+            pendingNavResId = resId;
+        }
     }
 
 }
