@@ -12,8 +12,8 @@ import java.util.List;
 
 public class FeaturedEventsAdapter extends RecyclerView.Adapter<FeaturedEventsAdapter.ViewHolder> {
 
-    private List<Event> eventList;
-    private Context context;
+    private final List<Event> eventList;
+    private final Context context;
 
     public FeaturedEventsAdapter(Context context, List<Event> eventList) {
         this.context = context;
