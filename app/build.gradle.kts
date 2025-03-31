@@ -66,4 +66,8 @@ dependencies {
     // Added dependency for CircleImageView
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    implementation("androidx.core:core-ktx:1.13.1") // Replace with the latest stable version
+    implementation("androidx.appcompat:appcompat:1.7.0") // Replace with the latest stable version
+    implementation("com.google.android.material:material:1.12.0") // Replace with the latest stable version
+
 }
