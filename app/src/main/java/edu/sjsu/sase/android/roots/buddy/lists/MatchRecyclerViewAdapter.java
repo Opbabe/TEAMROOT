@@ -4,25 +4,31 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import edu.sjsu.sase.android.roots.R;
+import edu.sjsu.sase.android.roots.User;
 import edu.sjsu.sase.android.roots.databinding.FragmentMatchBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Creates view for each Match in Matches List of the Buddies List screen
  */
 public class MatchRecyclerViewAdapter extends RecyclerView.Adapter<MatchRecyclerViewAdapter.ViewHolder> {
-    // TODO: Create User class and convert mValues into a List<User>
-    private final List<String> mValues;
+    private List<User> usersList;
+    private int navigationId;
+    private boolean navigationSet = false;
 
-    public MatchRecyclerViewAdapter(List<String> items) {
-        mValues = items;
+    public MatchRecyclerViewAdapter(ArrayList<User> items) {
+        usersList = items;
     }
 
     /** Creates a new ViewHolder object for a row when needed. Only initializes the ViewHolder, with no data filled in.
@@ -45,11 +51,19 @@ public class MatchRecyclerViewAdapter extends RecyclerView.Adapter<MatchRecycler
      */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        // Set the image as the launcher icon of Android
-        holder.binding.profilePic.setImageResource(R.mipmap.ic_launcher);
-        // Get the current data from the arraylist based on the position
-        String current = mValues.get(position);
-        holder.binding.name.setText(current);
+        // profile user info
+        holder.binding.name.setText(usersList.get(position).getName());
+        String picUrl = usersList.get(position).getProfilePicUrl();
+        if (picUrl != null && !picUrl.isEmpty()) {
+            Picasso.with(holder.binding.name.getContext())
+                    .load(usersList.get(position).getProfilePicUrl())
+                    .placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile)
+                    .into( holder.binding.profilePic);
+        }
+        else {
+            holder.binding.profilePic.setImageResource(R.drawable.ic_profile);
+        }
     }
 
     /**
@@ -58,7 +72,7 @@ public class MatchRecyclerViewAdapter extends RecyclerView.Adapter<MatchRecycler
      */
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return usersList.size();
     }
 
     /**
@@ -75,9 +89,28 @@ public class MatchRecyclerViewAdapter extends RecyclerView.Adapter<MatchRecycler
             // The root represents one row
             // When the row is clicked, navigate to match's user profile
             this.binding.getRoot().setOnClickListener(view -> {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_buddyListFragment_to_userProfileFragment);
+                int position = getLayoutPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    // user clicked on
+                    User user = usersList.get(position);
+                    // pass user as data to the appropriate page
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(this.binding.name.getContext().getString(R.string.user_argument_key), user);
+                    NavController controller = Navigation.findNavController(view);
+                    controller.navigate(R.id.action_buddyListFragment_to_userProfileFragment, bundle);
+                }
             });
         }
+    }
+
+    /**
+     * Set the list of users to the specified list and refresh the UI to display the list
+     * @param usersList the list of users to display
+     */
+    @SuppressLint("NotifyDataSetChanged")
+    public void setUsersList(ArrayList<User> usersList) {
+        Log.d("match adapter", "matches list size: " + usersList.size());
+        this.usersList = usersList;
+        notifyDataSetChanged(); // Notify the RecyclerView to refresh the UI
     }
 }

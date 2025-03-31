@@ -62,19 +62,17 @@ public class BuddyListFragment extends Fragment {
         // Inflate the layout for this fragment (initializes layout (UI) for fragment)
         View view = inflater.inflate(R.layout.fragment_buddy_list, container, false);
 
-//        String picPlaceholder = "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png";
-//        User placeholderUser = new User("id", "name", "username@gmail.com", picPlaceholder, "username");;
+        // TODO: implement mechanism to keep track of matches and replace hardcoded data
         // matches list: placeholder hardcoded data
-//        for (int i = 1; i <= 8; i++) {
-//            matchesList.add("Match " + i);
-//        }
-//        matchesList.add(placeholderUser);
-//        MatchFragment matchFragment = (MatchFragment)  getChildFragmentManager().findFragmentById(R.id.matchesFragment);
-//        matchFragment.setData(matchesList);
-//
+        for (int i = 1; i <= 10; i++) {
+            matchesList.add(new User(i));
+        }
+        Log.d("buddy list", "matches list size on create view: " + matchesList.size());
+        updateMatchFragment();
+
         // TODO: implement mechanism to keep track of friends and replace hardcoded data
         // friends list: placeholder hardcoded data
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 11; i <= 20; i++) {
             friendsList.add(new User(i));
         }
         Log.d("buddy list", "friends list size on create view: " + friendsList.size());
@@ -103,7 +101,18 @@ public class BuddyListFragment extends Fragment {
     }
 
     /**
-     * Update UI
+     * Update Matches List UI
+     */
+    private void updateMatchFragment() {
+        MatchFragment matchFragment = (MatchFragment) getChildFragmentManager().findFragmentById(R.id.matchesFragment);
+        if (matchFragment != null) {
+            Log.d("buddy list", "matches list size: " + matchesList.size());
+            matchFragment.setUsersList(matchesList);
+        }
+    }
+
+    /**
+     * Update Friends UI
      */
     private void updateFriendFragment() {
         FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.friendsFragment);

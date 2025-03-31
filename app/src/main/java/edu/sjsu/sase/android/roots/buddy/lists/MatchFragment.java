@@ -3,10 +3,9 @@ package edu.sjsu.sase.android.roots.buddy.lists;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +13,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import edu.sjsu.sase.android.roots.R;
+import edu.sjsu.sase.android.roots.User;
 
 /**
  * A fragment representing a list of matches.
  */
 public class MatchFragment extends Fragment {
-    ArrayList<String> data = new ArrayList<>();
+    ArrayList<User> usersList = new ArrayList<>();
+    ArrayList<User> pendingList;
     MatchRecyclerViewAdapter adapter;
     RecyclerView recyclerView;
 
@@ -60,18 +61,32 @@ public class MatchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_match_list, container, false);
 
         // pass data as argument to construct adapter
-        adapter = new MatchRecyclerViewAdapter(data);
+        adapter = new MatchRecyclerViewAdapter(usersList);
         // cast view to RecyclerView and set adapter for RecyclerView
         recyclerView = (RecyclerView) view;
         recyclerView.setAdapter(adapter);
+
+        // set adapter's data to the pending list
+        if (pendingList != null) {
+            adapter.setUsersList(pendingList);
+            pendingList = null;
+        }
+
         return view;
     }
 
     /**
      * Sets the matches list data to the specified ArrayList of data
-     * @param data ArrayList of data
+     * @param usersList ArrayList of data
      */
-    public void setData(ArrayList<String> data) {
-        this.data = data;
+    public void setUsersList(ArrayList<User> usersList) {
+        if (adapter != null) {
+            Log.d("match frag", "match list size: " + usersList.size());
+            adapter.setUsersList(usersList);
+        }
+        else {
+            // temporarily store list until adapter is created
+            pendingList = usersList;
+        }
     }
 }

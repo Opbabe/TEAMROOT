@@ -27,7 +27,6 @@ import java.util.List;
 public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecyclerViewAdapter.ViewHolder> {
     private List<User> usersList;
     private int navigationId;
-    private boolean navigationSet = false;
 
     public FriendRecyclerViewAdapter(ArrayList<User> items) {
         usersList = items;
@@ -89,7 +88,7 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
             // When the row is clicked, navigate to the appropriate page
             this.binding.getRoot().setOnClickListener(view -> {
                 int position = getLayoutPosition();
-                if (navigationSet && position != RecyclerView.NO_POSITION){
+                if (navigationId != 0 && position != RecyclerView.NO_POSITION){
                     // user clicked on
                     User user = usersList.get(position);
                     // pass user as data to the appropriate page
@@ -97,7 +96,7 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
                     bundle.putParcelable(this.binding.name.getContext().getString(R.string.user_argument_key), user);
                     NavController controller = Navigation.findNavController(view);
                     controller.navigate(navigationId, bundle);
-                    navigationSet = false;
+                    navigationId = 0;
                 }
             });
         }
@@ -111,7 +110,6 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
      */
     public void setNavigationId(@IdRes int resId) {
         this.navigationId = resId;
-        navigationSet = true;
     }
 
     /**
