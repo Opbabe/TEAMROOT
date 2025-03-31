@@ -53,6 +53,7 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
      */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        Log.d("friend adapter", "onbindviewholder: " + position);
         // profile user info
         holder.binding.name.setText(usersList.get(position).getName());
         holder.binding.username.setText(usersList.get(position).getUsername());
@@ -118,8 +119,8 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
      */
     @SuppressLint("NotifyDataSetChanged")
     public void setUsersList(ArrayList<User> usersList) {
-        Log.d("friend adapter", "friends list size: " + usersList.size());
         this.usersList = usersList;
+        Log.d("friend adapter", "friends list size: " + this.usersList.size());
         notifyDataSetChanged(); // Notify the RecyclerView to refresh the UI
     }
 }

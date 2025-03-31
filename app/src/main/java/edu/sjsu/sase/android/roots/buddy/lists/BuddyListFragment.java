@@ -62,22 +62,9 @@ public class BuddyListFragment extends Fragment {
         // Inflate the layout for this fragment (initializes layout (UI) for fragment)
         View view = inflater.inflate(R.layout.fragment_buddy_list, container, false);
 
-        // TODO: implement mechanism to keep track of matches and replace hardcoded data
-        // matches list: placeholder hardcoded data
-        for (int i = 1; i <= 10; i++) {
-            matchesList.add(new User(i));
-        }
-        Log.d("buddy list", "matches list size on create view: " + matchesList.size());
-        updateMatchFragment();
-
-        // TODO: implement mechanism to keep track of friends and replace hardcoded data
-        // friends list: placeholder hardcoded data
-        for (int i = 11; i <= 20; i++) {
-            friendsList.add(new User(i));
-        }
-        Log.d("buddy list", "friends list size on create view: " + friendsList.size());
-        updateFriendFragment();
-
+        // matches and friends list
+        fetchMatches();
+        fetchFriends();
 
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
@@ -101,6 +88,20 @@ public class BuddyListFragment extends Fragment {
     }
 
     /**
+     * Retrieve user's matches
+     */
+    private void fetchMatches() {
+        matchesList.clear();
+        // TODO: implement mechanism to keep track of matches and replace hardcoded data
+        // matches list: placeholder hardcoded data
+        for (int i = 1; i <= 10; i++) {
+            matchesList.add(new User(i));
+        }
+        Log.d("buddy list", "matches list size on create view: " + matchesList.size());
+        updateMatchFragment();
+    }
+
+    /**
      * Update Matches List UI
      */
     private void updateMatchFragment() {
@@ -109,6 +110,20 @@ public class BuddyListFragment extends Fragment {
             Log.d("buddy list", "matches list size: " + matchesList.size());
             matchFragment.setUsersList(matchesList);
         }
+    }
+
+    /**
+     * Retrieve user's friends list
+     */
+    private void fetchFriends() {
+        friendsList.clear();
+        // TODO: implement mechanism to keep track of friends and replace hardcoded data
+        // friends list: placeholder hardcoded data
+        for (int i = 11; i <= 20; i++) {
+            friendsList.add(new User(i));
+        }
+        Log.d("buddy list", "friends list size on create view: " + friendsList.size());
+        updateFriendFragment();
     }
 
     /**
