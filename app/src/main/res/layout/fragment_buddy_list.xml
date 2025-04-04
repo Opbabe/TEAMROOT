@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".buddy.lists.BuddyListFragment"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/backArrowBtn"
+        android:layout_width="@dimen/back_arrow"
+        android:layout_height="@dimen/back_arrow"
+        android:src="@drawable/back_arrow_icon"/>
+
+    <TextView
+        android:id="@+id/screenHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/buddies" />
+
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search" />
+
+    <Button
+        android:id="@+id/requestBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/requests" />
+
+    <TextView
+        android:id="@+id/matchesHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/matches" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/matchesFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.lists.MatchFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/friendsHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/friends" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/friendsFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.lists.FriendFragment"
+        android:layout_width="match_parent"
+        android:layout_height="500dp" />
+
+<!-- TODO: replace buttons below with BottomNavigationView-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/homeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="home" />
+
+        <Button
+            android:id="@+id/buddiesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="buddies" />
+
+        <Button
+            android:id="@+id/userProfileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="profile" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

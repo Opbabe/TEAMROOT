@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- A simple placeholder Instagram icon -->
+    <path
+        android:fillColor="#E1306C"
+        android:pathData="M7,2 h10 a5,5 0 0 1 5,5 v10 a5,5 0 0 1 -5,5 H7 a5,5 0 0 1 -5,-5 V7 a5,5 0 0 1 5,-5 z M12,7 a5,5 0 1 0 5,5 a5,5 0 0 0 -5,-5 z"/>
+</vector> 

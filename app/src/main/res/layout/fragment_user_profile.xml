@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserProfileFragment">
+
+    <!-- NestedScrollView holds the new detailed profile UI -->
+    <androidx.core.widget.NestedScrollView
+         android:id="@+id/profileScrollView"
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         android:fillViewport="true"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintBottom_toTopOf="@+id/navigationContainer"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent">
+         
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/clContainer"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:padding="16dp">
+
+             <!-- Profile Picture -->
+             <com.google.android.material.imageview.ShapeableImageView
+                 android:id="@+id/profilePic"
+                 android:layout_width="120dp"
+                 android:layout_height="120dp"
+                 android:layout_marginTop="24dp"
+                 android:scaleType="centerCrop"
+                 android:src="@drawable/ic_profile"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent"
+                 app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+             <!-- Username -->
+             <TextView
+                 android:id="@+id/tvUsername"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+                 android:text="Username"
+                 android:textAppearance="?attr/textAppearanceHeadline6"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/profilePic" />
+
+             <!-- Full Name (First Name/Last Name) -->
+             <TextView
+                 android:id="@+id/tvFullName"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="4dp"
+                 android:text="FirstName LastName"
+                 android:textAppearance="?attr/textAppearanceBody2"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+
+             <!-- Bio -->
+             <TextView
+                 android:id="@+id/tvBio"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+                 android:text="This is the user bio. A brief description can go here."
+                 android:textAlignment="center"
+                 android:textAppearance="?attr/textAppearanceBody1"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/tvFullName" />
+
+             <!-- Social Media Links -->
+             <com.google.android.material.card.MaterialCardView
+                 android:id="@+id/socialLinksCard"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="24dp"
+                 app:cardCornerRadius="8dp"
+                 app:cardElevation="4dp"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/tvBio">
+
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal"
+                     android:padding="8dp">
+
+                     <!-- Instagram Social Icon -->
+                     <ImageButton
+                         android:id="@+id/btnInstagram"
+                         android:layout_width="48dp"
+                         android:layout_height="48dp"
+                         android:background="?attr/selectableItemBackgroundBorderless"
+                         android:contentDescription="Instagram"
+                         android:src="@drawable/ic_instagram" />
+
+                     <!-- Twitter Social Icon -->
+                     <ImageButton
+                         android:id="@+id/btnTwitter"
+                         android:layout_width="48dp"
+                         android:layout_height="48dp"
+                         android:layout_marginStart="16dp"
+                         android:background="?attr/selectableItemBackgroundBorderless"
+                         android:contentDescription="Twitter"
+                         android:src="@drawable/ic_twitter" />
+
+                 </LinearLayout>
+             </com.google.android.material.card.MaterialCardView>
+
+             <!-- Buttons: Buddy Profile Creation and Friend Request -->
+             <com.google.android.material.button.MaterialButton
+                 android:id="@+id/btnBuddyProfile"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="24dp"
+                 android:text="Create Buddy Profile"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintEnd_toStartOf="@id/btnFriendRequest"
+                 app:layout_constraintTop_toBottomOf="@id/socialLinksCard" />
+
+             <com.google.android.material.button.MaterialButton
+                 android:id="@+id/btnFriendRequest"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="8dp"
+                 android:text="Send Friend Request"
+                 app:layout_constraintStart_toEndOf="@id/btnBuddyProfile"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toTopOf="@id/btnBuddyProfile" />
+
+             <!-- Friends Following Section -->
+             <TextView
+                 android:id="@+id/tvFriendsFollowingLabel"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="24dp"
+                 android:text="Friends Following"
+                 android:textAppearance="?attr/textAppearanceSubtitle1"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/btnBuddyProfile" />
+
+             <!-- RecyclerView for Friend Icons -->
+             <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/rvFriends"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="8dp"
+                 android:orientation="horizontal"
+                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/tvFriendsFollowingLabel" />
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Navigation Container with buttons (IDs referenced in the code) -->
+    <LinearLayout
+         android:id="@+id/navigationContainer"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:padding="16dp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent">
+         
+         <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Log Out" />
+         <Button
+            android:id="@+id/homeBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Home" />
+         <Button
+            android:id="@+id/buddySystemBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Buddies" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayout6"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".buddy.BuddySystemFragment">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buddy System"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- "My Buddies" Button -->
+    <Button
+        android:id="@+id/buddiesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Buddies"
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Swipe Card for Tinder-style swipe feature -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/swipeCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/buddiesBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavLayout"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Image placeholder (ensure you have a drawable named placeholder_image) -->
+            <ImageView
+                android:id="@+id/buddyImage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder_image" />
+
+            <!-- Buddy Name -->
+            <TextView
+                android:id="@+id/buddyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buddy Name"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
+
+            <!-- Buddy Information -->
+            <TextView
+                android:id="@+id/buddyInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buddy Information"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Bottom Navigation Buttons -->
+    <LinearLayout
+        android:id="@+id/bottomNavLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Home Button -->
+        <Button
+            android:id="@+id/homeBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Home" />
+
+        <!-- Buddies Button (for bottom navigation; since you're already in Buddy System,
+             you may choose to display a message or simply do nothing when it is clicked) -->
+        <Button
+            android:id="@+id/buddiesSystemBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Buddies" />
+
+        <!-- Profile Button -->
+        <Button
+            android:id="@+id/userProfileBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Profile" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
