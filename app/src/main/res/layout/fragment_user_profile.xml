@@ -7,184 +7,220 @@
     android:layout_height="match_parent"
     tools:context=".UserProfileFragment">
 
-    <!-- NestedScrollView holds the new detailed profile UI -->
+    <!-- NestedScrollView holds the profile UI -->
     <androidx.core.widget.NestedScrollView
-         android:id="@+id/profileScrollView"
-         android:layout_width="0dp"
-         android:layout_height="0dp"
-         android:fillViewport="true"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintBottom_toTopOf="@+id/navigationContainer"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintEnd_toEndOf="parent">
-         
-         <androidx.constraintlayout.widget.ConstraintLayout
-             android:id="@+id/clContainer"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:padding="16dp">
+        android:id="@+id/profileScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navigationContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp">
 
-             <!-- Profile Picture -->
-             <com.google.android.material.imageview.ShapeableImageView
-                 android:id="@+id/profilePic"
-                 android:layout_width="120dp"
-                 android:layout_height="120dp"
-                 android:layout_marginTop="24dp"
-                 android:scaleType="centerCrop"
-                 android:src="@drawable/ic_profile"
-                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toTopOf="parent"
-                 app:shapeAppearanceOverlay="@style/CircleImageView" />
+            <!-- Edit Profile Button -->
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Edit profile"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-             <!-- Username -->
-             <TextView
-                 android:id="@+id/tvUsername"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="16dp"
-                 android:text="Username"
-                 android:textAppearance="?attr/textAppearanceHeadline6"
-                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@id/profilePic" />
+            <!-- User Info Section -->
+            <LinearLayout
+                android:id="@+id/llUserInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/btnEditProfile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-             <!-- Full Name (First Name/Last Name) -->
-             <TextView
-                 android:id="@+id/tvFullName"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="4dp"
-                 android:text="FirstName LastName"
-                 android:textAppearance="?attr/textAppearanceBody2"
-                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+                <!-- Pronouns -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
 
-             <!-- Bio -->
-             <TextView
-                 android:id="@+id/tvBio"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="16dp"
-                 android:text="This is the user bio. A brief description can go here."
-                 android:textAlignment="center"
-                 android:textAppearance="?attr/textAppearanceBody1"
-                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@id/tvFullName" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_info_details"
+                        android:contentDescription="Pronouns" />
 
-             <!-- Social Media Links -->
-             <com.google.android.material.card.MaterialCardView
-                 android:id="@+id/socialLinksCard"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="24dp"
-                 app:cardCornerRadius="8dp"
-                 app:cardElevation="4dp"
-                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@id/tvBio">
+                    <TextView
+                        android:id="@+id/tvPronouns"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(she/her)"
+                        android:textSize="16sp"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
 
-                 <LinearLayout
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="horizontal"
-                     android:padding="8dp">
+                <!-- Age -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
 
-                     <!-- Instagram Social Icon -->
-                     <ImageButton
-                         android:id="@+id/btnInstagram"
-                         android:layout_width="48dp"
-                         android:layout_height="48dp"
-                         android:background="?attr/selectableItemBackgroundBorderless"
-                         android:contentDescription="Instagram"
-                         android:src="@drawable/ic_instagram" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_my_calendar"
+                        android:contentDescription="Age" />
 
-                     <!-- Twitter Social Icon -->
-                     <ImageButton
-                         android:id="@+id/btnTwitter"
-                         android:layout_width="48dp"
-                         android:layout_height="48dp"
-                         android:layout_marginStart="16dp"
-                         android:background="?attr/selectableItemBackgroundBorderless"
-                         android:contentDescription="Twitter"
-                         android:src="@drawable/ic_twitter" />
+                    <TextView
+                        android:id="@+id/tvAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="21 y/o"
+                        android:textSize="16sp"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
 
-                 </LinearLayout>
-             </com.google.android.material.card.MaterialCardView>
+                <!-- Location -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
 
-             <!-- Buttons: Buddy Profile Creation and Friend Request -->
-             <com.google.android.material.button.MaterialButton
-                 android:id="@+id/btnBuddyProfile"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="24dp"
-                 android:text="Create Buddy Profile"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintEnd_toStartOf="@id/btnFriendRequest"
-                 app:layout_constraintTop_toBottomOf="@id/socialLinksCard" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_mylocation"
+                        android:contentDescription="Location" />
 
-             <com.google.android.material.button.MaterialButton
-                 android:id="@+id/btnFriendRequest"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:layout_marginStart="8dp"
-                 android:text="Send Friend Request"
-                 app:layout_constraintStart_toEndOf="@id/btnBuddyProfile"
-                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toTopOf="@id/btnBuddyProfile" />
+                    <TextView
+                        android:id="@+id/tvLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="san jose, CA, United states"
+                        android:textSize="16sp"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
 
-             <!-- Friends Following Section -->
-             <TextView
-                 android:id="@+id/tvFriendsFollowingLabel"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="24dp"
-                 android:text="Friends Following"
-                 android:textAppearance="?attr/textAppearanceSubtitle1"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@id/btnBuddyProfile" />
+                <!-- Interests -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
 
-             <!-- RecyclerView for Friend Icons -->
-             <androidx.recyclerview.widget.RecyclerView
-                 android:id="@+id/rvFriends"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="8dp"
-                 android:orientation="horizontal"
-                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintTop_toBottomOf="@id/tvFriendsFollowingLabel" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_compass"
+                        android:contentDescription="Interests" />
 
-         </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/tvInterests"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="social, food, music, outdoor"
+                        android:textSize="16sp"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Bio -->
+            <TextView
+                android:id="@+id/tvBio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="erm this is my user bio for the profile :0"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/llUserInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Event Tabs -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/tvBio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upcoming" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hosting" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Invites" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Attended" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <!-- Event Cards Container -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEvents"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Navigation Container with buttons (IDs referenced in the code) -->
+    <!-- Bottom Navigation Container -->
     <LinearLayout
-         android:id="@+id/navigationContainer"
-         android:layout_width="0dp"
-         android:layout_height="wrap_content"
-         android:orientation="horizontal"
-         android:padding="16dp"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintEnd_toEndOf="parent">
-         
-         <Button
+        android:id="@+id/navigationContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        
+        <Button
             android:id="@+id/logoutBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Log Out" />
-         <Button
+        <Button
             android:id="@+id/homeBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Home" />
-         <Button
+        <Button
             android:id="@+id/buddySystemBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

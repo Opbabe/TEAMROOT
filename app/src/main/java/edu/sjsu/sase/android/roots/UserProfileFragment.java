@@ -1,11 +1,10 @@
 package edu.sjsu.sase.android.roots;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a user's profile screen.
@@ -23,16 +26,19 @@ public class UserProfileFragment extends Fragment {
     private MyApplication app;
     private User currUser;
     private User userToDisplay;
+    
+    private TextView tvPronouns, tvAge, tvLocation, tvInterests, tvBio;
+    private RecyclerView rvEvents;
+    private TabLayout tabLayout;
 
     public UserProfileFragment() {
-        // Required empty public constructor
+        // Required empty constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Retrieve global application of app for global variables tied to app's lifecycle
+        // Retrieve global application instance
         app = MyApplication.getInstance();
     }
 
@@ -49,80 +55,114 @@ public class UserProfileFragment extends Fragment {
             String key = requireContext().getString(R.string.user_argument_key);
             userToDisplay = argument.getParcelable(key);
             Log.d("Profile", "display chosen user: " + userToDisplay.getName());
-        }
-        else {
+        } else {
             userToDisplay = currUser;
             Log.d("Profile", "display curr user: " + currUser.getName());
         }
 
-        // profile user info
-        TextView name = view.findViewById(R.id.tvFullName);
-        name.setText(userToDisplay.getName());
-        TextView username = view.findViewById(R.id.tvUsername);
-        username.setText(userToDisplay.getUsername());
-        ImageView profilePic = view.findViewById(R.id.profilePic);
-        String picUrl = userToDisplay.getProfilePicUrl();
-        if (picUrl != null && !picUrl.isEmpty()) {
-            Picasso.with(getContext())
-                    .load(userToDisplay.getProfilePicUrl())
-                    .placeholder(R.drawable.ic_profile)
-                    .error(R.drawable.ic_profile)
-                    .into(profilePic);
-        }
+        // Initialize views
+        tvPronouns = view.findViewById(R.id.tvPronouns);
+        tvAge = view.findViewById(R.id.tvAge);
+        tvLocation = view.findViewById(R.id.tvLocation);
+        tvInterests = view.findViewById(R.id.tvInterests);
+        tvBio = view.findViewById(R.id.tvBio);
+        rvEvents = view.findViewById(R.id.rvEvents);
+        tabLayout = view.findViewById(R.id.tabLayout);
+        
+        // Set user data
+        // tvPronouns.setText(userToDisplay.getPronouns());
+        // tvAge.setText(userToDisplay.getAge() + " y/o");
+        // tvLocation.setText(userToDisplay.getLocation());
+        // tvInterests.setText(userToDisplay.getInterests());
+        // tvBio.setText(userToDisplay.getBio());
 
-        // buttons (retrieve from view)
-        Button editProfileBtn = view.findViewById(R.id.btnBuddyProfile);
+        // Setup events list
+        setupEventsList();
+        
+        // Setup tab selection listener
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                updateEventsForTab(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // Not needed
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // Not needed
+            }
+        });
+
+        // Initialize navigation buttons
+        Button editProfileBtn = view.findViewById(R.id.btnEditProfile);
         Button logoutBtn = view.findViewById(R.id.logoutBtn);
-        // TODO: replace with BottomNavigationView
         Button homeBtn = view.findViewById(R.id.homeBtn);
         Button buddiesBtn = view.findViewById(R.id.buddySystemBtn);
 
-        // setOnClickListeners
         editProfileBtn.setOnClickListener(this::onClickEditProfile);
         logoutBtn.setOnClickListener(this::onClickLogout);
-        // TODO: replace with BottomNavigationView
         homeBtn.setOnClickListener(this::onClickHome);
         buddiesBtn.setOnClickListener(this::onClickBuddySystem);
 
         return view;
     }
+    
+    private void setupEventsList() {
+        List<Event> events = new ArrayList<>();
+        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
+        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
+        
+        EventAdapter adapter = new EventAdapter(events, event -> {
+            // Handle event click if needed
+        });
+        rvEvents.setAdapter(adapter);
+    }
+    
+    private void updateEventsForTab(int tabPosition) {
+        List<Event> events = new ArrayList<>();
+        switch (tabPosition) {
+            case 0:
+                events.add(new Event("Upcoming Event", "April 10 - 8 pm", "host name", "outdoor, social", "", R.drawable.ic_profile));
+                events.add(new Event("Upcoming Event 2", "April 15 - 6 pm", "host name", "music, food", "", R.drawable.ic_profile));
+                break;
+            case 1:
+                events.add(new Event("My Hosted Event", "April 20 - 7 pm", "You", "outdoor, music", "", R.drawable.ic_profile));
+                break;
+            case 2:
+                events.add(new Event("Invited Event", "April 12 - 9 pm", "friend name", "social, food", "", R.drawable.ic_profile));
+                events.add(new Event("Invited Event 2", "April 18 - 8 pm", "friend name", "music, outdoor", "", R.drawable.ic_profile));
+                break;
+            case 3:
+                events.add(new Event("Past Event", "March 25 - 7 pm", "host name", "social, music", "", R.drawable.ic_profile));
+                break;
+        }
+        EventAdapter adapter = new EventAdapter(events, event -> {
+            // Handle event click if needed
+        });
+        rvEvents.setAdapter(adapter);
+    }
 
-    /**
-     * Navigates to edit profile screen.
-     * @param view
-     */
     private void onClickEditProfile(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_userProfileFragment_to_editProfileFragment);
     }
 
-    /**
-     * Navigates to start screen.
-     * @param view
-     */
     private void onClickLogout(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_userProfileFragment_to_startFragment);
     }
 
-    // BOTTOM NAVIGATION BUTTONS
-
-    /**
-     * Navigates to Home screen.
-     * @param view
-     */
     private void onClickHome(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_userProfileFragment_to_homeFragment);
     }
 
-    /**
-     * Navigates to Buddy System screen.
-     * @param view
-     */
     private void onClickBuddySystem(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_userProfileFragment_to_buddySystemFragment);
     }
-
 }
