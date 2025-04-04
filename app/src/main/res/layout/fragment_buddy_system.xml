@@ -6,117 +6,305 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="16dp"
     tools:context=".buddy.BuddySystemFragment">
 
-    <!-- Header -->
+    <!-- App Title -->
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvAppTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buddy System"
+        android:text="Buds to Blossoms"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif-medium"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- "My Buddies" Button -->
-    <Button
+    <!-- My Buddies Button (replaced with icon) -->
+    <ImageButton
         android:id="@+id/buddiesBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Buddies"
-        app:layout_constraintTop_toBottomOf="@id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:src="@android:drawable/ic_menu_myplaces"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp"
+        android:contentDescription="My Buddies"
+        app:layout_constraintTop_toTopOf="@id/tvAppTitle"
+        app:layout_constraintBottom_toBottomOf="@id/tvAppTitle"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Swipe Card for Tinder-style swipe feature -->
+    <!-- Next Button -->
+    <ImageButton
+        android:id="@+id/nextBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_media_next"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp"
+        android:contentDescription="Next"
+        app:layout_constraintTop_toTopOf="@id/tvAppTitle"
+        app:layout_constraintBottom_toBottomOf="@id/tvAppTitle"
+        app:layout_constraintEnd_toStartOf="@id/buddiesBtn"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Tagline -->
+    <TextView
+        android:id="@+id/tvTagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="connect with your community"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:textColor="#666666"
+        android:fontFamily="sans-serif-light"
+        app:layout_constraintTop_toBottomOf="@id/tvAppTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="4dp" />
+
+    <!-- Profile Card -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/swipeCard"
+        android:id="@+id/profileCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/buddiesBtn"
+        app:layout_constraintTop_toBottomOf="@id/tvTagline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavLayout"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        app:layout_constraintBottom_toTopOf="@id/actionButtonsLayout"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="match_parent">
 
-            <!-- Image placeholder (ensure you have a drawable named placeholder_image) -->
+            <!-- Profile Image -->
             <ImageView
                 android:id="@+id/buddyImage"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/placeholder_image" />
+                android:src="@drawable/placeholder_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/buddyName"
+                app:layout_constraintHeight_percent="0.7" />
 
             <!-- Buddy Name -->
             <TextView
                 android:id="@+id/buddyName"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Buddy Name"
-                android:textSize="18sp"
+                android:text="Sandra Le"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:layout_marginTop="8dp" />
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-medium"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/buddyImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Buddy Information -->
-            <TextView
-                android:id="@+id/buddyInfo"
-                android:layout_width="match_parent"
+            <!-- Interests -->
+            <LinearLayout
+                android:id="@+id/interestsLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Buddy Information"
-                android:layout_marginTop="4dp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@id/buddyName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@android:drawable/btn_star"
+                    android:tint="#000000" />
 
+                <TextView
+                    android:id="@+id/tvInterests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="social, food, music, outdoor"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <!-- Bio -->
+            <TextView
+                android:id="@+id/tvBio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="erm this is my user bio for the profile :0"
+                android:textSize="16sp"
+                android:textColor="#666666"
+                android:fontFamily="sans-serif"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/interestsLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Bottom Navigation Buttons -->
+    <!-- Action Buttons -->
     <LinearLayout
-        android:id="@+id/bottomNavLayout"
+        android:id="@+id/actionButtonsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Home Button -->
-        <Button
-            android:id="@+id/homeBtn"
+        <!-- Skip Button -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/skipBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Home" />
+            android:layout_marginHorizontal="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp">
 
-        <!-- Buddies Button (for bottom navigation; since you're already in Buddy System,
-             you may choose to display a message or simply do nothing when it is clicked) -->
-        <Button
-            android:id="@+id/buddiesSystemBtn"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_media_ff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Skip"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Dig Deeper Button -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/digDeeperBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Buddies" />
+            android:layout_marginHorizontal="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp">
 
-        <!-- Profile Button -->
-        <Button
-            android:id="@+id/userProfileBtn"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_view" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dig Deeper"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Be Buds Button -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/beBudsBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Profile" />
+            android:layout_marginHorizontal="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_compass" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Be buds"
+                    android:textSize="14sp"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNavContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="@color/white"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        
+        <Button
+            android:id="@+id/profileBttn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/profileButton_nav"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+        
+        <Button
+            android:id="@+id/homeButtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/home_screen_fragment"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+        
+        <Button
+            android:id="@+id/buddyBttn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/buddiesButton_nav"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
