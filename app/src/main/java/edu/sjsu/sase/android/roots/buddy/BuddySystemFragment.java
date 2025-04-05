@@ -120,3 +120,4 @@ public class BuddySystemFragment extends Fragment {
         tvBio.setText(bios[randomIndex]);
     }
 }
+
