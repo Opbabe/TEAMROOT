@@ -68,8 +68,8 @@ public class BuddySystemFragment extends Fragment {
         // In a real app, you would load data from your database or API
         // For now, we'll use sample data
         buddyName.setText("Sandra Le");
-        tvInterests.setText("social, food, music, outdoor");
-        tvBio.setText("erm this is my user bio for the profile :0");
+        tvInterests.setText("social, coding, music, outdoor");
+        tvBio.setText("Hi there! I like playing guitar!");
         
         // Load image (using placeholder for now)
         buddyImage.setImageResource(R.drawable.placeholder_image);
