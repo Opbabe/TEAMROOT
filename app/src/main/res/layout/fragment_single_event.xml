@@ -5,7 +5,7 @@
     android:id="@+id/singleEvent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SingleEventFragment" >
+    tools:context=".event.SingleEventFragment" >
 
     <Button
         android:id="@+id/singleEbud"

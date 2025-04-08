@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 import com.google.firebase.FirebaseApp;
 
+import edu.sjsu.sase.android.roots.user.User;
+
 public class MyApplication extends Application {
     private static MyApplication instance;
     private User currUser;

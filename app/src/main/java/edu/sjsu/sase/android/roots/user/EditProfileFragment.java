@@ -1,6 +1,5 @@
-package edu.sjsu.sase.android.roots;
+package edu.sjsu.sase.android.roots.user;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -19,6 +18,9 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
+
+import edu.sjsu.sase.android.roots.MyApplication;
+import edu.sjsu.sase.android.roots.R;
 
 /**
  * A fragment representing the screen where users can edit their user profile.

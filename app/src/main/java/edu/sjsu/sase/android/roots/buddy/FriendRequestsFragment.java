@@ -1,4 +1,4 @@
-package edu.sjsu.sase.android.roots;
+package edu.sjsu.sase.android.roots.buddy;
 
 import android.os.Bundle;
 
@@ -13,7 +13,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-import edu.sjsu.sase.android.roots.buddy.lists.FriendFragment;
+import edu.sjsu.sase.android.roots.R;
 
 /**
  * A fragment representing the friend requests screen

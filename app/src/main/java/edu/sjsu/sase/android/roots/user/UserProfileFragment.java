@@ -1,4 +1,4 @@
-package edu.sjsu.sase.android.roots;
+package edu.sjsu.sase.android.roots.user;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -17,6 +17,11 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.sjsu.sase.android.roots.event.Event;
+import edu.sjsu.sase.android.roots.event.EventAdapter;
+import edu.sjsu.sase.android.roots.MyApplication;
+import edu.sjsu.sase.android.roots.R;
 
 /**
  * A fragment representing a user's profile screen.

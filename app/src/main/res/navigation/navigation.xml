@@ -71,7 +71,7 @@
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
-        android:name="edu.sjsu.sase.android.roots.UserProfileFragment"
+        android:name="edu.sjsu.sase.android.roots.user.UserProfileFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" >
         <action
@@ -91,11 +91,11 @@
             app:destination="@id/editProfileFragment" />
         <argument
             android:name="@string/user_argument_key"
-            app:argType="edu.sjsu.sase.android.roots.User" />
+            app:argType="edu.sjsu.sase.android.roots.user.User" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="edu.sjsu.sase.android.roots.EditProfileFragment"
+        android:name="edu.sjsu.sase.android.roots.user.EditProfileFragment"
         android:label="fragment_buddy_profile"
         tools:layout="@layout/fragment_edit_profile" >
         <action
@@ -155,7 +155,7 @@
     </fragment>
     <fragment
         android:id="@+id/friendRequestsFragment"
-        android:name="edu.sjsu.sase.android.roots.FriendRequestsFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.FriendRequestsFragment"
         android:label="fragment_friend_requests"
         tools:layout="@layout/fragment_friend_requests" >
         <action
@@ -176,7 +176,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventCreationFragment"
-        android:name="edu.sjsu.sase.android.roots.EventCreationFragment"
+        android:name="edu.sjsu.sase.android.roots.event.EventCreationFragment"
         android:label="fragment_event_creation"
         tools:layout="@layout/fragment_event_creation" >
         <action
@@ -197,7 +197,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventListingFragment"
-        android:name="edu.sjsu.sase.android.roots.EventListingFragment"
+        android:name="edu.sjsu.sase.android.roots.event.EventListingFragment"
         android:label="fragment_event_listing"
         tools:layout="@layout/fragment_event_listing" >
         <action
@@ -218,7 +218,7 @@
     </fragment>
     <fragment
         android:id="@+id/singleEventFragment"
-        android:name="edu.sjsu.sase.android.roots.SingleEventFragment"
+        android:name="edu.sjsu.sase.android.roots.event.SingleEventFragment"
         android:label="fragment_single_event"
         tools:layout="@layout/fragment_single_event" >
         <action
@@ -236,7 +236,7 @@
     </fragment>
     <fragment
         android:id="@+id/userListingFragment"
-        android:name="edu.sjsu.sase.android.roots.UserListingFragment"
+        android:name="edu.sjsu.sase.android.roots.user.UserListingFragment"
         android:label="fragment_user_listing"
         tools:layout="@layout/fragment_user_listing" >
         <action

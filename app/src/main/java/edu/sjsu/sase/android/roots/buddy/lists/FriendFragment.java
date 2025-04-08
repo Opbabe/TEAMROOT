@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import edu.sjsu.sase.android.roots.R;
-import edu.sjsu.sase.android.roots.User;
+import edu.sjsu.sase.android.roots.user.User;
 
 
 /**
