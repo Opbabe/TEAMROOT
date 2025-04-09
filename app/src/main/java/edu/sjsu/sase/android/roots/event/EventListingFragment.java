@@ -1,4 +1,4 @@
-package edu.sjsu.sase.android.roots;
+package edu.sjsu.sase.android.roots.event;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import edu.sjsu.sase.android.roots.R;
 
 
 /**

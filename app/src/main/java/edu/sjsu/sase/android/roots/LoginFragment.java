@@ -36,6 +36,8 @@ import java.util.Objects;
 
 import javax.annotation.Nullable;
 
+import edu.sjsu.sase.android.roots.user.User;
+
 /**
  * A fragment representing the Login screen
  */

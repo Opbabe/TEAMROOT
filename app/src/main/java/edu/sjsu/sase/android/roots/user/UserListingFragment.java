@@ -1,4 +1,4 @@
-package edu.sjsu.sase.android.roots;
+package edu.sjsu.sase.android.roots.user;
 
 import android.os.Bundle;
 
@@ -16,15 +16,15 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import edu.sjsu.sase.android.roots.MyApplication;
+import edu.sjsu.sase.android.roots.R;
 import edu.sjsu.sase.android.roots.buddy.lists.FriendFragment;
 
 public class UserListingFragment extends Fragment {
     private FirebaseFirestore db;
     private MyApplication app;
-    private ArrayList<User> usersList = new ArrayList<>();
+    private ArrayList<edu.sjsu.sase.android.roots.user.User> usersList = new ArrayList<>();
     private String searchQuery = ""; //this string holds the search query from BuddyListFragment, from method
 
     public UserListingFragment() {}
@@ -61,7 +61,7 @@ public class UserListingFragment extends Fragment {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
-                        User user = document.toObject(User.class);
+                        edu.sjsu.sase.android.roots.user.User user = document.toObject(edu.sjsu.sase.android.roots.user.User.class);
                         usersList.add(user);
                     }
 
@@ -77,9 +77,9 @@ public class UserListingFragment extends Fragment {
     // filters by username
     private void filterUsersBySearchQuery() {
         if (!searchQuery.isEmpty()) {
-            ArrayList<User> filteredList = new ArrayList<>();
+            ArrayList<edu.sjsu.sase.android.roots.user.User> filteredList = new ArrayList<>();
             //loop thru each user
-            for (User user : usersList) {
+            for (edu.sjsu.sase.android.roots.user.User user : usersList) {
                 if (user.getUsername().toLowerCase().contains(searchQuery)) {
                     filteredList.add(user);
                 }

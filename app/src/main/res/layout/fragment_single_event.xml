@@ -5,7 +5,7 @@
     android:id="@+id/singleEvent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SingleEventFragment" >
+    tools:context=".event.SingleEventFragment" >
 
     <Button
         android:id="@+id/singleEbud"
@@ -36,16 +36,6 @@
         android:layout_marginStart="26dp"
         android:layout_marginBottom="18dp"
         android:text="profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/singleElogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginBottom="18dp"
-        android:text="login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

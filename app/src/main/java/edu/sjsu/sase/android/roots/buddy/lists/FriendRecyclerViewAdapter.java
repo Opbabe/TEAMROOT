@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 import edu.sjsu.sase.android.roots.R;
-import edu.sjsu.sase.android.roots.User;
+import edu.sjsu.sase.android.roots.user.User;
 import edu.sjsu.sase.android.roots.databinding.FragmentFriendBinding;
 
 import java.util.ArrayList;

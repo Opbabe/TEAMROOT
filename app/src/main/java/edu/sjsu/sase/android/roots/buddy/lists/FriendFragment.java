@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import edu.sjsu.sase.android.roots.R;
-import edu.sjsu.sase.android.roots.User;
+import edu.sjsu.sase.android.roots.user.User;
 
 
 /**
@@ -86,7 +86,7 @@ public class FriendFragment extends Fragment {
      * Sets the adapter's friend list data to the specified ArrayList of data
      * @param usersList ArrayList of data
      */
-    public void setUsersList(ArrayList<User> usersList) {
+    public void setUsersList(ArrayList<edu.sjsu.sase.android.roots.user.User> usersList) {
         if (adapter != null) {
             Log.d("friend frag", "friends list size: " + usersList.size());
             adapter.setUsersList(usersList);

@@ -1,4 +1,4 @@
-package edu.sjsu.sase.android.roots;
+package edu.sjsu.sase.android.roots.buddy;
 
 import android.os.Bundle;
 
@@ -11,16 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
+import edu.sjsu.sase.android.roots.R;
+
 /**
- * A fragment representing the screen where users can edit their user profile.
+ * A fragment representing the friend requests screen
  */
-public class EditProfileFragment extends Fragment {
+public class FriendRequestsFragment extends Fragment {
+    ArrayList<String> usersList = new ArrayList<>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public EditProfileFragment() {
+    public FriendRequestsFragment() {
         // Required empty public constructor
     }
 
@@ -50,7 +55,15 @@ public class EditProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_friend_requests, container, false);
+
+        // requests list: placeholder hardcoded data
+//        for (int i = 0; i < 12; i++) {
+//            usersList.add(String.valueOf(i));
+//        }
+//        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
+//        friendFragment.setData(usersList);
+//        friendFragment.setNavigation(R.id.action_friendRequestsFragment_to_userProfileFragment);
 
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
@@ -67,6 +80,6 @@ public class EditProfileFragment extends Fragment {
      */
     private void onClickBackArrow(View view) {
         NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_editProfileFragment_to_userProfileFragment);
+        controller.navigate(R.id.action_friendRequestsFragment_to_buddyListFragment);
     }
 }

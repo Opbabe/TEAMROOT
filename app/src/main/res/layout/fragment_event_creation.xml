@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollViewEventCreation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,26 +14,12 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/tvEventCreationTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Create Event"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Event Name Input -->
+        <!-- Event Title Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEventName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/tvEventCreationTitle"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -41,56 +28,253 @@
                 android:id="@+id/etEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Event Name"/>
+                android:hint="Event Title"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Event Date Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilEventDate"
+        <!-- Image Upload Area -->
+        <FrameLayout
+            android:id="@+id/flMediaPreview"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:background="#E0E0E0"
             app:layout_constraintTop_toBottomOf="@id/tilEventName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tilEventTime"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEventDate"
+            <ImageView
+                android:id="@+id/ivEventImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Date (MM/DD/YYYY)"
-                android:inputType="date"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="Event image preview"/>
+        </FrameLayout>
 
-        <!-- Event Time Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilEventTime"
+        <!-- Upload Image Button -->
+        <Button
+            android:id="@+id/btnUploadImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Image"
+            android:layout_marginTop="16dp"
+            android:drawableStart="@android:drawable/ic_menu_upload"
+            android:drawablePadding="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintTop_toBottomOf="@id/flMediaPreview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Time Period Section -->
+        <TextView
+            android:id="@+id/tvTimePeriod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time Period:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/btnUploadImage"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Date Row -->
+        <ImageView
+            android:id="@+id/ivCalendarIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_my_calendar"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvTimePeriod"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="Calendar icon"/>
+
+        <Button
+            android:id="@+id/btnStartDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:text="Start Date"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintTop_toTopOf="@id/ivCalendarIcon"
+            app:layout_constraintBottom_toBottomOf="@id/ivCalendarIcon"
+            app:layout_constraintStart_toEndOf="@id/ivCalendarIcon"
+            app:layout_constraintEnd_toStartOf="@id/btnEndDate"/>
+
+        <Button
+            android:id="@+id/btnEndDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="End Date"
             android:layout_marginStart="8dp"
-            app:layout_constraintTop_toBottomOf="@id/tilEventName"
-            app:layout_constraintStart_toEndOf="@id/tilEventDate"
-            app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintTop_toTopOf="@id/btnStartDate"
+            app:layout_constraintBottom_toBottomOf="@id/btnStartDate"
+            app:layout_constraintStart_toEndOf="@id/btnStartDate"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEventTime"
-                android:layout_width="match_parent"
+        <!-- Time Row -->
+        <ImageView
+            android:id="@+id/ivTimeIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_recent_history"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/btnStartDate"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="Time icon"/>
+
+        <Button
+            android:id="@+id/btnStartTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Start Time"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintTop_toTopOf="@id/ivTimeIcon"
+            app:layout_constraintBottom_toBottomOf="@id/ivTimeIcon"
+            app:layout_constraintStart_toEndOf="@id/ivTimeIcon"
+            app:layout_constraintEnd_toStartOf="@id/btnEndTime"/>
+
+        <Button
+            android:id="@+id/btnEndTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="End Time"
+            android:layout_marginStart="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintTop_toTopOf="@id/btnStartTime"
+            app:layout_constraintBottom_toBottomOf="@id/btnStartTime"
+            app:layout_constraintStart_toEndOf="@id/btnStartTime"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Visibility Section -->
+        <TextView
+            android:id="@+id/tvVisibility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visibility:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/btnStartTime"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <RadioGroup
+            android:id="@+id/rgVisibility"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvVisibility"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <RadioButton
+                android:id="@+id/rbPrivate"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Time (HH:MM AM/PM)"
-                android:inputType="time"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="private"
+                android:checked="true"/>
 
-        <!-- Event Details Input -->
+            <RadioButton
+                android:id="@+id/rbPublic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="public"/>
+        </RadioGroup>
+
+        <!-- Categories Section -->
+        <TextView
+            android:id="@+id/tvCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categories:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/rgVisibility"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <CheckBox
+            android:id="@+id/cbOption1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvCategories"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <CheckBox
+            android:id="@+id/cbOption2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option"
+            app:layout_constraintTop_toBottomOf="@id/cbOption1"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <CheckBox
+            android:id="@+id/cbOption3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option"
+            app:layout_constraintTop_toBottomOf="@id/cbOption2"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <CheckBox
+            android:id="@+id/cbOption4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option"
+            app:layout_constraintTop_toBottomOf="@id/cbOption3"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Location Section -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/cbOption4"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/llLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvLocation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_mylocation"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="Location icon"/>
+
+            <TextView
+                android:id="@+id/tvLocationValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="San Jose, CA, United States"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <!-- Description Section -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilEventDetails"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/tilEventDate"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/llLocation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -99,92 +283,242 @@
                 android:id="@+id/etEventDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Event Details"
+                android:hint="Add a description of your event..."
                 android:inputType="textMultiLine"
-                android:minLines="3"
+                android:minLines="4"
                 android:gravity="top"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Event Tags Input -->
+        <!-- Invite List Section -->
+        <TextView
+            android:id="@+id/tvInviteList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invite List"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tilEventDetails"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Invited Users -->
+        <LinearLayout
+            android:id="@+id/llInvitedUsers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvInviteList"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/circle_shape"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Last"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/circle_shape"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Last"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/circle_shape"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Last"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Search Users -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilEventTags"
+            android:id="@+id/tilSearchUsers"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/tilEventDetails"
+            app:startIconDrawable="@android:drawable/ic_menu_search"
+            app:layout_constraintTop_toBottomOf="@id/llInvitedUsers"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEventTags"
+                android:id="@+id/etSearchUsers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Event Tags (comma separated)"/>
+                android:hint="Search Users"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Media Section Title -->
-        <TextView
-            android:id="@+id/tvMediaSection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Pictures/Videos"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/tilEventTags"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <!-- Media Preview Container -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvMediaContainer"
+        <!-- User Search Results -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvUserResult1"
             android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:layout_constraintTop_toBottomOf="@id/tvMediaSection"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="12dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tilSearchUsers"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <FrameLayout
-                android:id="@+id/flMediaPreview"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/media_preview_background">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circle_shape"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Media Preview"
-                    android:textColor="@color/text_secondary"
-                    android:layout_gravity="center" />
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabAddMedia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_margin="16dp"
-                    android:src="@drawable/ic_add_photo"
-                    app:fabSize="mini" />
-            </FrameLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="First Last"
+                        android:textStyle="bold"/>
 
-        <!-- Post Event Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnPostEvent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\@username"
+                        android:textColor="#757575"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvUserResult2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Post Event"
-            android:textColor="@color/white"
-            android:padding="12dp"
-            android:layout_marginTop="24dp"
-            app:cornerRadius="8dp"
-            app:layout_constraintTop_toBottomOf="@id/cvMediaContainer"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="4dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="12dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/cvUserResult1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circle_shape"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="First Last"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="\@username"
+                        android:textColor="#757575"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:id="@+id/llActionButtons"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/cvUserResult2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save"
+                android:layout_marginEnd="8dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+            <Button
+                android:id="@+id/btnDiscard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Discard"
+                android:layout_marginStart="8dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+        </LinearLayout>
+
+        <!-- Bottom spacing -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            app:layout_constraintTop_toBottomOf="@id/llActionButtons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
+
+
 

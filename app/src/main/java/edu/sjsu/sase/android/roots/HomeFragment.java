@@ -5,19 +5,30 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
+
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.sjsu.sase.android.roots.event.Event;
+import edu.sjsu.sase.android.roots.event.EventAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements EventAdapter.OnEventClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +38,11 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView eventsRecyclerView;
+    private EventAdapter eventAdapter;
+    private List<Event> allEvents;
+    private List<Event> filteredEvents;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -65,75 +81,86 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Button profileBttn = view.findViewById(R.id.profileBttn);
-        Button buddyBttn = view.findViewById(R.id.buddyBttn);
-        Button homeButtn = view.findViewById(R.id.homeButtn);
-        Button createEventBttn = view.findViewById(R.id.createBttn);
-        ImageButton listingBttn1 = view.findViewById(R.id.eventListing1);
-        ImageButton listingBttn2 = view.findViewById(R.id.eventListing2);
-        ImageButton listingBttn3 = view.findViewById(R.id.eventListing3);
-        ImageButton myEventsBttn = view.findViewById(R.id.myEventCard);
+        // Initialize views
+        eventsRecyclerView = view.findViewById(R.id.eventsRecyclerView);
+        FloatingActionButton createEventBtn = view.findViewById(R.id.createBttn);
+        MaterialCardView searchCard = view.findViewById(R.id.searchCard);
+        Button profileBtn = view.findViewById(R.id.profileBttn);
+        Button homeBtn = view.findViewById(R.id.homeButtn);
+        Button buddyBtn = view.findViewById(R.id.buddyBttn);
 
-        profileBttn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                gotToUserProfile(view);
-            }
-        });
+        // Set up RecyclerView with grid layout (2 columns)
+        eventsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        buddyBttn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToBuddySystem(view);
-            }
-        });
+        // Initialize event data
+        setupEventData();
 
-        homeButtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goHome(view);
-            }
-        });
+        // Create a copy for filtering
+        filteredEvents = new ArrayList<>(allEvents);
 
-        createEventBttn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToEventCreation(view);
-            }
-        });
+        // Set up adapter
+        eventAdapter = new EventAdapter(filteredEvents, this);
+        eventsRecyclerView.setAdapter(eventAdapter);
 
-        listingBttn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToEventListing(view);
-            }
-        });
+        // Set up category chips click listeners
+        setupCategoryChips(view);
 
-        listingBttn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToEventListing(view);
-            }
-        });
-
-        listingBttn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToEventListing(view);
-            }
-        });
-
-        myEventsBttn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToSingleEvent(view);
-            }
-        });
+        // Set up button click listeners
+        createEventBtn.setOnClickListener(v -> goToEventCreation(v));
+        searchCard.setOnClickListener(v -> goToEventListing(v));
+        profileBtn.setOnClickListener(v -> gotToUserProfile(v));
+        homeBtn.setOnClickListener(v -> goHome(v));
+        buddyBtn.setOnClickListener(v -> goToBuddySystem(v));
 
         return view;
     }
 
+    private void setupEventData() {
+        // Create sample event data; replace with actual data as needed.
+        allEvents = new ArrayList<>();
+        int eventImagePlaceholder = android.R.drawable.ic_menu_gallery; // Replace with your drawable resource
+        allEvents.add(new Event("1", "Summer Music Festival", "April 8 - 7 pm", "Live Nation", "outdoor, music, festival", eventImagePlaceholder));
+        allEvents.add(new Event("2", "Tech Conference 2023", "May 15 - 9 am", "TechCorp", "tech, conference, networking", eventImagePlaceholder));
+        allEvents.add(new Event("3", "Charity Run", "June 10 - 8 am", "RunForGood", "sports, charity, outdoor", eventImagePlaceholder));
+        allEvents.add(new Event("4", "Art Exhibition", "April 20 - 6 pm", "City Gallery", "art, culture, indoor", eventImagePlaceholder));
+        allEvents.add(new Event("5", "Food & Wine Festival", "May 5 - 12 pm", "Taste Inc.", "food, social, outdoor", eventImagePlaceholder));
+        allEvents.add(new Event("6", "Comedy Night", "April 12 - 8 pm", "Laugh Factory", "comedy, entertainment, indoor", eventImagePlaceholder));
+        allEvents.add(new Event("7", "Yoga in the Park", "Every Sunday - 9 am", "Zen Studios", "yoga, wellness, outdoor", eventImagePlaceholder));
+        allEvents.add(new Event("8", "Book Club Meeting", "April 18 - 7 pm", "Page Turners", "books, discussion, social", eventImagePlaceholder));
+    }
 
+    private void setupCategoryChips(View view) {
+        // Assuming your fragment_home.xml contains chips with these IDs
+        Chip chipAll = view.findViewById(R.id.chipAll);
+        Chip chipSocial = view.findViewById(R.id.chipSocial);
+        Chip chipMusic = view.findViewById(R.id.chipMusic);
+        Chip chipSports = view.findViewById(R.id.chipSports);
+
+        chipAll.setOnClickListener(v -> filterEvents("all"));
+        chipSocial.setOnClickListener(v -> filterEvents("social"));
+        chipMusic.setOnClickListener(v -> filterEvents("music"));
+        chipSports.setOnClickListener(v -> filterEvents("sports"));
+    }
+
+    private void filterEvents(String category) {
+        filteredEvents.clear();
+        if (category.equalsIgnoreCase("all")) {
+            filteredEvents.addAll(allEvents);
+        } else {
+            for (Event event : allEvents) {
+                if (event.getTags().toLowerCase().contains(category.toLowerCase())) {
+                    filteredEvents.add(event);
+                }
+            }
+        }
+        eventAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onEventClick(int position) {
+        // Navigate to single event details when an event card is clicked
+        goToSingleEvent(getView());
+    }
 
     private void gotToUserProfile(View view){
         NavController controller = Navigation.findNavController(view);
@@ -163,6 +190,4 @@ public class HomeFragment extends Fragment {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_homeFragment_to_singleEventFragment);
     }
-
-
 }

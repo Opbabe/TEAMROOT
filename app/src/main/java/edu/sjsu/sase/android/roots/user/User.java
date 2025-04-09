@@ -1,4 +1,4 @@
-package edu.sjsu.sase.android.roots;
+package edu.sjsu.sase.android.roots.user;
 
 import android.os.Parcel;
 import android.os.Parcelable;
