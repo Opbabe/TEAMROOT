@@ -205,18 +205,63 @@ public class LoginFragment extends Fragment {
      * @param account the google sign in account
      */
     private void saveUserToFirestore(GoogleSignInAccount account) {
-        // set user variable in MyApplication and LoginFragment
         setCurrUser(account);
         User currUser = app.getCurrUser();
-        // save user to Firestore
-        db.collection("users").document(currUser.getId()).set(currUser)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(getActivity(), "Signed in as: " + currUser.getName(), Toast.LENGTH_SHORT).show();
-                    navigateToHome();
-                })
-                .addOnFailureListener(e -> Log.e("LoginFragment", "Error writing document", e));
 
+        db.collection("users").document(currUser.getId()).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (!documentSnapshot.exists()) {
+                        // save a TON of new stuff for new users, but also accounted for our existing accs dw
+                        Map<String, Object> userMap = new HashMap<>();
+                        userMap.put("id", currUser.getId());
+                        userMap.put("name", currUser.getName());
+                        userMap.put("email", currUser.getEmail());
+                        userMap.put("profilePicUrl", currUser.getProfilePicUrl());
+                        userMap.put("username", currUser.getUsername());
+                        userMap.put("friends", List.of());
+                        userMap.put("socials", List.of());
+                        userMap.put("incomingRequests", List.of());
+                        userMap.put("outgoingRequests", List.of());
+
+                        db.collection("users").document(currUser.getId()).set(userMap)
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(getActivity(), "Signed in as: " + currUser.getName(), Toast.LENGTH_SHORT).show();
+                                    navigateToHome();
+                                })
+                                .addOnFailureListener(e -> Log.e("LoginFragment", "Error creating new user", e));
+
+                    } else {
+                        // for devs existing acc, edge case
+                        Map<String, Object> updates = new HashMap<>();
+                        if (!documentSnapshot.contains("friends")) {
+                            updates.put("friends", List.of());
+                        }
+                        if (!documentSnapshot.contains("socials")) {
+                            updates.put("socials", List.of());
+                        }
+                        if (!documentSnapshot.contains("incomingRequests")) {
+                            updates.put("incomingRequests", List.of());
+                        }
+                        if (!documentSnapshot.contains("outgoingRequests")) {
+                            updates.put("outgoingRequests", List.of());
+                        }
+
+                        if (!updates.isEmpty()) {
+                            db.collection("users").document(currUser.getId()).update(updates)
+                                    .addOnSuccessListener(aVoid -> Log.d("LoginFragment", "Missing fields initialized!"))
+                                    .addOnFailureListener(e -> Log.e("LoginFragment", "Failed to update missing fields :(", e));
+                        }
+
+                        Toast.makeText(getActivity(), "Welcome back, " + currUser.getName(), Toast.LENGTH_SHORT).show();
+                        navigateToHome();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("LoginFragment", "Error checking user existence", e);
+                    Toast.makeText(getActivity(), "Error signing in", Toast.LENGTH_SHORT).show();
+                });
     }
+
 
     private void navigateToHome() {
         NavController navController = Navigation.findNavController(requireView());

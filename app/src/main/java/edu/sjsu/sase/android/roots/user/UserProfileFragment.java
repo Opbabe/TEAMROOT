@@ -14,6 +14,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
@@ -118,6 +123,15 @@ public class UserProfileFragment extends Fragment {
 
         // Bottom navigation buttons
         Button editProfileBtn = view.findViewById(R.id.btnEditProfile);
+        Button sendRequestBtn = view.findViewById(R.id.btnSendFriendRequest);
+
+        //if viewing own profile hide button
+        if (userToDisplay.getId().equals(currUser.getId())) {
+            sendRequestBtn.setVisibility(View.GONE);
+        } else {
+            sendRequestBtn.setOnClickListener(v -> sendFriendRequest());
+        }
+
         Button logoutBtn = view.findViewById(R.id.logoutBtn);
         Button homeBtn = view.findViewById(R.id.homeBtn);
         Button buddiesBtn = view.findViewById(R.id.buddySystemBtn);
@@ -130,7 +144,54 @@ public class UserProfileFragment extends Fragment {
 
         return view;
     }
-    
+
+    /**
+     * Handles incoming or outcoming friend requests
+     */
+    private void sendFriendRequest() {
+        String currentUserId = currUser.getId();
+        String targetUserId = userToDisplay.getId();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference currentUserRef = db.collection("users").document(currentUserId);
+        DocumentReference targetUserRef = db.collection("users").document(targetUserId);
+
+        //fetcjh both users' data
+        db.runTransaction(transaction -> {
+            DocumentSnapshot currentUserSnap = transaction.get(currentUserRef);
+            DocumentSnapshot targetUserSnap = transaction.get(targetUserRef);
+
+            List<String> outgoing = (List<String>) currentUserSnap.get("outgoingRequests");
+            List<String> incoming = (List<String>) targetUserSnap.get("incomingRequests");
+
+            if (outgoing == null) outgoing = new ArrayList<>();
+            if (incoming == null) incoming = new ArrayList<>();
+
+            if (outgoing.contains(targetUserId)) {
+                throw new FirebaseFirestoreException("Request already sent", FirebaseFirestoreException.Code.ABORTED);
+            }
+
+            if (incoming.contains(currentUserId)) {
+                throw new FirebaseFirestoreException("User already received request", FirebaseFirestoreException.Code.ABORTED);
+            }
+
+            outgoing.add(targetUserId);
+            incoming.add(currentUserId);
+
+            transaction.update(currentUserRef, "outgoingRequests", outgoing);
+            transaction.update(targetUserRef, "incomingRequests", incoming);
+
+            return null;
+        }).addOnSuccessListener(unused -> {
+            Toast.makeText(getContext(), "Friend request sent!", Toast.LENGTH_SHORT).show();
+        }).addOnFailureListener(e -> {
+            Log.e("FriendRequest", "Failed to send request: ", e);
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+
     /**
      * Shows the options menu
      */

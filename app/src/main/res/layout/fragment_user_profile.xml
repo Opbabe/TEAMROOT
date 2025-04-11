@@ -124,6 +124,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- Friend Request Button -->
+            <Button
+                android:id="@+id/btnSendFriendRequest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Send Friend Request"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@android:color/holo_purple"
+                android:textColor="@android:color/white"
+                app:layout_constraintTop_toBottomOf="@id/btnEditProfile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
             <!-- User Info Section -->
             <LinearLayout
                 android:id="@+id/llUserInfo"
@@ -131,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/btnEditProfile"
+                app:layout_constraintTop_toBottomOf="@id/btnSendFriendRequest"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
