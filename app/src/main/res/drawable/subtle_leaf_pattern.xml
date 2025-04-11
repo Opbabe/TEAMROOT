@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- Leaf 1 -->
+    <path
+        android:pathData="M20,30 C25,25 35,25 40,30 C45,35 45,45 40,50 C35,55 25,55 20,50 C15,45 15,35 20,30 Z"
+        android:fillColor="#4A6741"
+        android:alpha="0.2" />
+    
+    <!-- Leaf 2 -->
+    <path
+        android:pathData="M80,70 C85,65 95,65 100,70 C105,75 105,85 100,90 C95,95 85,95 80,90 C75,85 75,75 80,70 Z"
+        android:fillColor="#4A6741"
+        android:alpha="0.2" />
+    
+    <!-- Leaf 3 -->
+    <path
+        android:pathData="M140,30 C145,25 155,25 160,30 C165,35 165,45 160,50 C155,55 145,55 140,50 C135,45 135,35 140,30 Z"
+        android:fillColor="#4A6741"
+        android:alpha="0.2" />
+    
+    <!-- Leaf 4 -->
+    <path
+        android:pathData="M20,110 C25,105 35,105 40,110 C45,115 45,125 40,130 C35,135 25,135 20,130 C15,125 15,115 20,110 Z"
+        android:fillColor="#4A6741"
+        android:alpha="0.2" />
+    
+    <!-- Leaf 5 -->
+    <path
+        android:pathData="M80,150 C85,145 95,145 100,150 C105,155 105,165 100,170 C95,175 85,175 80,170 C75,165 75,155 80,150 Z"
+        android:fillColor="#4A6741"
+        android:alpha="0.2" />
+    
+    <!-- Leaf 6 -->
+    <path
+        android:pathData="M140,110 C145,105 155,105 160,110 C165,115 165,125 160,130 C155,135 145,135 140,130 C135,125 135,115 140,110 Z"
+        android:fillColor="#4A6741"
+        android:alpha="0.2" />
+</vector> 

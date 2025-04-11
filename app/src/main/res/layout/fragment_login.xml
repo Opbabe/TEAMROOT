@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F5F0"
+    tools:context=".LoginFragment">
+
+    <!-- Subtle leaf pattern background -->
+    <ImageView
+        android:id="@+id/backgroundPattern"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/subtle_leaf_pattern"
+        android:alpha="0.05"
+        android:scaleType="centerCrop" />
+
+    <!-- Back Arrow Button -->
+    <ImageView
+        android:id="@+id/backArrowBtn"
+        android:layout_width="@dimen/back_arrow"
+        android:layout_height="@dimen/back_arrow"
+        android:src="@drawable/back_arrow_icon"
+        android:padding="8dp"
+        android:background="@drawable/circle_background"
+        android:elevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Animated Leaves Container -->
+    <FrameLayout
+        android:id="@+id/leavesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.6">
+        <!-- Leaves will be added programmatically -->
+    </FrameLayout>
+
+    <!-- Logo Container with Modern Elevation -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/logoContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/signInButtonContainer"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginBottom="48dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp">
+
+            <!-- Roots Logo -->
+            <ImageView
+                android:id="@+id/roots_logo"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/roots_logo"
+                android:scaleType="fitCenter" />
+
+            <!-- Roots Text -->
+            <ImageView
+                android:id="@+id/roots"
+                android:layout_width="240dp"
+                android:layout_height="70dp"
+                android:src="@drawable/roots"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="8dp" />
+
+            <!-- Tagline -->
+            <TextView
+                android:id="@+id/taglineText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp"
+                android:textColor="#9C27B0"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginTop="8dp" />
+
+            <!-- Welcome text -->
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome!"
+                android:textSize="20sp"
+                android:textColor="#4A6741"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Sign In Button Container with Modern Design -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/signInButtonContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/logoContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Modern Forest Landscape -->
+    <ImageView
+        android:id="@+id/forestSilhouette"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/modern_forest_landscape"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
