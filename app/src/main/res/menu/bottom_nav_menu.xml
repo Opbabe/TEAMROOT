@@ -1,18 +1,26 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/ic_home"
+        android:id="@+id/nav_home"
+        android:icon="@drawable/nav_home"
+        android:enabled="true"
         android:title="@string/home_screen_fragment" />
     <item
-        android:id="@+id/profile"
-        android:icon="@drawable/ic_profile"
-        android:title="@string/profileButton_nav" />
-    <item
-        android:id="@+id/buddies"
-        android:icon="@drawable/ic_buddies"
+        android:id="@+id/nav_buddies"
+        android:icon="@drawable/nav_buddy"
+        android:enabled="true"
         android:title="@string/buddiesButton_nav" />
     <item
-        android:id="@+id/login"
-        android:icon="@drawable/ic_login"
-        android:title="@string/loginButton_nav" />
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/nav_profile"
+        android:enabled="true"
+        android:title="@string/profileButton_nav" />
+    <item
+        android:id="@+id/dummy"
+        android:enabled="false"
+        android:title=""
+        android:icon="@drawable/placeholder_image" />
+
+
 </menu>

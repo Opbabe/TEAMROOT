@@ -2,10 +2,8 @@ package edu.sjsu.sase.android.roots.buddy;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,37 +29,11 @@ public class BuddySystemFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static BuddySystemFragment newInstance(String param1, String param2) {
-        BuddySystemFragment fragment = new BuddySystemFragment();
-        Bundle args = new Bundle();
-        args.putString("param1", param1);
-        args.putString("param2", param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // Retrieve and process any arguments if needed.
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment.
-        View view = inflater.inflate(R.layout.fragment_buddy_system, container, false);
-
-        // Initialize the swipe card and bottom elements.
-        //Button buddyBtn = view.findViewById(R.id.buddyBtn);
-        Button homeBtn = view.findViewById(R.id.homeBtn);
-        Button profileBtn = view.findViewById(R.id.profileBtn);
-
-        // Set onClickListeners for the buttons.
-        homeBtn.setOnClickListener(this::onClickHome);
-        profileBtn.setOnClickListener(this::onClickUserProfile);
-
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_buddy_system, container, false);
     }
 
     @Override
@@ -85,7 +57,7 @@ public class BuddySystemFragment extends Fragment {
         skipBtn.setOnClickListener(v -> skipProfile());
         digDeeperBtn.setOnClickListener(v -> viewProfileDetails());
         beBudsBtn.setOnClickListener(v -> connectWithBuddy());
-        buddiesBtn.setOnClickListener(this::goToList);
+        buddiesBtn.setOnClickListener(v -> navigateToMyBuddies());
         nextBtn.setOnClickListener(v -> showNextProfile());
 
         // Load initial profile data
@@ -96,8 +68,8 @@ public class BuddySystemFragment extends Fragment {
         // In a real app, you would load data from your database or API
         // For now, we'll use sample data
         buddyName.setText("Sandra Le");
-        tvInterests.setText("social, coding, music, outdoor");
-        tvBio.setText("Hi there! I like playing guitar!");
+        tvInterests.setText("social, food, music, outdoor");
+        tvBio.setText("erm this is my user bio for the profile :0");
 
         // Load image (using placeholder for now)
         buddyImage.setImageResource(R.drawable.placeholder_image);
@@ -120,9 +92,9 @@ public class BuddySystemFragment extends Fragment {
         showNextProfile();
     }
 
-    private void navigateToMyBuddies(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_buddySystemFragment_to_homeFragment);
+    private void navigateToMyBuddies() {
+        NavController controller = Navigation.findNavController(requireView());
+        controller.navigate(R.id.action_buddySystemFragment_to_buddyListFragment);
     }
 
     private void showNextProfile() {
@@ -130,45 +102,21 @@ public class BuddySystemFragment extends Fragment {
 
         String[] names = {"Alex Kim", "Jordan Taylor", "Casey Morgan", "Riley Johnson"};
         String[] interests = {
-                "hiking, photography, travel",
-                "gaming, anime, tech",
-                "cooking, reading, yoga",
-                "sports, music, art"
+            "hiking, photography, travel",
+            "gaming, anime, tech",
+            "cooking, reading, yoga",
+            "sports, music, art"
         };
         String[] bios = {
-                "Adventure seeker looking for hiking buddies!",
-                "Gamer by night, coder by day. Let's talk tech!",
-                "Foodie who loves trying new recipes and restaurants.",
-                "Sports enthusiast who also plays in a band."
+            "Adventure seeker looking for hiking buddies!",
+            "Gamer by night, coder by day. Let's talk tech!",
+            "Foodie who loves trying new recipes and restaurants.",
+            "Sports enthusiast who also plays in a band."
         };
 
         int randomIndex = (int) (Math.random() * names.length);
         buddyName.setText(names[randomIndex]);
         tvInterests.setText(interests[randomIndex]);
         tvBio.setText(bios[randomIndex]);
-    }
-
-    /**
-     * Navigates to the Home fragment.
-     */
-    private void onClickHome(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_buddySystemFragment_to_homeFragment);
-    }
-
-    /**
-     * Navigates to the User Profile fragment.
-     */
-    private void onClickUserProfile(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_buddySystemFragment_to_userProfileFragment);
-    }
-
-    /**
-     * Navigates to the Buddy List fragment.
-     */
-        private void goToList (View view){
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_buddySystemFragment_to_buddyListFragment);
     }
 }

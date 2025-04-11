@@ -85,9 +85,6 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         eventsRecyclerView = view.findViewById(R.id.eventsRecyclerView);
         FloatingActionButton createEventBtn = view.findViewById(R.id.createBttn);
         MaterialCardView searchCard = view.findViewById(R.id.searchCard);
-        Button profileBtn = view.findViewById(R.id.profileBttn);
-        Button homeBtn = view.findViewById(R.id.homeButtn);
-        Button buddyBtn = view.findViewById(R.id.buddyBttn);
 
         // Set up RecyclerView with grid layout (2 columns)
         eventsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -108,9 +105,6 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         // Set up button click listeners
         createEventBtn.setOnClickListener(v -> goToEventCreation(v));
         searchCard.setOnClickListener(v -> goToEventListing(v));
-        profileBtn.setOnClickListener(v -> gotToUserProfile(v));
-        homeBtn.setOnClickListener(v -> goHome(v));
-        buddyBtn.setOnClickListener(v -> goToBuddySystem(v));
 
         return view;
     }
@@ -160,21 +154,6 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
     public void onEventClick(int position) {
         // Navigate to single event details when an event card is clicked
         goToSingleEvent(getView());
-    }
-
-    private void gotToUserProfile(View view){
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_homeFragment_to_userProfileFragment);
-    }
-
-    private void goToBuddySystem(View view){
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_homeFragment_to_buddySystemFragment);
-    }
-
-    private void goHome(View view){
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_homeFragment_self);
     }
 
     private void goToEventListing(View view){

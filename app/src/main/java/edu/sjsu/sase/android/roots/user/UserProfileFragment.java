@@ -118,15 +118,9 @@ public class UserProfileFragment extends Fragment {
 
         // Bottom navigation buttons
         Button editProfileBtn = view.findViewById(R.id.btnEditProfile);
-        Button logoutBtn = view.findViewById(R.id.logoutBtn);
-        Button homeBtn = view.findViewById(R.id.homeBtn);
-        Button buddiesBtn = view.findViewById(R.id.buddySystemBtn);
 
         // Set onClick listeners
         editProfileBtn.setOnClickListener(this::onClickEditProfile);
-        logoutBtn.setOnClickListener(this::onClickLogout);
-        homeBtn.setOnClickListener(this::onClickHome);
-        buddiesBtn.setOnClickListener(this::onClickBuddySystem);
 
         return view;
     }
@@ -218,32 +212,5 @@ public class UserProfileFragment extends Fragment {
     private void onClickEditProfile(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_userProfileFragment_to_editProfileFragment);
-    }
-
-    /**
-     * Navigates to start screen.
-     * @param view
-     */
-    private void onClickLogout(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_userProfileFragment_to_startFragment);
-    }
-
-    /**
-     * Navigates to Home screen.
-     * @param view
-     */
-    private void onClickHome(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_userProfileFragment_to_homeFragment);
-    }
-
-    /**
-     * Navigates to Buddy System screen.
-     * @param view
-     */
-    private void onClickBuddySystem(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_userProfileFragment_to_buddySystemFragment);
     }
 }

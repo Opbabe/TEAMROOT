@@ -9,7 +9,7 @@
     <string name="friends">Friends</string>
     <string name="login">Login</string>
     <string name="welcome_home">Hello from Home Page</string>
-    <string name="home_screen_fragment">HOME</string>
+    <string name="home_screen_fragment">Home</string>
     <string name="createEvent_nav">Create Event</string>
     <string name="eventListing_nav">Event Listing</string>
     <string name="profileButton_nav">Profile</string>
