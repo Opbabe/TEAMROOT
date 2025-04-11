@@ -5,81 +5,103 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.sjsu.sase.android.roots.R;
 
-/**
- * A fragment representing the friend requests screen
- */
 public class FriendRequestsFragment extends Fragment {
-    ArrayList<String> usersList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private FriendRequestAdapter adapter;
+    private List<DocumentSnapshot> requestList = new ArrayList<>();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String currentUserId = FirebaseAuth.getInstance().getUid();
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public FriendRequestsFragment() {
-        // Required empty public constructor
+        //required construct
     }
 
-    /**
-     * Starting point for fragment.
-     * @param savedInstanceState If the fragment is being re-created from
-     * a previous saved state, this is the state.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    /**
-     * Initializes layout (UI) for the fragment.
-     * @param inflater The LayoutInflater object that can be used to inflate
-     * any views in the fragment,
-     * @param container If non-null, this is the parent view that the fragment's
-     * UI should be attached to.  The fragment should not add the view itself,
-     * but this can be used to generate the LayoutParams of the view.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
-     *
-     * @return view of fragment
-     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friend_requests, container, false);
 
-        // requests list: placeholder hardcoded data
-//        for (int i = 0; i < 12; i++) {
-//            usersList.add(String.valueOf(i));
-//        }
-//        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
-//        friendFragment.setData(usersList);
-//        friendFragment.setNavigation(R.id.action_friendRequestsFragment_to_userProfileFragment);
-
-        // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
-
-        // setOnClickListeners
         backArrow.setOnClickListener(this::onClickBackArrow);
+
+        recyclerView = view.findViewById(R.id.friend_requests_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        adapter = new FriendRequestAdapter(requestList, new FriendRequestAdapter.OnRequestActionListener() {
+            @Override
+            public void onAccept(DocumentSnapshot request) {
+                handleAccept(request);
+            } //need sandra or nick to test this
+
+            @Override
+            public void onDecline(DocumentSnapshot request) {
+                db.collection("friendRequests").document(request.getId()).delete();
+                loadFriendRequests(); // refresh reqs after decline
+            }
+        });
+
+        recyclerView.setAdapter(adapter);
+        loadFriendRequests();
 
         return view;
     }
 
-    /**
-     * Navigates to Buddy List screen.
-     * @param view
-     */
     private void onClickBackArrow(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_friendRequestsFragment_to_buddyListFragment);
     }
+
+    private void loadFriendRequests() {
+        db.collection("friendRequests")
+                .whereEqualTo("to", currentUserId)
+                .get()
+                .addOnSuccessListener(query -> {
+                    requestList.clear();
+                    requestList.addAll(query.getDocuments());
+                    adapter.notifyDataSetChanged();
+                });
+    }
+
+    private void handleAccept(DocumentSnapshot request) {
+        String fromUserId = request.getString("from");
+
+        WriteBatch batch = db.batch();
+        DocumentReference currentUserRef = db.collection("users").document(currentUserId);
+        DocumentReference fromUserRef = db.collection("users").document(fromUserId);
+
+        batch.update(currentUserRef, "friends", FieldValue.arrayUnion(fromUserId));
+        batch.update(fromUserRef, "friends", FieldValue.arrayUnion(currentUserId));
+        batch.delete(db.collection("friendRequests").document(request.getId()));
+
+        batch.commit().addOnSuccessListener(unused -> {
+            Toast.makeText(getContext(), "Friend request accepted!", Toast.LENGTH_SHORT).show();
+            loadFriendRequests();
+        });
+    }
 }
+
