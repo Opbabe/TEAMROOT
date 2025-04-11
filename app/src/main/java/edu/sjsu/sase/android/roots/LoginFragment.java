@@ -133,9 +133,9 @@ public class LoginFragment extends Fragment {
         signInButton.setOnClickListener(view -> signIn());
 
         // login button
-        loginBtn = rootView.findViewById(R.id.loginBtn);
-        loginBtn.setEnabled(false);
-        loginBtn.setOnClickListener(this::onClickLogin);
+//        loginBtn = rootView.findViewById(R.id.loginBtn);
+//        loginBtn.setEnabled(false);
+//        loginBtn.setOnClickListener(this::onClickLogin);
 
         return rootView;
     }
