@@ -5,7 +5,7 @@ public class Event {
     private String name;
     private String dateTime;
     private String hostName;
-    private String tags;
+    private String tags; //change to collection of tags empty arraylist or hash map?
     private int imageResourceId; // For demo purposes, use resource IDs
 
     public Event(String id, String name, String dateTime, String hostName, String tags, int imageResourceId) {
@@ -40,4 +40,6 @@ public class Event {
     public int getImageResourceId() {
         return imageResourceId;
     }
-} 
+
+
+}
