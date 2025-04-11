@@ -1,8 +1,13 @@
 package edu.sjsu.sase.android.roots.buddy.lists;
 
+import static edu.sjsu.sase.android.roots.R.*;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -15,6 +20,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
+
 import edu.sjsu.sase.android.roots.R;
 import edu.sjsu.sase.android.roots.user.User;
 
@@ -23,9 +31,14 @@ import edu.sjsu.sase.android.roots.user.User;
  * and a button to view friend requests
  */
 public class BuddyListFragment extends Fragment {
-    private ArrayList<User> matchesList = new ArrayList<>();
-    private ArrayList<User> friendsList = new ArrayList<>();
+    private ArrayList<User> blossomsList = new ArrayList<>();
+    private ArrayList<User> budsList = new ArrayList<>();
+    private ArrayList<User> requestsList = new ArrayList<>();
     private EditText searchInput; // need to capture search query
+    // tabs
+    Button budsTab, blossomsTab, requestsTab;
+    FragmentContainerView budsFragment, blossomsFragment, requestsFragment;
+    HashMap<Button, FragmentContainerView> tabToFragmentMap = new HashMap<>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -64,71 +77,116 @@ public class BuddyListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_buddy_list, container, false);
 
         // matches and friends list
-        fetchMatches();
-        fetchFriends();
+        fetchBlossoms();
+        fetchBuds();
+        fetchRequests();
 
         // buttons (retrieve from view)
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
         Button searchBtn = view.findViewById(R.id.searchBtn);
-        Button requestBtn = view.findViewById(R.id.requestBtn);
         searchInput = view.findViewById(R.id.searchInput); //taking in input text
+
+        // tabs
+        budsTab = view.findViewById(R.id.budsTab);
+        blossomsTab = view.findViewById(R.id.blossomsTab);
+        requestsTab = view.findViewById(R.id.requestsTab);
+
+        // list fragments
+        budsFragment = view.findViewById(R.id.budsFragment);
+        blossomsFragment = view.findViewById(R.id.blossomsFragment);
+        requestsFragment = view.findViewById(R.id.requestsFragment);
+
+        // tab to fragment hash map
+        tabToFragmentMap.put(budsTab, budsFragment);
+        tabToFragmentMap.put(blossomsTab,blossomsFragment);
+        tabToFragmentMap.put(requestsTab, requestsFragment);
 
         // setOnClickListeners
         backArrow.setOnClickListener(this::onClickBackArrow);
         searchBtn.setOnClickListener(this::onClickSearch); //search listener
-        requestBtn.setOnClickListener(this::onClickRequests);
+
+        // setOnClickListeners for each tab
+        for (Button tab : tabToFragmentMap.keySet()) {
+            tab.setOnClickListener(v -> onClickTab(tab));
+        }
 
         return view;
     }
 
     /**
-     * Retrieve user's matches
+     * Retrieve user's blossoms (steaks)
      */
-    private void fetchMatches() {
-        matchesList.clear();
+    private void fetchBlossoms() {
+        blossomsList.clear();
         // TODO: implement mechanism to keep track of matches and replace hardcoded data
-        // matches list: placeholder hardcoded data
+        // blossoms list: placeholder hardcoded data
         for (int i = 1; i <= 10; i++) {
-            matchesList.add(new User(i));
+            blossomsList.add(new User(i));
         }
-        Log.d("buddy list", "matches list size on create view: " + matchesList.size());
-        updateMatchFragment();
+        Log.d("buddy list", "blossoms list size on create view: " + blossomsList.size());
+        updateBlossomsFragment();
     }
 
     /**
-     * Update Matches List UI
+     * Update Blossoms (streaks) List UI
      */
-    private void updateMatchFragment() {
-        MatchFragment matchFragment = (MatchFragment) getChildFragmentManager().findFragmentById(R.id.matchesFragment);
-        if (matchFragment != null) {
-            Log.d("buddy list", "matches list size: " + matchesList.size());
-            matchFragment.setUsersList(matchesList);
+    private void updateBlossomsFragment() {
+        BlossomsFragment blossomsFragment = (BlossomsFragment) getChildFragmentManager().findFragmentById(R.id.blossomsFragment);
+        if (blossomsFragment != null) {
+            Log.d("buddy list", "blossoms list size: " + blossomsList.size());
+            blossomsFragment.setUsersList(blossomsList);
         }
     }
 
     /**
-     * Retrieve user's friends list
+     * Retrieve user's buds (friends) list
      */
-    private void fetchFriends() {
-        friendsList.clear();
+    private void fetchBuds() {
+        budsList.clear();
         // TODO: implement mechanism to keep track of friends and replace hardcoded data
-        // friends list: placeholder hardcoded data
+        // buds list: placeholder hardcoded data
         for (int i = 11; i <= 20; i++) {
-            friendsList.add(new User(i));
+            budsList.add(new User(i));
         }
-        Log.d("buddy list", "friends list size on create view: " + friendsList.size());
-        updateFriendFragment();
+        Log.d("buddy list", "buds list size on create view: " + budsList.size());
+        updateBudFragment();
     }
 
     /**
-     * Update Friends UI
+     * Update Buds (Friends) fragment UI
      */
-    private void updateFriendFragment() {
-        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.friendsFragment);
-        if (friendFragment != null) {
-            Log.d("buddy list", "friends list size: " + friendsList.size());
-            friendFragment.setUsersList(friendsList);
-            friendFragment.setNavigationId(R.id.action_buddyListFragment_to_userProfileFragment);
+    private void updateBudFragment() {
+        BudFragment budFragment = (BudFragment) getChildFragmentManager().findFragmentById(R.id.budsFragment);
+        if (budFragment != null) {
+            Log.d("buddy list", "friends list size: " + budsList.size());
+            budFragment.setUsersList(budsList);
+            budFragment.setNavigationId(R.id.action_buddyListFragment_to_userProfileFragment);
+        }
+    }
+
+    /**
+     * Retrieve user's incoming requests list
+     */
+    private void fetchRequests() {
+        requestsList.clear();
+        // TODO: implement mechanism to keep track of friends and replace hardcoded data
+        // buds list: placeholder hardcoded data
+        for (int i = 11; i <= 20; i++) {
+            requestsList.add(new User(i));
+        }
+        Log.d("buddy list", "buds list size on create view: " + requestsList.size());
+        updateRequestsFragment();
+    }
+
+    /**
+     * Update Requests fragment UI
+     */
+    private void updateRequestsFragment() {
+        RequestFragment requestFragment = (RequestFragment) getChildFragmentManager().findFragmentById(R.id.requestsFragment);
+        if (requestFragment != null) {
+            Log.d("buddy list", "friends list size: " + requestsList.size());
+            requestFragment.setUsersList(requestsList);
+            requestFragment.setNavigationId(R.id.action_buddyListFragment_to_userProfileFragment);
         }
     }
 
@@ -154,12 +212,16 @@ public class BuddyListFragment extends Fragment {
         controller.navigate(R.id.action_buddyListFragment_to_userListingFragment, bundle);
     }
 
-    /**
-     * Navigates to Friend Requests screen.
-     * @param view
-     */
-    private void onClickRequests(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_buddyListFragment_to_friendRequestsFragment);
+    private void onClickTab(Button button) {
+        for (Button tab: tabToFragmentMap.keySet()) {
+            if (tab == button) {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab_pressed));
+                Objects.requireNonNull(tabToFragmentMap.get(tab)).setVisibility(View.VISIBLE);
+            }
+            else {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab));
+                Objects.requireNonNull(tabToFragmentMap.get(tab)).setVisibility(View.GONE);
+            }
+        }
     }
 }

@@ -258,11 +258,11 @@
 
                     <Button
                         android:id="@+id/btnUpcoming"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Upcoming"
                         android:layout_marginEnd="8dp"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                        android:text="Upcoming" />
 
                     <Button
                         android:id="@+id/btnHosting"

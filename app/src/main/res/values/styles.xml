@@ -1,4 +1,5 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- Other styles may already be here -->
 
     <!-- Style for making an ImageView circular -->
@@ -6,5 +7,9 @@
         <!-- These attributes make the image corners 50%, creating a circle -->
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+    <style name="title">
+        <item name="android:textSize">@dimen/big_text</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources> 

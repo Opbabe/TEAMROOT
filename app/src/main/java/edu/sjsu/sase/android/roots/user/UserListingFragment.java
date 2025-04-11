@@ -19,12 +19,12 @@ import java.util.ArrayList;
 
 import edu.sjsu.sase.android.roots.MyApplication;
 import edu.sjsu.sase.android.roots.R;
-import edu.sjsu.sase.android.roots.buddy.lists.FriendFragment;
+import edu.sjsu.sase.android.roots.buddy.lists.RequestFragment;
 
 public class UserListingFragment extends Fragment {
     private FirebaseFirestore db;
     private MyApplication app;
-    private ArrayList<edu.sjsu.sase.android.roots.user.User> usersList = new ArrayList<>();
+    private ArrayList<User> usersList = new ArrayList<>();
     private String searchQuery = ""; //this string holds the search query from BuddyListFragment, from method
 
     public UserListingFragment() {}
@@ -61,7 +61,7 @@ public class UserListingFragment extends Fragment {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot document : queryDocumentSnapshots) {
-                        edu.sjsu.sase.android.roots.user.User user = document.toObject(edu.sjsu.sase.android.roots.user.User.class);
+                        User user = document.toObject(User.class);
                         usersList.add(user);
                     }
 
@@ -77,9 +77,9 @@ public class UserListingFragment extends Fragment {
     // filters by username
     private void filterUsersBySearchQuery() {
         if (!searchQuery.isEmpty()) {
-            ArrayList<edu.sjsu.sase.android.roots.user.User> filteredList = new ArrayList<>();
+            ArrayList<User> filteredList = new ArrayList<>();
             //loop thru each user
-            for (edu.sjsu.sase.android.roots.user.User user : usersList) {
+            for (User user : usersList) {
                 if (user.getUsername().toLowerCase().contains(searchQuery)) {
                     filteredList.add(user);
                 }
@@ -91,10 +91,10 @@ public class UserListingFragment extends Fragment {
 
 
     private void updateUserListingFragment() {
-        FriendFragment friendFragment = (FriendFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
-        if (friendFragment != null) {
-            friendFragment.setUsersList(usersList);
-            friendFragment.setNavigationId(R.id.action_userListingFragment_to_userProfileFragment);
+        RequestFragment requestFragment = (RequestFragment) getChildFragmentManager().findFragmentById(R.id.userListingFragment);
+        if (requestFragment != null) {
+            requestFragment.setUsersList(usersList);
+            requestFragment.setNavigationId(R.id.action_userListingFragment_to_userProfileFragment);
         }
     }
 

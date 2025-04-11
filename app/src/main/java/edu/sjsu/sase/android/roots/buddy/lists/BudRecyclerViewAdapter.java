@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import edu.sjsu.sase.android.roots.R;
 import edu.sjsu.sase.android.roots.user.User;
-import edu.sjsu.sase.android.roots.databinding.FragmentFriendBinding;
+import edu.sjsu.sase.android.roots.databinding.FragmentBudBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +24,11 @@ import java.util.List;
 /**
  * Creates view for each Friend in Friends List of the Buddies List screen.
  */
-public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecyclerViewAdapter.ViewHolder> {
+public class BudRecyclerViewAdapter extends RecyclerView.Adapter<BudRecyclerViewAdapter.ViewHolder> {
     private List<User> usersList;
     private int navigationId;
 
-    public FriendRecyclerViewAdapter(ArrayList<User> items) {
+    public BudRecyclerViewAdapter(ArrayList<User> items) {
         usersList = items;
     }
 
@@ -42,7 +42,7 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(FragmentFriendBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new ViewHolder(FragmentBudBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     /**
@@ -56,7 +56,6 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
         Log.d("friend adapter", "onbindviewholder: " + position);
         // profile user info
         holder.binding.name.setText(usersList.get(position).getName());
-        holder.binding.username.setText(usersList.get(position).getUsername());
         String picUrl = usersList.get(position).getProfilePicUrl();
         if (picUrl != null && !picUrl.isEmpty()) {
             Picasso.with(holder.binding.name.getContext())
@@ -79,9 +78,9 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         // bind with fragment_friend.xml
-        protected final FragmentFriendBinding binding;
+        protected final FragmentBudBinding binding;
 
-        public ViewHolder(FragmentFriendBinding binding) {
+        public ViewHolder(FragmentBudBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
