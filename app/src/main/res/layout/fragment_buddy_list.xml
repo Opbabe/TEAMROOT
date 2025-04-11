@@ -62,33 +62,4 @@
         android:layout_width="match_parent"
         android:layout_height="500dp" />
 
-<!-- TODO: replace buttons below with BottomNavigationView-->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/homeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="home" />
-
-        <Button
-            android:id="@+id/buddiesBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="buddies" />
-
-        <Button
-            android:id="@+id/userProfileBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="profile" />
-    </LinearLayout>
-
 </LinearLayout>

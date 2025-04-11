@@ -71,20 +71,12 @@ public class BuddyListFragment extends Fragment {
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
         Button searchBtn = view.findViewById(R.id.searchBtn);
         Button requestBtn = view.findViewById(R.id.requestBtn);
-        // TODO: replace with BottomNavigationView
-        Button homeBtn = view.findViewById(R.id.homeBtn);
-        Button buddiesBtn = view.findViewById(R.id.buddiesBtn);
-        Button profileBtn = view.findViewById(R.id.userProfileBtn);
         searchInput = view.findViewById(R.id.searchInput); //taking in input text
 
         // setOnClickListeners
         backArrow.setOnClickListener(this::onClickBackArrow);
         searchBtn.setOnClickListener(this::onClickSearch); //search listener
         requestBtn.setOnClickListener(this::onClickRequests);
-        // TODO: replace with BottomNavigationView
-        homeBtn.setOnClickListener(this::onClickHome);
-        buddiesBtn.setOnClickListener(this::onClickBuddies);
-        profileBtn.setOnClickListener(this::onClickUserProfile);
 
         return view;
     }
@@ -169,34 +161,5 @@ public class BuddyListFragment extends Fragment {
     private void onClickRequests(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_buddyListFragment_to_friendRequestsFragment);
-    }
-
-    // BOTTOM NAVIGATION BUTTONS
-
-    /**
-     * Navigates to Home screen.
-     * @param view
-     */
-    private void onClickHome(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_buddyListFragment_to_homeFragment);
-    }
-
-    /**
-     * Navigates to Buddy System screen.
-     * @param view
-     */
-    private void onClickBuddies(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_buddyListFragment_to_buddySystemFragment);
-    }
-
-    /**
-     * Navigates to User Profile screen.
-     * @param view
-     */
-    private void onClickUserProfile(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_buddyListFragment_to_userProfileFragment);
     }
 }
