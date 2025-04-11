@@ -26,7 +26,7 @@
         style="@style/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find Your Buds"
+        android:text="Community Garden"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingVertical="@dimen/section_spacer"
         app:layout_constraintEnd_toEndOf="@+id/title"
         app:layout_constraintStart_toStartOf="@+id/backArrowBtn"
         app:layout_constraintTop_toBottomOf="@+id/title">
@@ -48,18 +49,21 @@
             android:id="@+id/searchInput"
             android:layout_width="269dp"
             android:layout_height="wrap_content"
-            android:hint="Enter username" />
+            android:background="@drawable/rounded_container"
+            android:hint="Search username" />
 
         <Button
             android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_tab"
             android:layout_marginStart="16dp"
             android:text="Search"/>
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/searchCard"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
@@ -115,6 +119,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingBottom="@dimen/page_padding"
         app:layout_constraintEnd_toEndOf="@+id/searchCard"
         app:layout_constraintStart_toStartOf="@+id/searchCard"
         app:layout_constraintTop_toBottomOf="@+id/searchCard">
@@ -124,7 +129,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/rounded_tab_pressed"
+            android:background="@drawable/rounded_tab"
             android:text="@string/buds"
             android:textColor="@color/black"
             android:textSize="@dimen/regular_text"
@@ -136,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/list_space"
             android:layout_weight="1"
-            android:background="@drawable/rounded_tab"
+            android:background="@drawable/rounded_tab_pressed"
             android:text="@string/blossoms"
             android:textColor="@color/black"
             android:textSize="@dimen/regular_text"
@@ -160,6 +165,7 @@
         android:name="edu.sjsu.sase.android.roots.buddy.lists.BudFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tabs"
         app:layout_constraintStart_toStartOf="@+id/tabs"
@@ -170,7 +176,6 @@
         android:name="edu.sjsu.sase.android.roots.buddy.lists.BlossomsFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tabs"
         app:layout_constraintStart_toStartOf="@+id/tabs"

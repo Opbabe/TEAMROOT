@@ -6,7 +6,7 @@
     android:name="edu.sjsu.sase.android.roots.buddy.lists.MatchFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     app:layoutManager="LinearLayoutManager"
     tools:context=".buddy.lists.BlossomsFragment"
     tools:listitem="@layout/fragment_blossom" />

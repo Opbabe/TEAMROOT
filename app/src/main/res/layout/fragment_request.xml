@@ -7,14 +7,13 @@
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_container"
     android:paddingVertical="@dimen/button_horizontal_padding"
-    android:layout_marginHorizontal="@dimen/list_space"
     android:layout_marginVertical="@dimen/list_space">
 
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profilePic"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/profile_pic_list"
+        android:layout_height="@dimen/profile_pic_list"
         android:drawable="@drawable/ic_profile"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/CircleImageView"
