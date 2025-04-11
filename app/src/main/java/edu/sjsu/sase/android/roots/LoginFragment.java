@@ -90,16 +90,10 @@ public class LoginFragment extends Fragment {
             }
         }
 
-        mAuth = FirebaseAuth.getInstance(); // This might be causing the crash
+        mAuth = FirebaseAuth.getInstance();
 
         // Initialize Firebase Firestore
         db = FirebaseFirestore.getInstance();
-
-        if (db == null) {
-            Log.e("Firestore", "Firestore initialization failed!");
-        } else {
-            Log.d("Firestore", "Firestore initialized successfully.");
-        }
 
         FirebaseFirestore.setLoggingEnabled(true);
 
