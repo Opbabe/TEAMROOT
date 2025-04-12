@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         // Initialize views
         eventsRecyclerView = view.findViewById(R.id.eventsRecyclerView);
         FloatingActionButton createEventBtn = view.findViewById(R.id.createBttn);
-        MaterialCardView searchCard = view.findViewById(R.id.searchCard);
+        //MaterialCardView searchCard = view.findViewById(R.id.searchCard);
 
         // Set up RecyclerView with grid layout (2 columns)
         eventsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
