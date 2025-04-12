@@ -11,4 +11,5 @@
     <dimen name="small_text">14sp</dimen>
     <dimen name="section_spacer">20dp</dimen>
     <dimen name="profile_pic_list">50dp</dimen>
+    <dimen name="icon">25dp</dimen>
 </resources>

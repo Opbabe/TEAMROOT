@@ -66,8 +66,17 @@ public class SingleEventFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_single_event, container, false);
 
+        Button backArrow = view.findViewById(R.id.backArrowBtn);
+
+        backArrow.setOnClickListener(this::goToHome);
+
         return view;
 
+    }
+
+    private void goToHome(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_singleEventFragment_to_homeFragment);
     }
 
 }

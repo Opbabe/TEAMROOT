@@ -104,7 +104,6 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
 
         // Set up button click listeners
         createEventBtn.setOnClickListener(v -> goToEventCreation(v));
-        searchCard.setOnClickListener(v -> goToEventListing(v));
 
         return view;
     }
@@ -156,10 +155,6 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         goToSingleEvent(getView());
     }
 
-    private void goToEventListing(View view){
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_homeFragment_to_eventListingFragment);
-    }
     private void goToEventCreation(View view){
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_homeFragment_to_eventCreationFragment);
