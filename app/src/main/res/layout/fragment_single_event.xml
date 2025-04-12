@@ -5,291 +5,324 @@
     android:id="@+id/singleEvent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/page_padding"
     tools:context=".event.SingleEventFragment" >
 
-    <ImageView
-        android:id="@+id/backArrowBtn"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/back_arrow_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/title"
-        app:layout_constraintEnd_toStartOf="@+id/title"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/title"
-        style="@style/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="@dimen/page_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/eventTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Event Title"
-        style="@style/title"
-        app:layout_constraintEnd_toEndOf="@+id/title"
-        app:layout_constraintStart_toStartOf="@+id/title"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <LinearLayout
-        android:id="@+id/pictureSection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/section_spacer"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/eventTitle"
-        app:layout_constraintStart_toStartOf="@+id/eventTitle"
-        app:layout_constraintTop_toBottomOf="@+id/eventTitle">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/eventPic"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/placeholder_image" />
+            android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/list_space">
+            <ImageView
+                android:id="@+id/backArrowBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back_arrow_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/title"
+                app:layout_constraintEnd_toStartOf="@+id/title"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title"
+                app:layout_constraintVertical_bias="1.0" />
 
-            <Button
-                android:id="@+id/editBtn"
+            <TextView
+                android:id="@+id/title"
+                style="@style/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/eventTitle"
+                style="@style/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Title"
+                app:layout_constraintEnd_toEndOf="@+id/title"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <LinearLayout
+                android:id="@+id/pictureSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_selector"
-                android:text="Edit Event"
-                android:textColor="@color/black"
-                android:textSize="@dimen/regular_text"
-                app:backgroundTint="@null" />
+                android:layout_marginTop="@dimen/section_spacer"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@+id/eventTitle"
+                app:layout_constraintStart_toStartOf="@+id/eventTitle"
+                app:layout_constraintTop_toBottomOf="@+id/eventTitle">
 
-            <Button
-                android:id="@+id/goingBtn"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/eventPic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/placeholder_image" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/list_space">
+
+                    <Button
+                        android:id="@+id/editBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_selector"
+                        android:text="Edit Event"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        app:backgroundTint="@null" />
+
+                    <Button
+                        android:id="@+id/goingBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_selector"
+                        android:text="I'm going :D"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        android:visibility="gone"
+                        app:backgroundTint="@null" />
+
+                    <Button
+                        android:id="@+id/notGoingBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_selector"
+                        android:text="I'm not going :("
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        android:visibility="gone"
+                        app:backgroundTint="@null" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_selector"
-                android:text="I'm going :D"
-                android:textColor="@color/black"
-                android:textSize="@dimen/regular_text"
-                android:visibility="gone"
-                app:backgroundTint="@null" />
+                android:layout_marginVertical="@dimen/section_spacer"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@+id/pictureSection"
+                app:layout_constraintTop_toBottomOf="@+id/pictureSection">
 
-            <Button
-                android:id="@+id/notGoingBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_selector"
-                android:text="I'm not going :("
-                android:textColor="@color/black"
-                android:textSize="@dimen/regular_text"
-                android:visibility="gone"
-                app:backgroundTint="@null" />
+                <LinearLayout
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-        </FrameLayout>
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/startDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apr 18"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginVertical="@dimen/section_spacer"
-        app:layout_constraintStart_toStartOf="@+id/pictureSection"
-        app:layout_constraintTop_toBottomOf="@+id/pictureSection">
+                    <TextView
+                        android:id="@+id/dash1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/list_space"
+                        android:text="-"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/endDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="April 30"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/startDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Apr 18"
-                android:textSize="@dimen/big_text"
-                android:textStyle="bold" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_margin" />
 
-            <TextView
-                android:id="@+id/dash1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/list_space"
-                android:text="-"
-                android:textSize="@dimen/big_text"
-                android:textStyle="bold" />
+                <LinearLayout
+                    android:id="@+id/timeSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/endDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="April 30"
-                android:textSize="@dimen/big_text"
-                android:textStyle="bold" />
-        </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/icon"
+                        android:layout_height="@dimen/icon"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:src="@drawable/clock" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/text_margin" />
+                    <TextView
+                        android:id="@+id/startTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4:00 PM"
+                        android:textSize="@dimen/regular_text" />
 
-        <LinearLayout
-            android:id="@+id/timeSection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/dash2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/list_space"
+                        android:text="-"
+                        android:textSize="@dimen/regular_text" />
 
-            <ImageView
-                android:layout_width="@dimen/icon"
-                android:layout_height="@dimen/icon"
-                android:layout_marginEnd="@dimen/text_margin"
-                android:src="@drawable/clock" />
+                    <TextView
+                        android:id="@+id/endTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6:30 PM"
+                        android:textSize="@dimen/regular_text" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/startTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4:00 PM"
-                android:textSize="@dimen/regular_text"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/list_space" />
 
-            <TextView
-                android:id="@+id/dash2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/list_space"
-                android:text="-"
-                android:textSize="@dimen/regular_text"/>
+                <LinearLayout
+                    android:id="@+id/hostSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/endTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6:30 PM"
-                android:textSize="@dimen/regular_text"/>
-        </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/icon"
+                        android:layout_height="@dimen/icon"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:src="@drawable/crown" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_space" />
+                    <TextView
+                        android:id="@+id/hostName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="First Last"
+                        android:textSize="@dimen/regular_text" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/hostSection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/list_space" />
 
-            <ImageView
-                android:layout_width="@dimen/icon"
-                android:layout_height="@dimen/icon"
-                android:layout_marginEnd="@dimen/text_margin"
-                android:src="@drawable/crown" />
+                <LinearLayout
+                    android:id="@+id/visibilitySection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/hostName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="First Last"
-                android:textSize="@dimen/regular_text"/>
-        </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/icon"
+                        android:layout_height="@dimen/icon"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:src="@drawable/visibility_eye" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_space" />
+                    <TextView
+                        android:id="@+id/visibility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Public"
+                        android:textSize="@dimen/regular_text" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/visibilitySection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/list_space" />
 
-            <ImageView
-                android:layout_width="@dimen/icon"
-                android:layout_height="@dimen/icon"
-                android:layout_marginEnd="@dimen/text_margin"
-                android:src="@drawable/visibility_eye" />
+                <LinearLayout
+                    android:id="@+id/tagSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/visibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Public"
-                android:textSize="@dimen/regular_text"/>
-        </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/icon"
+                        android:layout_height="@dimen/icon"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:src="@drawable/tag" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_space" />
+                    <TextView
+                        android:id="@+id/tags"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Outdoor, Social, Music, ..."
+                        android:textSize="@dimen/regular_text" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/tagSection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/list_space" />
 
-            <ImageView
-                android:layout_width="@dimen/icon"
-                android:layout_height="@dimen/icon"
-                android:layout_marginEnd="@dimen/text_margin"
-                android:src="@drawable/tag" />
+                <LinearLayout
+                    android:id="@+id/locationSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tags"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Outdoor, Social, Music, ..."
-                android:textSize="@dimen/regular_text"/>
-        </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/icon"
+                        android:layout_height="@dimen/icon"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:src="@drawable/location" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_space" />
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="San Jose, CA, United States"
+                        android:textSize="@dimen/regular_text" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/locationSection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_margin" />
 
-            <ImageView
-                android:layout_width="@dimen/icon"
-                android:layout_height="@dimen/icon"
-                android:layout_marginEnd="@dimen/text_margin"
-                android:src="@drawable/location" />
-
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="San Jose, CA, United States"
-                android:textSize="@dimen/regular_text"/>
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/text_margin" />
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="This is a description of the event
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="@dimen/list_space"
+                    android:text="This is a description of the event
 that describes the event, emphasizing what the event may be about,
 giving a sneak peak of the event that the user may be interested
 in to get to know the event more."
-            android:textSize="@dimen/regular_text"
-            android:lineSpacingExtra="@dimen/list_space"/>
-    </LinearLayout>
+                    android:textSize="@dimen/regular_text" />
+            </LinearLayout>
 
+            <TextView
+                android:id="@+id/guestTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/section_spacer"
+                android:text="Guest List"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/linearLayout7"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout7" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/guestList"
+                android:name="edu.sjsu.sase.android.roots.event.SingleEventFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/page_padding"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintStart_toStartOf="@+id/guestTitle"
+                app:layout_constraintTop_toBottomOf="@id/guestTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

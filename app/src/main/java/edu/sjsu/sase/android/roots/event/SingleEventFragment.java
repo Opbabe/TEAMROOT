@@ -5,59 +5,38 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 import edu.sjsu.sase.android.roots.R;
+import edu.sjsu.sase.android.roots.user.User;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link SingleEventFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Represents a single event screen
  */
 public class SingleEventFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    ArrayList<User> guestList = new ArrayList<>();
+    GuestRecyclerViewAdapter adapter;
+    RecyclerView recyclerView;
 
     public SingleEventFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SingleEventFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SingleEventFragment newInstance(String param1, String param2) {
-        SingleEventFragment fragment = new SingleEventFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -66,17 +45,83 @@ public class SingleEventFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_single_event, container, false);
 
-        Button backArrow = view.findViewById(R.id.backArrowBtn);
+        ImageView backArrow = view.findViewById(R.id.backArrowBtn);
+        Button editBtn = view.findViewById(R.id.editBtn);
 
         backArrow.setOnClickListener(this::goToHome);
+        editBtn.setOnClickListener(this::goToEventCreation);
+
+        // set data
+        for (int i = 1; i <= 10; i++) {
+            guestList.add(new User(i));
+        }
+        Log.d("single event", "guest list size on create view: " +  guestList.size());
+
+        // pass data as argument to construct adapter
+        adapter = new GuestRecyclerViewAdapter(guestList);
+        adapter.setIsOnSingleEvent(true);
+
+        // cast view to RecyclerView and set adapter for RecyclerView
+        recyclerView = view.findViewById(R.id.guestList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setAdapter(adapter);
+        recyclerView.getAdapter().registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                setRecyclerViewHeightBasedOnChildren(recyclerView);
+            }
+        });
+
 
         return view;
 
     }
 
+    /**
+     * Retrieve event guests
+     */
+    private void fetchGuests() {
+        guestList.clear();
+        // TODO: implement mechanism to keep track of matches and replace hardcoded data
+        // guest list: placeholder hardcoded data
+        for (int i = 1; i <= 10; i++) {
+            guestList.add(new User(i));
+        }
+        Log.d("event", "guest list size on create view: " +  guestList.size());
+    }
+
+    public static void setRecyclerViewHeightBasedOnChildren(RecyclerView recyclerView) {
+        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+        if (adapter == null) {
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < adapter.getItemCount(); i++) {
+            View listItem = recyclerView.getLayoutManager().findViewByPosition(i);
+            if (listItem != null) {
+                listItem.measure(
+                        View.MeasureSpec.makeMeasureSpec(recyclerView.getWidth(), View.MeasureSpec.EXACTLY),
+                        View.MeasureSpec.UNSPECIFIED
+                );
+                totalHeight += listItem.getMeasuredHeight();
+            }
+        }
+
+        ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+        params.height = totalHeight;
+        recyclerView.setLayoutParams(params);
+    }
+
     private void goToHome(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_singleEventFragment_to_homeFragment);
+    }
+
+    private void goToEventCreation(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_singleEventFragment_to_eventCreationFragment);
     }
 
 }
