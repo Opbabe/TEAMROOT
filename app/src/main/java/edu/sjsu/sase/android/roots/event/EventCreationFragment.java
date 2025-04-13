@@ -241,7 +241,9 @@ public class EventCreationFragment extends Fragment {
         db.collection("events").document(event.getId()).set(event)
                 .addOnSuccessListener(aVoid -> {
                     Log.d("EventCreationFragment", "Event " + getEventName() + "saved to successfully");
-                    goToSingleEvent(view);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("event", event.getId());
+                    Navigation.findNavController(view).navigate(R.id.action_eventCreationFragment_to_singleEventFragment, bundle);
                 })
                 .addOnFailureListener(e -> Log.e("EventCreationFragment", "Error writing document", e));
         // Here you would validate and save the event
