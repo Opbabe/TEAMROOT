@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.sjsu.sase.android.roots.R;
@@ -25,7 +26,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     public EventAdapter(List<Event> eventList, OnEventClickListener listener) {
-        this.eventList = eventList;
+        this.eventList = (eventList != null) ? eventList : new ArrayList<>();
         this.listener = listener;
     }
 
@@ -41,11 +42,23 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         Event event = eventList.get(position);
         holder.eventName.setText(event.getName());
-        holder.eventTime.setText(event.getDateTime());
         holder.hostName.setText(event.getHostName());
         holder.eventTags.setText(event.getTags());
         holder.eventImage.setImageResource(event.getImageResourceId());
 
+        // For eventTime, if you need to combine date and time, adjust as appropriate.
+        // Here we assume getEventDateStart() and getEventTimeStart() are available.
+        String timeDisplay = "";
+        if (event.getEventDateStart() != null && event.getEventTimeStart() != null) {
+            timeDisplay = event.getEventDateStart() + " - " + event.getEventTimeStart();
+        } else if (event.getEventDateStart() != null) {
+            timeDisplay = event.getEventDateStart();
+        } else if (event.getEventTimeStart() != null) {
+            timeDisplay = event.getEventTimeStart();
+        }
+        holder.eventTime.setText(timeDisplay);
+
+        // Set click listener for the whole card.
         holder.eventCard.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onEventClick(position);
@@ -76,4 +89,4 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             eventTags = itemView.findViewById(R.id.eventTags);
         }
     }
-} 
+}

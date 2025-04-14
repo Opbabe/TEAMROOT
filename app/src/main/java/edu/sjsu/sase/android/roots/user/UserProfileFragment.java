@@ -141,9 +141,9 @@ public class UserProfileFragment extends Fragment {
         List<Event> events = new ArrayList<>();
         
         // Add sample events
-        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
-        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
-        
+//        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
+//        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
+//
         // Create and set adapter
         EventAdapter adapter = new EventAdapter(events, event -> {
             // Handle event click if needed
@@ -181,22 +181,22 @@ public class UserProfileFragment extends Fragment {
         // For demonstration, we create sample events for each tab
         List<Event> events = new ArrayList<>();
         
-        switch (tabPosition) {
-            case 0: // Upcoming
-                events.add(new Event("Upcoming Event", "April 10 - 8 pm", "host name", "outdoor, social", "", R.drawable.ic_profile));
-                events.add(new Event("Upcoming Event 2", "April 15 - 6 pm", "host name", "music, food", "", R.drawable.ic_profile));
-                break;
-            case 1: // Hosting
-                events.add(new Event("My Hosted Event", "April 20 - 7 pm", "You", "outdoor, music", "", R.drawable.ic_profile));
-                break;
-            case 2: // Invites
-                events.add(new Event("Invited Event", "April 12 - 9 pm", "friend name", "social, food", "", R.drawable.ic_profile));
-                events.add(new Event("Invited Event 2", "April 18 - 8 pm", "friend name", "music, outdoor", "", R.drawable.ic_profile));
-                break;
-            case 3: // Attended
-                events.add(new Event("Past Event", "March 25 - 7 pm", "host name", "social, music", "", R.drawable.ic_profile));
-                break;
-        }
+//        switch (tabPosition) {
+//            case 0: // Upcoming
+//                events.add(new Event("Upcoming Event", "April 10 - 8 pm", "host name", "outdoor, social", "", R.drawable.ic_profile));
+//                events.add(new Event("Upcoming Event 2", "April 15 - 6 pm", "host name", "music, food", "", R.drawable.ic_profile));
+//                break;
+//            case 1: // Hosting
+//                events.add(new Event("My Hosted Event", "April 20 - 7 pm", "You", "outdoor, music", "", R.drawable.ic_profile));
+//                break;
+//            case 2: // Invites
+//                events.add(new Event("Invited Event", "April 12 - 9 pm", "friend name", "social, food", "", R.drawable.ic_profile));
+//                events.add(new Event("Invited Event 2", "April 18 - 8 pm", "friend name", "music, outdoor", "", R.drawable.ic_profile));
+//                break;
+//            case 3: // Attended
+//                events.add(new Event("Past Event", "March 25 - 7 pm", "host name", "social, music", "", R.drawable.ic_profile));
+//                break;
+//        }
         
         // Update adapter with new events
         EventAdapter adapter = new EventAdapter(events, event -> {

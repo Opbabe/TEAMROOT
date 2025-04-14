@@ -3,11 +3,13 @@ package edu.sjsu.sase.android.roots;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +18,12 @@ import android.widget.Button;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.sjsu.sase.android.roots.event.Event;
@@ -89,10 +95,8 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         // Set up RecyclerView with grid layout (2 columns)
         eventsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        // Initialize event data
-        setupEventData();
-
-        // Create a copy for filtering
+        // initialize event lists
+        allEvents = new ArrayList<>();
         filteredEvents = new ArrayList<>(allEvents);
 
         // Set up adapter
@@ -105,22 +109,35 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         // Set up button click listeners
         createEventBtn.setOnClickListener(v -> goToEventCreation(v));
 
+        // Fetch events from Firebase
+        fetchEvents();
+
+
+
         return view;
     }
 
-    private void setupEventData() {
-        // Create sample event data; replace with actual data as needed.
-        allEvents = new ArrayList<>();
-        int eventImagePlaceholder = android.R.drawable.ic_menu_gallery; // Replace with your drawable resource
-        allEvents.add(new Event("1", "Summer Music Festival", "April 8 - 7 pm", "Live Nation", "outdoor, music, festival", eventImagePlaceholder));
-        allEvents.add(new Event("2", "Tech Conference 2023", "May 15 - 9 am", "TechCorp", "tech, conference, networking", eventImagePlaceholder));
-        allEvents.add(new Event("3", "Charity Run", "June 10 - 8 am", "RunForGood", "sports, charity, outdoor", eventImagePlaceholder));
-        allEvents.add(new Event("4", "Art Exhibition", "April 20 - 6 pm", "City Gallery", "art, culture, indoor", eventImagePlaceholder));
-        allEvents.add(new Event("5", "Food & Wine Festival", "May 5 - 12 pm", "Taste Inc.", "food, social, outdoor", eventImagePlaceholder));
-        allEvents.add(new Event("6", "Comedy Night", "April 12 - 8 pm", "Laugh Factory", "comedy, entertainment, indoor", eventImagePlaceholder));
-        allEvents.add(new Event("7", "Yoga in the Park", "Every Sunday - 9 am", "Zen Studios", "yoga, wellness, outdoor", eventImagePlaceholder));
-        allEvents.add(new Event("8", "Book Club Meeting", "April 18 - 7 pm", "Page Turners", "books, discussion, social", eventImagePlaceholder));
+    private void fetchEvents() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("events")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    allEvents.clear(); // clear any existing data
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        Event event = doc.toObject(Event.class);
+                        event.setId(doc.getId());
+                        allEvents.add(event);
+                    }
+                    // Refresh the filteredEvents, here we're simply showing all events
+                    filteredEvents.clear();
+                    filteredEvents.addAll(allEvents);
+                    eventAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("HomeFragment", "Error fetching events", e);
+                });
     }
+
 
     private void setupCategoryChips(View view) {
         // Assuming your fragment_home.xml contains chips with these IDs

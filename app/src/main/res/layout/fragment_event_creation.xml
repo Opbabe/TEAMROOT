@@ -258,14 +258,14 @@
                 android:layout_gravity="center_vertical"
                 android:contentDescription="Location icon"/>
 
-            <TextView
-                android:id="@+id/tvLocationValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="San Jose, CA, United States"
-                android:textSize="16sp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLocation"
+                android:layout_width="184dp"
+                android:layout_height="69dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="8dp"
-                android:layout_gravity="center_vertical"/>
+                android:hint="Add a location..."
+                android:textSize="16sp" />
         </LinearLayout>
 
         <!-- Description Section -->
