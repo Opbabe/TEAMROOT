@@ -109,6 +109,8 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         // Set up button click listeners
         createEventBtn.setOnClickListener(v -> goToEventCreation(v));
 
+
+
         // Fetch events from Firebase
         fetchEvents();
 
@@ -168,17 +170,17 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
 
     @Override
     public void onEventClick(int position) {
-        // Navigate to single event details when an event card is clicked
-        goToSingleEvent(getView());
+        // Get the selected event.
+        Event selectedEvent = allEvents.get(position);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("event", selectedEvent.getId());
+
+        Navigation.findNavController(getView()).navigate(R.id.action_homeFragment_to_singleEventFragment, bundle);
     }
 
     private void goToEventCreation(View view){
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_homeFragment_to_eventCreationFragment);
-    }
-
-    private void goToSingleEvent(View view){
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_homeFragment_to_singleEventFragment);
     }
 }
