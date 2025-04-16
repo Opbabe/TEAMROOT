@@ -48,7 +48,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/profilePic"
                 app:layout_constraintTop_toTopOf="@id/profilePic"
-                app:layout_constraintEnd_toStartOf="@id/btnOptions" />
+                app:layout_constraintEnd_toStartOf="@id/logoutBtn" />
 
             <TextView
                 android:id="@+id/tvUsername"
@@ -61,20 +61,23 @@
                 android:textSize="@dimen/regular_text"
                 app:layout_constraintStart_toEndOf="@id/profilePic"
                 app:layout_constraintTop_toBottomOf="@id/tvFullName"
-                app:layout_constraintEnd_toStartOf="@id/btnOptions" />
+                app:layout_constraintEnd_toStartOf="@id/logoutBtn" />
 
             <!-- Options Menu Button -->
-            <ImageButton
-                android:id="@+id/btnOptions"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+
+            <!-- Social Media Icons -->
+
+            <ImageView
+                android:id="@+id/logoutBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_menu_more"
                 android:contentDescription="Options"
+                android:src="@drawable/logout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/profilePic" />
 
-            <!-- Social Media Icons -->
             <LinearLayout
                 android:id="@+id/llSocialIcons"
                 android:layout_width="wrap_content"

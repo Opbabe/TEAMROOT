@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +19,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 
 import edu.sjsu.sase.android.roots.event.Event;
 import edu.sjsu.sase.android.roots.event.EventAdapter;
@@ -39,7 +37,7 @@ public class UserProfileFragment extends Fragment {
     private RecyclerView rvEvents;
     private Button btnUpcoming, btnHosting, btnInvites, btnAttended;
     HashSet<Button> buttons = new HashSet<>();
-    private ImageButton btnOptions;
+    private ImageView logoutBtn;
 
     public UserProfileFragment() {
         // Required empty public constructor
@@ -80,7 +78,7 @@ public class UserProfileFragment extends Fragment {
         tvInterests = view.findViewById(R.id.tvInterests);
         tvBio = view.findViewById(R.id.tvBio);
         rvEvents = view.findViewById(R.id.rvEvents);
-        btnOptions = view.findViewById(R.id.btnOptions);
+        logoutBtn = view.findViewById(R.id.logoutBtn);
         
         // Initialize tab buttons
         btnUpcoming = view.findViewById(R.id.btnUpcoming);
@@ -127,7 +125,7 @@ public class UserProfileFragment extends Fragment {
         btnAttended.setOnClickListener(v -> {onClickTab(btnAttended); updateEventsForTab(3);});
         
         // Options menu
-        btnOptions.setOnClickListener(v -> showOptionsMenu());
+        logoutBtn.setOnClickListener(v -> logout());
 
         // Bottom navigation buttons
         Button editProfileBtn = view.findViewById(R.id.btnEditProfile);
@@ -141,9 +139,9 @@ public class UserProfileFragment extends Fragment {
     /**
      * Shows the options menu
      */
-    private void showOptionsMenu() {
+    private void logout() {
         // In a real app, you would show a popup menu here
-        Toast.makeText(getContext(), "Options menu clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "log out clicked", Toast.LENGTH_SHORT).show();
     }
     
     /**
