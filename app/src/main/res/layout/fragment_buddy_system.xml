@@ -6,156 +6,148 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:paddingTop="16dp"
-    android:paddingHorizontal="16dp"
+    android:paddingTop="24dp"
+    android:paddingHorizontal="@dimen/page_padding"
     tools:context=".buddy.BuddySystemFragment">
 
     <!-- App Title -->
-    <TextView
-        android:id="@+id/tvAppTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buds to Blossoms"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- My Buddies Button (replaced with icon) -->
-    <ImageButton
-        android:id="@+id/buddiesBtn"
+    <TextView
+        android:id="@+id/tvAppTitle"
+        style="@style/title"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:src="@android:drawable/ic_menu_myplaces"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Buds to Blossoms"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/buddiesBtn"
+        android:layout_width="@dimen/icon"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:src="@drawable/community_garden"
         android:contentDescription="My Buddies"
         app:layout_constraintTop_toTopOf="@id/tvAppTitle"
         app:layout_constraintBottom_toBottomOf="@id/tvAppTitle"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Next Button -->
-    <ImageButton
-        android:id="@+id/nextBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:src="@android:drawable/ic_media_next"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:contentDescription="Next"
-        app:layout_constraintTop_toTopOf="@id/tvAppTitle"
-        app:layout_constraintBottom_toBottomOf="@id/tvAppTitle"
-        app:layout_constraintEnd_toStartOf="@id/buddiesBtn"
-        android:layout_marginEnd="8dp" />
 
     <!-- Tagline -->
     <TextView
         android:id="@+id/tvTagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/section_spacer"
+        android:fontFamily="sans-serif-light"
         android:text="connect with your community"
+        android:textColor="#666666"
         android:textSize="16sp"
         android:textStyle="italic"
-        android:textColor="#666666"
-        android:fontFamily="sans-serif-light"
-        app:layout_constraintTop_toBottomOf="@id/tvAppTitle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="4dp" />
+        app:layout_constraintTop_toBottomOf="@id/tvAppTitle" />
 
     <!-- Profile Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/profileCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/section_spacer"
         app:layout_constraintTop_toBottomOf="@id/tvTagline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/actionButtonsLayout"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="12dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_container"
+            android:paddingBottom="0dp"
+            android:scrollbars="none">
 
-            <!-- Profile Image -->
-            <ImageView
-                android:id="@+id/buddyImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholder_image"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/buddyName"
-                app:layout_constraintHeight_percent="0.7" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <!-- Buddy Name -->
-            <TextView
-                android:id="@+id/buddyName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Sandra Le"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:fontFamily="sans-serif-medium"
-                android:padding="16dp"
-                app:layout_constraintTop_toBottomOf="@id/buddyImage"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <!-- Interests -->
-            <LinearLayout
-                android:id="@+id/interestsLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp"
-                app:layout_constraintTop_toBottomOf="@id/buddyName"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
+                <!-- Profile Image -->
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@android:drawable/btn_star"
-                    app:tint="#000000" />
+                    android:id="@+id/buddyImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/placeholder_image"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/buddyName"/>
 
+                <!-- Buddy Name -->
                 <TextView
-                    android:id="@+id/tvInterests"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/buddyName"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="social, food, music, outdoor"
+                    android:text="Sandra Le"
+                    style="@style/title"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingTop="@dimen/section_spacer"
+                    android:paddingBottom="@dimen/list_space"
+                    app:layout_constraintTop_toBottomOf="@id/buddyImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- Interests -->
+                <LinearLayout
+                    android:id="@+id/interestsLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    app:layout_constraintTop_toBottomOf="@id/buddyName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@android:drawable/btn_star"
+                        app:tint="#000000" />
+
+                    <TextView
+                        android:id="@+id/tvInterests"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="social, food, music, outdoor"
+                        android:textSize="16sp"
+                        android:textColor="#333333"
+                        android:fontFamily="sans-serif"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
+                <!-- Bio -->
+                <TextView
+                    android:id="@+id/tvBio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="erm this is my user bio for the profile :0"
                     android:textSize="16sp"
-                    android:textColor="#333333"
+                    android:textColor="#666666"
                     android:fontFamily="sans-serif"
-                    android:layout_marginStart="8dp" />
-            </LinearLayout>
+                    android:paddingTop="@dimen/list_space"
+                    android:paddingBottom="@dimen/page_padding"
+                    app:layout_constraintTop_toBottomOf="@id/interestsLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Bio -->
-            <TextView
-                android:id="@+id/tvBio"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="erm this is my user bio for the profile :0"
-                android:textSize="16sp"
-                android:textColor="#666666"
-                android:fontFamily="sans-serif"
-                android:padding="16dp"
-                app:layout_constraintTop_toBottomOf="@id/interestsLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <!-- Action Buttons -->
@@ -177,26 +169,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="@drawable/button_selector"
                 android:gravity="center"
                 android:padding="12dp">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@android:drawable/ic_media_ff" />
+                    android:src="@drawable/skip" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Skip"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/small_text"
                     android:textColor="#000000"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginTop="4dp" />
@@ -210,26 +203,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="@drawable/button_selector"
                 android:gravity="center"
                 android:padding="12dp">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_view" />
+                    android:src="@drawable/search" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dig Deeper"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/small_text"
                     android:textColor="#000000"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginTop="4dp" />
@@ -243,26 +237,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginHorizontal="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="@drawable/button_selector"
                 android:gravity="center"
                 android:padding="12dp">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_compass" />
+                    android:src="@drawable/bud" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Be buds"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/small_text"
                     android:textColor="#000000"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginTop="4dp" />

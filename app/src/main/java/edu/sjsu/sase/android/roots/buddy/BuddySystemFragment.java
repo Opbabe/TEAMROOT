@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +22,7 @@ public class BuddySystemFragment extends Fragment {
     private ImageView buddyImage;
     private TextView buddyName, tvInterests, tvBio;
     private CardView skipBtn, digDeeperBtn, beBudsBtn;
-    private ImageButton buddiesBtn, nextBtn;
+    private ImageView buddiesBtn;
 
     public BuddySystemFragment() {
         // Required empty public constructor
@@ -51,14 +50,12 @@ public class BuddySystemFragment extends Fragment {
         digDeeperBtn = view.findViewById(R.id.digDeeperBtn);
         beBudsBtn = view.findViewById(R.id.beBudsBtn);
         buddiesBtn = view.findViewById(R.id.buddiesBtn);
-        nextBtn = view.findViewById(R.id.nextBtn);
 
         // Set up click listeners
         skipBtn.setOnClickListener(v -> skipProfile());
         digDeeperBtn.setOnClickListener(v -> viewProfileDetails());
         beBudsBtn.setOnClickListener(v -> connectWithBuddy());
         buddiesBtn.setOnClickListener(v -> navigateToMyBuddies());
-        nextBtn.setOnClickListener(v -> showNextProfile());
 
         // Load initial profile data
         loadProfileData();
@@ -69,7 +66,7 @@ public class BuddySystemFragment extends Fragment {
         // For now, we'll use sample data
         buddyName.setText("Sandra Le");
         tvInterests.setText("social, food, music, outdoor");
-        tvBio.setText("erm this is my user bio for the profile :0");
+        tvBio.setText("erm this is my user bio for the profile :0  dafsdfk ops asdf dsfdf dfk opsd kfpo sdkfo psdkfpod s kfpos dkfpd oskfs podf kpdoskf podsk fpdsko fpdsof");
 
         // Load image (using placeholder for now)
         buddyImage.setImageResource(R.drawable.placeholder_image);
