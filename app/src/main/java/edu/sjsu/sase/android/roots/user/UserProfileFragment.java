@@ -1,6 +1,8 @@
 package edu.sjsu.sase.android.roots.user;
 
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,7 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 import edu.sjsu.sase.android.roots.event.Event;
 import edu.sjsu.sase.android.roots.event.EventAdapter;
@@ -34,6 +38,7 @@ public class UserProfileFragment extends Fragment {
     private TextView tvPronouns, tvAge, tvLocation, tvInterests, tvBio;
     private RecyclerView rvEvents;
     private Button btnUpcoming, btnHosting, btnInvites, btnAttended;
+    HashSet<Button> buttons = new HashSet<>();
     private ImageButton btnOptions;
 
     public UserProfileFragment() {
@@ -82,6 +87,10 @@ public class UserProfileFragment extends Fragment {
         btnHosting = view.findViewById(R.id.btnHosting);
         btnInvites = view.findViewById(R.id.btnInvites);
         btnAttended = view.findViewById(R.id.btnAttended);
+        buttons.add(btnUpcoming);
+        buttons.add(btnHosting);
+        buttons.add(btnInvites);
+        buttons.add(btnAttended);
         
         // Set user data
         name.setText(userToDisplay.getName());
@@ -106,12 +115,16 @@ public class UserProfileFragment extends Fragment {
 
         // Setup event list
         setupEventsList();
+
+//        for (Button tab : buttons) {
+//            tab.setOnClickListener(v -> onClickTab(tab));
+//        }
         
         // Setup tab buttons
-        btnUpcoming.setOnClickListener(v -> updateEventsForTab(0));
-        btnHosting.setOnClickListener(v -> updateEventsForTab(1));
-        btnInvites.setOnClickListener(v -> updateEventsForTab(2));
-        btnAttended.setOnClickListener(v -> updateEventsForTab(3));
+        btnUpcoming.setOnClickListener(v -> {onClickTab(btnUpcoming); updateEventsForTab(0);});
+        btnHosting.setOnClickListener(v -> {onClickTab(btnHosting); updateEventsForTab(1);});
+        btnInvites.setOnClickListener(v -> {onClickTab(btnInvites); updateEventsForTab(2);});
+        btnAttended.setOnClickListener(v -> {onClickTab(btnAttended); updateEventsForTab(3);});
         
         // Options menu
         btnOptions.setOnClickListener(v -> showOptionsMenu());
@@ -156,27 +169,6 @@ public class UserProfileFragment extends Fragment {
      * @param tabPosition The position of the selected tab
      */
     private void updateEventsForTab(int tabPosition) {
-        // Reset all tab button backgrounds
-        btnUpcoming.setBackgroundTintList(null);
-        btnHosting.setBackgroundTintList(null);
-        btnInvites.setBackgroundTintList(null);
-        btnAttended.setBackgroundTintList(null);
-        
-        // Highlight the selected tab
-        switch (tabPosition) {
-            case 0:
-                btnUpcoming.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFE0E0FF));
-                break;
-            case 1:
-                btnHosting.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFE0E0FF));
-                break;
-            case 2:
-                btnInvites.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFE0E0FF));
-                break;
-            case 3:
-                btnAttended.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFE0E0FF));
-                break;
-        }
         
         // For demonstration, we create sample events for each tab
         List<Event> events = new ArrayList<>();
@@ -185,6 +177,7 @@ public class UserProfileFragment extends Fragment {
             case 0: // Upcoming
                 events.add(new Event("Upcoming Event", "April 10 - 8 pm", "host name", "outdoor, social", "", R.drawable.ic_profile));
                 events.add(new Event("Upcoming Event 2", "April 15 - 6 pm", "host name", "music, food", "", R.drawable.ic_profile));
+                events.add(new Event("Upcoming Event 3", "April 15 - 6 pm", "host name", "music, food", "", R.drawable.ic_profile));
                 break;
             case 1: // Hosting
                 events.add(new Event("My Hosted Event", "April 20 - 7 pm", "You", "outdoor, music", "", R.drawable.ic_profile));
@@ -212,5 +205,18 @@ public class UserProfileFragment extends Fragment {
     private void onClickEditProfile(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_userProfileFragment_to_editProfileFragment);
+    }
+
+    private void onClickTab(Button button) {
+        for (Button tab: buttons) {
+            if (tab == button) {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab_pressed));
+                Log.d("profile tab", tab.getText() + " pressed");
+            }
+            else {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab));
+                Log.d("profile tab", "not pressed");
+            }
+        }
     }
 }
