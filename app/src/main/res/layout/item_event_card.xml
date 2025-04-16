@@ -6,15 +6,16 @@
     android:id="@+id/eventCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="4dp"
+    app:strokeWidth="0dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="2dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="#E0E0E0">
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="1dp"
+        android:background="@drawable/rounded_container"
         android:orientation="vertical">
 
         <ImageView
@@ -28,13 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:paddingTop="12dp">
 
             <TextView
                 android:id="@+id/eventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="@dimen/regular_text"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="8dp"
@@ -49,7 +50,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@android:drawable/ic_menu_recent_history"
+                    android:src="@drawable/clock"
                     android:layout_gravity="center_vertical" />
 
                 <TextView
@@ -71,7 +72,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@android:drawable/ic_menu_myplaces"
+                    android:src="@drawable/crown"
                     android:layout_gravity="center_vertical" />
 
                 <TextView
@@ -92,7 +93,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@android:drawable/ic_menu_info_details"
+                    android:src="@drawable/tag"
                     android:layout_gravity="center_vertical" />
 
                 <TextView

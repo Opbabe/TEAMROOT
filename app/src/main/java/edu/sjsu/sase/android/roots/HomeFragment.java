@@ -2,6 +2,7 @@ package edu.sjsu.sase.android.roots;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -13,12 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 import edu.sjsu.sase.android.roots.event.Event;
 import edu.sjsu.sase.android.roots.event.EventAdapter;
@@ -43,6 +45,7 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
     private EventAdapter eventAdapter;
     private List<Event> allEvents;
     private List<Event> filteredEvents;
+    private HashSet<Button> buttons = new HashSet<>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -124,15 +127,23 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
 
     private void setupCategoryChips(View view) {
         // Assuming your fragment_home.xml contains chips with these IDs
-        Chip chipAll = view.findViewById(R.id.chipAll);
-        Chip chipSocial = view.findViewById(R.id.chipSocial);
-        Chip chipMusic = view.findViewById(R.id.chipMusic);
-        Chip chipSports = view.findViewById(R.id.chipSports);
+        Button allTab = view.findViewById(R.id.allTab);
+        Button socialTab = view.findViewById(R.id.socialTab);
+        Button musicTab = view.findViewById(R.id.musicTab);
+        Button sportsTab = view.findViewById(R.id.sportsTab);
+        buttons.add(allTab);
+        buttons.add(socialTab);
+        buttons.add(musicTab);
+        buttons.add(sportsTab);
 
-        chipAll.setOnClickListener(v -> filterEvents("all"));
-        chipSocial.setOnClickListener(v -> filterEvents("social"));
-        chipMusic.setOnClickListener(v -> filterEvents("music"));
-        chipSports.setOnClickListener(v -> filterEvents("sports"));
+//        allTab.setOnClickListener(v -> filterEvents("all"));
+//        socialTab.setOnClickListener(v -> filterEvents("social"));
+//        musicTab.setOnClickListener(v -> filterEvents("music"));
+//        sportsTab.setOnClickListener(v -> filterEvents("sports"));
+
+        for (Button tab : buttons) {
+            tab.setOnClickListener(v -> onClickTab(tab));
+        }
     }
 
     private void filterEvents(String category) {
@@ -147,6 +158,18 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
             }
         }
         eventAdapter.notifyDataSetChanged();
+    }
+
+    private void onClickTab(Button button) {
+        for (Button tab: buttons) {
+            if (tab == button) {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab_pressed));
+                filterEvents(tab.getText().toString());
+            }
+            else {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab));
+            }
+        }
     }
 
     @Override
