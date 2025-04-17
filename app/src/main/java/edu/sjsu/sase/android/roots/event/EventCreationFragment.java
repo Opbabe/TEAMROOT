@@ -116,7 +116,7 @@ public class EventCreationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_creation, container, false);
 
         // Initialize text input
-        eventTitleInput = view.findViewById(R.id.etEventName);
+        eventTitleInput = view.findViewById(R.id.eventName);
 
         // Initialize date and time buttons
         btnStartDate = view.findViewById(R.id.btnStartDate);
@@ -137,7 +137,7 @@ public class EventCreationFragment extends Fragment {
         btnDiscard.setOnClickListener(v -> discardEvent());
         btnUploadImage.setOnClickListener(v -> uploadImage());
 
-        eventDescriptionInput = view.findViewById(R.id.etEventDetails);
+        eventDescriptionInput = view.findViewById(R.id.description);
         eventLocationInput = view.findViewById(R.id.etLocation);
 
         rgVisibility = view.findViewById(R.id.rgVisibility);
