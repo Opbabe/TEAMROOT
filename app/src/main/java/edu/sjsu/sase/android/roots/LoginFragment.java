@@ -139,10 +139,6 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for fragment
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
-        // Back button
-        ImageView backArrowBtn = rootView.findViewById(R.id.backArrowBtn);
-        backArrowBtn.setOnClickListener(this::onClickBackArrow);
-
         // Sign-in button setup
         SignInButton signInButton = rootView.findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(view -> signIn());
