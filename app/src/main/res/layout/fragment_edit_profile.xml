@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp">
+        android:padding="@dimen/page_padding">
 
         <!-- Back Button -->
     <ImageView
@@ -35,23 +35,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Profile Picture -->
-        <FrameLayout
-            android:id="@+id/flProfilePicture"
+        <ImageView
+            android:id="@+id/profilePic"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
             android:layout_marginTop="24dp"
-            android:background="#E0E0E0"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_image"
+            android:contentDescription="Profile picture"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvEditProfileTitle">
-
-            <ImageView
-                android:id="@+id/ivProfilePicture"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:contentDescription="Profile picture" />
-        </FrameLayout>
+            app:layout_constraintTop_toBottomOf="@id/tvEditProfileTitle"/>
 
         <!-- Upload Image Button -->
         <Button
@@ -62,10 +57,13 @@
             android:drawableStart="@android:drawable/ic_menu_upload"
             android:drawablePadding="8dp"
             android:text="Upload Image"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textSize="@dimen/regular_text"
+            android:textColor="@color/black"
+            android:background="@drawable/button_selector"
+            app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/flProfilePicture" />
+            app:layout_constraintTop_toBottomOf="@id/profilePic" />
 
         <!-- Name Field -->
         <LinearLayout
@@ -80,24 +78,18 @@
             app:layout_constraintTop_toBottomOf="@id/btnUploadImage">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_myplaces"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:src="@drawable/crown"
                 android:contentDescription="Person icon" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilName"
+            <EditText
+                android:id="@+id/editName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Name" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Name"
+                android:background="@drawable/rounded_container"/>
         </LinearLayout>
 
         <!-- Username Field -->
@@ -113,26 +105,20 @@
             app:layout_constraintTop_toBottomOf="@id/llName">
 
             <TextView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@"
-                android:textSize="18sp"
+                android:text="\@"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilUsername"
+            <EditText
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Username" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Username"
+                android:background="@drawable/rounded_container"/>
         </LinearLayout>
 
         <!-- Pronouns Field -->
@@ -150,22 +136,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_info_details"
+                android:src="@drawable/face"
                 android:contentDescription="Pronouns icon" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilPronouns"
+            <EditText
+                android:id="@+id/pronouns"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPronouns"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Pronouns" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Pronouns"
+                android:background="@drawable/rounded_container"/>
         </LinearLayout>
 
         <!-- Age Field -->
@@ -183,23 +163,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_my_calendar"
+                android:src="@drawable/birthday"
                 android:contentDescription="Age icon" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilAge"
+            <EditText
+                android:id="@+id/age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etAge"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Age"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Age"
+                android:background="@drawable/rounded_container"/>
         </LinearLayout>
 
         <!-- Location Field -->
@@ -217,22 +190,16 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_mylocation"
+                android:src="@drawable/location"
                 android:contentDescription="Location icon" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilLocation"
+            <EditText
+                android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Location" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Location"
+                android:background="@drawable/rounded_container"/>
         </LinearLayout>
 
         <!-- Interests Section -->
@@ -280,25 +247,19 @@
             app:layout_constraintTop_toBottomOf="@id/cbOption3" />
 
         <!-- Bio Field -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilBio"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/bio"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginTop="@dimen/section_spacer"
+            android:hint="Add a bio..."
+            android:background="@drawable/rounded_container"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cbOption4">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Add a bio..."
-                android:inputType="textMultiLine"
-                android:minLines="3"
-                android:gravity="top" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@id/cbOption4"/>
 
         <!-- Contact Info Section -->
         <TextView
@@ -310,7 +271,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilBio" />
+            app:layout_constraintTop_toBottomOf="@id/bio" />
 
         <!-- Email -->
         <LinearLayout
@@ -327,23 +288,16 @@
             <View
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="@drawable/circle_shape"
-                android:backgroundTint="#E0E0E0" />
+                android:background="@drawable/email"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilEmail"
+            <EditText
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="email"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/rounded_container"/>
         </LinearLayout>
 
         <!-- Facebook -->
@@ -361,22 +315,15 @@
             <View
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="@drawable/circle_shape"
-                android:backgroundTint="#4267B2" />
+                android:background="@drawable/facebook"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilFacebook"
+            <EditText
+                android:id="@+id/facebook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etFacebook"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Facebook link" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Facebook Link"
+                android:background="@drawable/rounded_container"/>
         </LinearLayout>
 
         <!-- Instagram -->
@@ -394,22 +341,15 @@
             <View
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="@drawable/circle_shape"
-                android:backgroundTint="#C13584" />
+                android:background="@drawable/instagram"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilInstagram"
+            <EditText
+                android:id="@+id/instagram"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etInstagram"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Instagram link" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Instagram Link"
+                android:background="@drawable/rounded_container"/>
         </LinearLayout>
 
         <!-- Twitter/X -->
@@ -427,22 +367,15 @@
             <View
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="@drawable/circle_shape"
-                android:backgroundTint="#333333" />
+                android:background="@drawable/twitter"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilTwitter"
+            <EditText
+                android:id="@+id/twitter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTwitter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="X link" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Twitter Link"
+                android:background="@drawable/rounded_container"/>
         </LinearLayout>
 
         <!-- Action Buttons -->
@@ -450,7 +383,7 @@
             android:id="@+id/llActionButtons"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -463,8 +396,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Save"
+                android:textSize="@dimen/regular_text"
+                android:textColor="@color/black"
                 android:layout_marginEnd="8dp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                android:background="@drawable/button_selector"
+                app:backgroundTint="@null"/>
 
             <Button
                 android:id="@+id/btnCancel"
@@ -472,8 +408,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cancel"
+                android:textColor="@color/black"
+                android:textSize="@dimen/regular_text"
                 android:layout_marginStart="8dp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                android:background="@drawable/button_selector"
+                app:backgroundTint="@null"/>
 </LinearLayout>
 
 

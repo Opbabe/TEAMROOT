@@ -13,10 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
 import edu.sjsu.sase.android.roots.MyApplication;
@@ -31,8 +31,8 @@ public class EditProfileFragment extends Fragment {
     private User currUser;
     
     private ImageView profilePicture;
-    private TextInputEditText etName, etUsername, etPronouns, etAge, etLocation, etBio;
-    private TextInputEditText etEmail, etFacebook, etInstagram, etTwitter;
+    private EditText name, username, pronouns, age, location, bio;
+    private EditText email, facebook, instagram, twitter;
     private Button btnSave, btnCancel, btnUploadImage;
     
     private Uri selectedImageUri;
@@ -89,17 +89,17 @@ public class EditProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
         // Initialize views
-        profilePicture = view.findViewById(R.id.ivProfilePicture);
-        etName = view.findViewById(R.id.etName);
-        etUsername = view.findViewById(R.id.etUsername);
-        etPronouns = view.findViewById(R.id.etPronouns);
-        etAge = view.findViewById(R.id.etAge);
-        etLocation = view.findViewById(R.id.etLocation);
-        etBio = view.findViewById(R.id.etBio);
-        etEmail = view.findViewById(R.id.etEmail);
-        etFacebook = view.findViewById(R.id.etFacebook);
-        etInstagram = view.findViewById(R.id.etInstagram);
-        etTwitter = view.findViewById(R.id.etTwitter);
+        profilePicture = view.findViewById(R.id.profilePic);
+        name = view.findViewById(R.id.editName);
+        username = view.findViewById(R.id.username);
+        pronouns = view.findViewById(R.id.pronouns);
+        age = view.findViewById(R.id.age);
+        location = view.findViewById(R.id.location);
+        bio = view.findViewById(R.id.bio);
+        email = view.findViewById(R.id.email);
+        facebook = view.findViewById(R.id.facebook);
+        instagram = view.findViewById(R.id.instagram);
+        twitter = view.findViewById(R.id.twitter);
         
         btnSave = view.findViewById(R.id.btnSave);
         btnCancel = view.findViewById(R.id.btnCancel);
@@ -134,8 +134,8 @@ public class EditProfileFragment extends Fragment {
             }
             
             // Load text fields
-            etName.setText(currUser.getName());
-            etUsername.setText(currUser.getUsername());
+            name.setText(currUser.getName());
+            username.setText(currUser.getUsername());
             // Additional fields can be set if available in your User class
             // etPronouns.setText(currUser.getPronouns());
             // etAge.setText(currUser.getAge());
