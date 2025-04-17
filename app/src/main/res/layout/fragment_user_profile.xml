@@ -13,6 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +23,7 @@
             android:id="@+id/clContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp">
+            android:paddingTop="24dp">
 
             <!-- Profile Header Section -->
             <com.google.android.material.imageview.ShapeableImageView
@@ -31,6 +32,7 @@
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_profile"
+                android:layout_marginStart="@dimen/page_padding"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/CircleImageView" />
@@ -42,35 +44,40 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="(Name)"
-                android:textSize="20sp"
+                android:textSize="@dimen/big_text"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/profilePic"
                 app:layout_constraintTop_toTopOf="@id/profilePic"
-                app:layout_constraintEnd_toStartOf="@id/btnOptions" />
+                app:layout_constraintEnd_toStartOf="@id/logoutBtn" />
 
             <TextView
                 android:id="@+id/tvUsername"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginVertical="4dp"
                 android:text="(Username)"
                 android:textColor="#757575"
+                android:textSize="@dimen/regular_text"
                 app:layout_constraintStart_toEndOf="@id/profilePic"
                 app:layout_constraintTop_toBottomOf="@id/tvFullName"
-                app:layout_constraintEnd_toStartOf="@id/btnOptions" />
+                app:layout_constraintEnd_toStartOf="@id/logoutBtn" />
 
             <!-- Options Menu Button -->
-            <ImageButton
-                android:id="@+id/btnOptions"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+
+            <!-- Social Media Icons -->
+
+            <ImageView
+                android:id="@+id/logoutBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_menu_more"
                 android:contentDescription="Options"
+                android:src="@drawable/logout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/profilePic" />
 
-            <!-- Social Media Icons -->
             <LinearLayout
                 android:id="@+id/llSocialIcons"
                 android:layout_width="wrap_content"
@@ -81,48 +88,107 @@
                 app:layout_constraintTop_toBottomOf="@id/tvUsername">
 
                 <View
-                    android:id="@+id/socialIcon1"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/circle_shape"
-                    android:backgroundTint="#4FC3F7"
-                    android:layout_marginEnd="8dp" />
+                    android:id="@+id/email"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/email"
+                    android:layout_marginEnd="@dimen/page_padding" />
 
                 <View
-                    android:id="@+id/socialIcon2"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/circle_shape"
-                    android:backgroundTint="#4267B2"
-                    android:layout_marginEnd="8dp" />
+                    android:id="@+id/facebook"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/facebook"
+                    android:layout_marginEnd="@dimen/page_padding" />
 
                 <View
-                    android:id="@+id/socialIcon3"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/circle_shape"
-                    android:backgroundTint="#C13584"
-                    android:layout_marginEnd="8dp" />
+                    android:id="@+id/instagram"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/instagram"
+                    android:layout_marginEnd="@dimen/page_padding" />
 
                 <View
-                    android:id="@+id/socialIcon4"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/circle_shape"
-                    android:backgroundTint="#333333" />
+                    android:id="@+id/twitter"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/twitter"/>
             </LinearLayout>
 
-            <!-- Edit Profile Button -->
-            <Button
-                android:id="@+id/btnEditProfile"
-                android:layout_width="0dp"
+            <!-- Buttons -->
+            <FrameLayout
+                android:id="@+id/buttons"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit profile"
                 android:layout_marginTop="16dp"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_marginHorizontal="@dimen/page_padding"
                 app:layout_constraintTop_toBottomOf="@id/profilePic"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Edit Profile Button for current user -->
+                <Button
+                    android:id="@+id/btnEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:text="Edit Profile"
+                    android:textColor="@color/black"
+                    android:visibility="visible"
+                    android:textSize="@dimen/regular_text"
+                    app:backgroundTint="@null" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <Button
+                        android:id="@+id/beBudsBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/page_padding"
+                        android:background="@drawable/button_selector"
+                        android:text="Be buds"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        app:backgroundTint="@null" />
+
+                    <Button
+                        android:id="@+id/declineBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_selector"
+                        android:text="Decline"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        app:backgroundTint="@null" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <Button
+                        android:id="@+id/unrootBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_selector"
+                        android:text="Unroot"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        android:visibility="visible"
+                        app:backgroundTint="@null" />
+
+                </LinearLayout>
+
+            </FrameLayout>
 
             <!-- User Info Section -->
             <LinearLayout
@@ -130,8 +196,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/btnEditProfile"
+                android:layout_marginTop="@dimen/section_spacer"
+                android:layout_marginHorizontal="@dimen/page_padding"
+                app:layout_constraintTop_toBottomOf="@id/buttons"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -146,7 +213,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_info_details"
+                        android:src="@drawable/face"
                         android:contentDescription="Pronouns" />
 
                     <TextView
@@ -155,7 +222,7 @@
                         android:layout_height="wrap_content"
                         android:text="(she/her)"
                         android:textSize="16sp"
-                        android:layout_marginStart="8dp" />
+                        android:layout_marginStart="@dimen/page_padding" />
                 </LinearLayout>
 
                 <!-- Age -->
@@ -169,7 +236,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_my_calendar"
+                        android:src="@drawable/birthday"
                         android:contentDescription="Age" />
 
                     <TextView
@@ -178,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:text="21 y/o"
                         android:textSize="16sp"
-                        android:layout_marginStart="8dp" />
+                        android:layout_marginStart="@dimen/page_padding" />
                 </LinearLayout>
 
                 <!-- Location -->
@@ -192,7 +259,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_mylocation"
+                        android:src="@drawable/location"
                         android:contentDescription="Location" />
 
                     <TextView
@@ -201,7 +268,7 @@
                         android:layout_height="wrap_content"
                         android:text="san jose, CA, United states"
                         android:textSize="16sp"
-                        android:layout_marginStart="8dp" />
+                        android:layout_marginStart="@dimen/page_padding" />
                 </LinearLayout>
 
                 <!-- Interests -->
@@ -210,12 +277,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="@dimen/list_space">
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_compass"
+                        android:src="@drawable/heart"
                         android:contentDescription="Interests" />
 
                     <TextView
@@ -224,7 +291,7 @@
                         android:layout_height="wrap_content"
                         android:text="social, food, music, outdoor"
                         android:textSize="16sp"
-                        android:layout_marginStart="8dp" />
+                        android:layout_marginStart="@dimen/page_padding" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -233,9 +300,10 @@
                 android:id="@+id/tvBio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/list_space"
                 android:text="erm this is my user bio for the profile :0"
                 android:textSize="16sp"
+                android:layout_marginHorizontal="@dimen/page_padding"
                 app:layout_constraintTop_toBottomOf="@id/llUserInfo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -258,35 +326,52 @@
 
                     <Button
                         android:id="@+id/btnUpcoming"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="Upcoming" />
+                        android:minHeight="0dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="@dimen/page_padding"
+                        android:text="Upcoming"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        android:background="@drawable/rounded_tab_pressed"
+                        app:backgroundTint="@null"/>
 
                     <Button
                         android:id="@+id/btnHosting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:minHeight="0dp"
+                        android:layout_marginEnd="4dp"
                         android:text="Hosting"
-                        android:layout_marginEnd="8dp"
-                        android:backgroundTint="#E0E0FF"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        android:background="@drawable/rounded_tab"
+                        app:backgroundTint="@null" />
 
                     <Button
                         android:id="@+id/btnInvites"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:minHeight="0dp"
+                        android:layout_marginEnd="4dp"
                         android:text="Invites"
-                        android:layout_marginEnd="8dp"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        android:background="@drawable/rounded_tab"
+                        app:backgroundTint="@null" />
 
                     <Button
                         android:id="@+id/btnAttended"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:minHeight="0dp"
+                        android:layout_marginEnd="@dimen/page_padding"
                         android:text="Attended"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/regular_text"
+                        android:background="@drawable/rounded_tab"
+                        app:backgroundTint="@null" />
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -295,12 +380,14 @@
                 android:id="@+id/rvEvents"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="10dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
-                app:layout_constraintTop_toBottomOf="@id/hsvTabs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/hsvTabs"
+                app:spanCount="2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

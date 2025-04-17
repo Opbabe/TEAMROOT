@@ -3,7 +3,7 @@ package edu.sjsu.sase.android.roots;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,16 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
 
 import edu.sjsu.sase.android.roots.event.Event;
 import edu.sjsu.sase.android.roots.event.EventAdapter;
@@ -140,9 +138,8 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
                 });
     }
 
-
     private void setupCategoryChips(View view) {
-        // Assuming your fragment_home.xml contains chips with these IDs
+
         Chip chipAll = view.findViewById(R.id.chipAll);
         Chip chipSocial = view.findViewById(R.id.chipSocial);
         Chip chipMusic = view.findViewById(R.id.chipMusic);

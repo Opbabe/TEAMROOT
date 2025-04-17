@@ -148,18 +148,18 @@ public class LoginFragment extends Fragment {
         signInButton.setOnClickListener(view -> signIn());
 
         // Initialize leaves container and start leaf animations
-        leavesContainer = rootView.findViewById(R.id.leavesContainer);
-        startLeafAnimations();
+//        leavesContainer = rootView.findViewById(R.idz.leavesContainer);
+//        startLeafAnimations();
 
         return rootView;
     }
 
-    @Override
-    public void onViewCreated(View view, @javax.annotation.Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        animateGrass();
-        setupParallaxEffect();
-    }
+//    @Override
+//    public void onViewCreated(View view, @javax.annotation.Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        animateGrass();
+//        setupParallaxEffect();
+//    }
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -389,53 +389,53 @@ public class LoginFragment extends Fragment {
     /**
      * Creates a subtle grass animation effect on the forest silhouette.
      */
-    private void animateGrass() {
-        View forestView = getView().findViewById(R.id.forestSilhouette);
-        if (forestView == null) return;
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(forestView, "scaleX", 1.0f, 1.005f);
-        scaleX.setDuration(3000);
-        scaleX.setRepeatCount(ObjectAnimator.INFINITE);
-        scaleX.setRepeatMode(ObjectAnimator.REVERSE);
-        scaleX.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        ObjectAnimator translationY = ObjectAnimator.ofFloat(forestView, "translationY", 0f, -2f);
-        translationY.setDuration(2000);
-        translationY.setRepeatCount(ObjectAnimator.INFINITE);
-        translationY.setRepeatMode(ObjectAnimator.REVERSE);
-        translationY.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(scaleX, translationY);
-        animatorSet.start();
-    }
+//    private void animateGrass() {
+//        View forestView = getView().findViewById(R.id.forestSilhouette);
+//        if (forestView == null) return;
+//        ObjectAnimator scaleX = ObjectAnimator.ofFloat(forestView, "scaleX", 1.0f, 1.005f);
+//        scaleX.setDuration(3000);
+//        scaleX.setRepeatCount(ObjectAnimator.INFINITE);
+//        scaleX.setRepeatMode(ObjectAnimator.REVERSE);
+//        scaleX.setInterpolator(new AccelerateDecelerateInterpolator());
+//
+//        ObjectAnimator translationY = ObjectAnimator.ofFloat(forestView, "translationY", 0f, -2f);
+//        translationY.setDuration(2000);
+//        translationY.setRepeatCount(ObjectAnimator.INFINITE);
+//        translationY.setRepeatMode(ObjectAnimator.REVERSE);
+//        translationY.setInterpolator(new AccelerateDecelerateInterpolator());
+//
+//        AnimatorSet animatorSet = new AnimatorSet();
+//        animatorSet.playTogether(scaleX, translationY);
+//        animatorSet.start();
+//    }
 
     /**
      * Sets up a parallax effect based on device tilting.
      */
-    private void setupParallaxEffect() {
-        final View forestView = getView().findViewById(R.id.forestSilhouette);
-        final View logoContainer = getView().findViewById(R.id.logoContainer);
-        if (forestView == null || logoContainer == null) return;
-        sensorManager = (SensorManager) requireActivity().getSystemService(Context.SENSOR_SERVICE);
-        Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
-        sensorEventListener = new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                float x = Math.min(Math.max(event.values[0], -3), 3) / 3;
-                float y = Math.min(Math.max(event.values[1], -3), 3) / 3;
-                forestView.setTranslationX(-x * 15);
-                logoContainer.setTranslationX(-x * 5);
-                forestView.setTranslationY(y * 10);
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
-                // No action needed
-            }
-        };
-        sensorManager.registerListener(sensorEventListener, accelerometer, SensorManager.SENSOR_DELAY_GAME);
-    }
+//    private void setupParallaxEffect() {
+//        final View forestView = getView().findViewById(R.id.forestSilhouette);
+//        final View logoContainer = getView().findViewById(R.id.logoContainer);
+//        if (forestView == null || logoContainer == null) return;
+//        sensorManager = (SensorManager) requireActivity().getSystemService(Context.SENSOR_SERVICE);
+//        Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+//
+//        sensorEventListener = new SensorEventListener() {
+//            @Override
+//            public void onSensorChanged(SensorEvent event) {
+//                float x = Math.min(Math.max(event.values[0], -3), 3) / 3;
+//                float y = Math.min(Math.max(event.values[1], -3), 3) / 3;
+//                forestView.setTranslationX(-x * 15);
+//                logoContainer.setTranslationX(-x * 5);
+//                forestView.setTranslationY(y * 10);
+//            }
+//
+//            @Override
+//            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+//                // No action needed
+//            }
+//        };
+//        sensorManager.registerListener(sensorEventListener, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+//    }
 
     @Override
     public void onPause() {

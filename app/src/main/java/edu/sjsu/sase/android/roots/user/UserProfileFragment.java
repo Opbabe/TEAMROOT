@@ -1,6 +1,8 @@
 package edu.sjsu.sase.android.roots.user;
 
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -75,14 +77,13 @@ public class UserProfileFragment extends Fragment {
         tvInterests = view.findViewById(R.id.tvInterests);
         tvBio = view.findViewById(R.id.tvBio);
         rvEvents = view.findViewById(R.id.rvEvents);
-        btnOptions = view.findViewById(R.id.btnOptions);
-        
+
         // Initialize tab buttons
         btnUpcoming = view.findViewById(R.id.btnUpcoming);
         btnHosting = view.findViewById(R.id.btnHosting);
         btnInvites = view.findViewById(R.id.btnInvites);
         btnAttended = view.findViewById(R.id.btnAttended);
-        
+
         // Set user data
         name.setText(userToDisplay.getName());
         username.setText(userToDisplay.getUsername());
@@ -106,15 +107,12 @@ public class UserProfileFragment extends Fragment {
 
         // Setup event list
         setupEventsList();
-        
+
         // Setup tab buttons
         btnUpcoming.setOnClickListener(v -> updateEventsForTab(0));
         btnHosting.setOnClickListener(v -> updateEventsForTab(1));
         btnInvites.setOnClickListener(v -> updateEventsForTab(2));
         btnAttended.setOnClickListener(v -> updateEventsForTab(3));
-        
-        // Options menu
-        btnOptions.setOnClickListener(v -> showOptionsMenu());
 
         // Bottom navigation buttons
         Button editProfileBtn = view.findViewById(R.id.btnEditProfile);
@@ -126,24 +124,12 @@ public class UserProfileFragment extends Fragment {
     }
     
     /**
-     * Shows the options menu
-     */
-    private void showOptionsMenu() {
-        // In a real app, you would show a popup menu here
-        Toast.makeText(getContext(), "Options menu clicked", Toast.LENGTH_SHORT).show();
-    }
-    
-    /**
      * Sets up the events RecyclerView with sample data
      */
     private void setupEventsList() {
         // Create sample events (in a real app, this data would come from a database)
         List<Event> events = new ArrayList<>();
-        
-        // Add sample events
-//        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
-//        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
-//
+
         // Create and set adapter
         EventAdapter adapter = new EventAdapter(events, event -> {
             // Handle event click if needed
@@ -161,7 +147,7 @@ public class UserProfileFragment extends Fragment {
         btnHosting.setBackgroundTintList(null);
         btnInvites.setBackgroundTintList(null);
         btnAttended.setBackgroundTintList(null);
-        
+
         // Highlight the selected tab
         switch (tabPosition) {
             case 0:
@@ -197,7 +183,7 @@ public class UserProfileFragment extends Fragment {
 //                events.add(new Event("Past Event", "March 25 - 7 pm", "host name", "social, music", "", R.drawable.ic_profile));
 //                break;
 //        }
-        
+
         // Update adapter with new events
         EventAdapter adapter = new EventAdapter(events, event -> {
             // Handle event click if needed

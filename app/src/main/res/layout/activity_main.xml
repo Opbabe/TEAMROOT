@@ -27,7 +27,7 @@
         android:padding="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/nav_bar_background"
+        android:background="@drawable/nav_container"
         app:itemIconSize="24dp"
         app:itemIconTint="@color/nav_bar_item_inactive"
         app:itemTextColor="@color/nav_bar_item_inactive"
