@@ -1,11 +1,15 @@
 package edu.sjsu.sase.android.roots.event;
 
+import static edu.sjsu.sase.android.roots.event.SingleEventFragment.setRecyclerViewHeightBasedOnChildren;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.FirebaseApp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,7 +38,7 @@ import edu.sjsu.sase.android.roots.MyApplication;
 import edu.sjsu.sase.android.roots.R;
 
 import edu.sjsu.sase.android.roots.event.Event;
-
+import edu.sjsu.sase.android.roots.user.User;
 
 
 /**
@@ -56,6 +61,10 @@ public class EventCreationFragment extends Fragment {
     
     private Button btnStartDate, btnEndDate, btnStartTime, btnEndTime;
     private Button btnSave, btnDiscard, btnUploadImage;
+
+    private RecyclerView recyclerView;
+    ArrayList<User> userList = new ArrayList<>();
+    GuestRecyclerViewAdapter adapter;
 
     private FirebaseAuth mAuth;
 
@@ -122,7 +131,43 @@ public class EventCreationFragment extends Fragment {
         btnDiscard.setOnClickListener(v -> discardEvent());
         btnUploadImage.setOnClickListener(v -> uploadImage());
 
+
+        // set data
+        for (int i = 1; i <= 5; i++) {
+            userList.add(new User(i));
+        }
+        Log.d("create event", "guest list size on create view: " +  userList.size());
+
+        // pass data as argument to construct adapter
+        adapter = new GuestRecyclerViewAdapter(userList);
+        adapter.setIsOnSingleEvent(false);
+
+        // cast view to RecyclerView and set adapter for RecyclerView
+        recyclerView = view.findViewById(R.id.guestList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setAdapter(adapter);
+        recyclerView.getAdapter().registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                setRecyclerViewHeightBasedOnChildren(recyclerView);
+            }
+        });
+
         return view;
+    }
+
+    /**
+     * Retrieve event guests
+     */
+    private void fetchGuests() {
+        userList.clear();
+        // TODO: implement mechanism to keep track of matches and replace hardcoded data
+        // guest list: placeholder hardcoded data
+        for (int i = 1; i <= 5; i++) {
+            userList.add(new User(i));
+        }
+        Log.d("create event", "guest list size on create view: " +  userList.size());
     }
 
 
