@@ -16,7 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -57,11 +60,14 @@ public class EventCreationFragment extends Fragment {
     private Calendar startTimeCalendar = Calendar.getInstance();
     private Calendar endTimeCalendar = Calendar.getInstance();
 
-    private EditText eventTitleInput;
+    private EditText eventTitleInput, eventDescriptionInput, eventLocationInput;;;
     
     private Button btnStartDate, btnEndDate, btnStartTime, btnEndTime;
     private Button btnSave, btnDiscard, btnUploadImage;
 
+    private CheckBox cbOption1, cbOption2, cbOption3, cbOption4;
+    private RadioGroup rgVisibility;
+    private RadioButton tbPrivate, tbPublic;
     private RecyclerView recyclerView;
     ArrayList<User> userList = new ArrayList<>();
     GuestRecyclerViewAdapter adapter;
@@ -131,6 +137,13 @@ public class EventCreationFragment extends Fragment {
         btnDiscard.setOnClickListener(v -> discardEvent());
         btnUploadImage.setOnClickListener(v -> uploadImage());
 
+        eventDescriptionInput = view.findViewById(R.id.etEventDetails);
+        eventLocationInput = view.findViewById(R.id.etLocation);
+
+        rgVisibility = view.findViewById(R.id.rgVisibility);
+        tbPrivate = view.findViewById(R.id.rbPrivate);
+        tbPublic = view.findViewById(R.id.rbPublic);
+
 
         // set data
         for (int i = 1; i <= 5; i++) {
@@ -179,9 +192,26 @@ public class EventCreationFragment extends Fragment {
         return eventTitleInput.getText().toString();
     }
 
-    public String getEventDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy h:mm a", Locale.US);
-        return dateFormat.format(startDateCalendar.getTime()) + " - " + dateFormat.format(endDateCalendar.getTime());
+//    public String getEventDateTime() {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy h:mm a", Locale.US);
+//        return dateFormat.format(startDateCalendar.getTime()) + " - " + dateFormat.format(endDateCalendar.getTime());
+//    }
+    public String getEventStartDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+        return dateFormat.format(startDateCalendar.getTime());
+    }
+    public String getEventEndDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+        return dateFormat.format(endDateCalendar.getTime());
+    }
+
+    public String getEventStartTime(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a", Locale.US);
+        return dateFormat.format(startTimeCalendar.getTime());
+    }
+    public String getEventEndTime(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a", Locale.US);
+        return dateFormat.format(endTimeCalendar.getTime());
     }
 
     public String getEventHostUid() {
@@ -194,6 +224,21 @@ public class EventCreationFragment extends Fragment {
 
     public int getImageResourceId() {
         return 0;
+    }
+
+    public String getEventDescription(){
+        return eventDescriptionInput.getText().toString();
+    }
+    public String getEventLocation(){
+        return eventLocationInput.getText().toString();
+    }
+    public String getEventVisibility() {
+        if (tbPrivate.isChecked()) {
+            return "private";
+        } else if (tbPublic.isChecked()) {
+            return "public";
+        }
+        return "";
     }
 
     private void setupDateTimeButtons() {
@@ -281,12 +326,15 @@ public class EventCreationFragment extends Fragment {
 
         // Create new event object=
         Event event = new Event(generateEventID(), getEventName(),
-                getEventDateTime(), getEventHostUid(), getEventTags(),getImageResourceId());
+                getEventHostUid(), getEventTags(),getImageResourceId(),getEventStartDate(),getEventEndDate(),
+                getEventStartTime(),getEventEndTime(), getEventDescription(), getEventVisibility(), getEventLocation());
 
         db.collection("events").document(event.getId()).set(event)
                 .addOnSuccessListener(aVoid -> {
                     Log.d("EventCreationFragment", "Event " + getEventName() + "saved to successfully");
-                    goToSingleEvent(view);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("event", event.getId());
+                    Navigation.findNavController(view).navigate(R.id.action_eventCreationFragment_to_singleEventFragment, bundle);
                 })
                 .addOnFailureListener(e -> Log.e("EventCreationFragment", "Error writing document", e));
         // Here you would validate and save the event

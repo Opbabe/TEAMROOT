@@ -4,11 +4,13 @@ import android.app.Application;
 import android.util.Log;
 import com.google.firebase.FirebaseApp;
 
+import edu.sjsu.sase.android.roots.event.Event;
 import edu.sjsu.sase.android.roots.user.User;
 
 public class MyApplication extends Application {
     private static MyApplication instance;
     private User currUser;
+    private Event currentEvent;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -31,5 +33,9 @@ public class MyApplication extends Application {
 
     public void setCurrUser(User currUser) {
         this.currUser = currUser;
+    }
+
+    public Event getCurrentEvent(){
+        return currentEvent;
     }
 }
