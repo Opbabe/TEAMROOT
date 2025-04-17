@@ -2,6 +2,7 @@ package edu.sjsu.sase.android.roots;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import androidx.navigation.NavController;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
     private EventAdapter eventAdapter;
     private List<Event> allEvents;
     private List<Event> filteredEvents;
+    private HashSet<Button> buttons = new HashSet<>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -139,16 +142,23 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
     }
 
     private void setupCategoryChips(View view) {
+        Button allTab = view.findViewById(R.id.allTab);
+        Button socialTab = view.findViewById(R.id.socialTab);
+        Button musicTab = view.findViewById(R.id.musicTab);
+        Button sportsTab = view.findViewById(R.id.sportsTab);
+        buttons.add(allTab);
+        buttons.add(socialTab);
+        buttons.add(musicTab);
+        buttons.add(sportsTab);
 
-        Chip chipAll = view.findViewById(R.id.chipAll);
-        Chip chipSocial = view.findViewById(R.id.chipSocial);
-        Chip chipMusic = view.findViewById(R.id.chipMusic);
-        Chip chipSports = view.findViewById(R.id.chipSports);
+//        allTab.setOnClickListener(v -> filterEvents("all"));
+//        socialTab.setOnClickListener(v -> filterEvents("social"));
+//        musicTab.setOnClickListener(v -> filterEvents("music"));
+//        sportsTab.setOnClickListener(v -> filterEvents("sports"));
 
-        chipAll.setOnClickListener(v -> filterEvents("all"));
-        chipSocial.setOnClickListener(v -> filterEvents("social"));
-        chipMusic.setOnClickListener(v -> filterEvents("music"));
-        chipSports.setOnClickListener(v -> filterEvents("sports"));
+        for (Button tab : buttons) {
+            tab.setOnClickListener(v -> onClickTab(tab));
+        }
     }
 
     private void filterEvents(String category) {
@@ -163,6 +173,18 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
             }
         }
         eventAdapter.notifyDataSetChanged();
+    }
+
+    private void onClickTab(Button button) {
+        for (Button tab: buttons) {
+            if (tab == button) {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab_pressed));
+                filterEvents(tab.getText().toString());
+            }
+            else {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab));
+            }
+        }
     }
 
     @Override
