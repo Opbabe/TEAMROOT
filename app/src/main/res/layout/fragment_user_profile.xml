@@ -137,6 +137,18 @@
                     android:visibility="visible"
                     android:textSize="@dimen/regular_text"
                     app:backgroundTint="@null" />
+                <Button
+                    android:id="@+id/btnSendFriendRequest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/page_padding"
+                    android:background="@drawable/button_selector"
+                    android:visibility="gone"
+                    android:text="Be buds"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regular_text"
+                    app:backgroundTint="@null" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -145,7 +157,7 @@
                     android:visibility="gone">
 
                     <Button
-                        android:id="@+id/beBudsBtn"
+                        android:id="@+id/SendFriendRequest"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -309,18 +321,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Friend Request Button -->
-            <Button
-                android:id="@+id/btnSendFriendRequest"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Send Friend Request"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@android:color/holo_purple"
-                android:textColor="@android:color/white"
-                app:layout_constraintTop_toBottomOf="@id/tvBio"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+<!--            &lt;!&ndash; Friend Request Button &ndash;&gt;-->
+<!--            <Button-->
+<!--                android:id="@+id/btnSendFriendRequest"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Send Friend Request"-->
+<!--                android:textSize="@dimen/regular_text"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:background="@drawable/button_selector"-->
+<!--                app:backgroundTint="@null"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tvBio"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent" />-->
 
             <!-- Event Tabs -->
             <HorizontalScrollView
@@ -329,7 +343,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:scrollbars="none"
-                app:layout_constraintTop_toBottomOf="@id/btnSendFriendRequest"
+                app:layout_constraintTop_toBottomOf="@id/tvBio"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 

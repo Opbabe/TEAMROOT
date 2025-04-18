@@ -101,6 +101,7 @@ public class UserProfileFragment extends Fragment {
         tvPronouns.setText(userToDisplay.getPronouns());
         tvAge.setText(userToDisplay.getAge());
         tvLocation.setText(userToDisplay.getLocation());
+        tvInterests.setText(userToDisplay.getInterests());
         tvBio.setText(userToDisplay.getBio());
 
 
@@ -140,8 +141,11 @@ public class UserProfileFragment extends Fragment {
         //if viewing own profile hide button
         if (userToDisplay.getId().equals(currUser.getId())) {
             sendRequestBtn.setVisibility(View.GONE);
+            editProfileBtn.setVisibility(View.VISIBLE);
         } else {
+            sendRequestBtn.setVisibility(View.VISIBLE);
             sendRequestBtn.setOnClickListener(v -> sendFriendRequest());
+            editProfileBtn.setVisibility(View.GONE);
         }
 
         ImageView logoutBtn = view.findViewById(R.id.logoutBtn);
