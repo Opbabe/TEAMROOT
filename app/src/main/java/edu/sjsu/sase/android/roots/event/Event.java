@@ -6,6 +6,9 @@ import android.os.Parcelable;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @IgnoreExtraProperties
 public class Event implements Parcelable {
     @Exclude
@@ -14,12 +17,13 @@ public class Event implements Parcelable {
     private String id;
     private String name;
     private String hostName;
-    private String tags; // Consider changing to a List or Collection if needed.
-    private int imageResourceId; // For demo purposes, using resource IDs.
+    private String tags;
+    private String imageUrl; // Firebase Storage download URL
     private String description;
     private String visibility;
     private String location;
-    private String guestList;
+    private List<String> guestList;
+
     private String eventDateStart;
     private String eventDateEnd;
     private String eventTimeStart;
@@ -27,16 +31,30 @@ public class Event implements Parcelable {
 
     // Default constructor required for Firestore
     public Event() {
+        this.guestList = new ArrayList<>();
     }
 
-    public Event(String id, String name, String hostName, String tags, int imageResourceId,
-                 String eventDateStart, String eventDateEnd, String eventTimeStart, String eventTimeEnd,
-                 String description, String visibility, String location) {
+    // Full constructor
+    public Event(
+            String id,
+            String name,
+            String hostName,
+            String tags,
+            String imageUrl,
+            String eventDateStart,
+            String eventDateEnd,
+            String eventTimeStart,
+            String eventTimeEnd,
+            String description,
+            String visibility,
+            String location,
+            List<String> guestList
+    ) {
         this.id = id;
         this.name = name;
         this.hostName = hostName;
         this.tags = tags;
-        this.imageResourceId = imageResourceId;
+        this.imageUrl = imageUrl;
         this.eventDateStart = eventDateStart;
         this.eventDateEnd = eventDateEnd;
         this.eventTimeStart = eventTimeStart;
@@ -44,6 +62,7 @@ public class Event implements Parcelable {
         this.description = description;
         this.visibility = visibility;
         this.location = location;
+        this.guestList = guestList != null ? guestList : new ArrayList<>();
     }
 
     // Parcelable constructor
@@ -52,46 +71,32 @@ public class Event implements Parcelable {
         name = in.readString();
         hostName = in.readString();
         tags = in.readString();
-        imageResourceId = in.readInt();
+        imageUrl = in.readString();
         description = in.readString();
         visibility = in.readString();
         location = in.readString();
-        guestList = in.readString();
+        guestList = in.createStringArrayList();
         eventDateStart = in.readString();
         eventDateEnd = in.readString();
         eventTimeStart = in.readString();
         eventTimeEnd = in.readString();
     }
 
-    // Helper methods for nullable parceling
-    private void writeNullableToParcel(Parcel dest, String str) {
-        if (str == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeString(str);
-        }
-    }
-
-    private String readNullableString(Parcel in) {
-        return in.readByte() == 0 ? null : in.readString();
-    }
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        writeNullableToParcel(dest, id);
-        writeNullableToParcel(dest, name);
-        writeNullableToParcel(dest, hostName);
-        writeNullableToParcel(dest, tags);
-        dest.writeInt(imageResourceId);
-        writeNullableToParcel(dest, description);
-        writeNullableToParcel(dest, visibility);
-        writeNullableToParcel(dest, location);
-        writeNullableToParcel(dest, guestList);
-        writeNullableToParcel(dest, eventDateStart);
-        writeNullableToParcel(dest, eventDateEnd);
-        writeNullableToParcel(dest, eventTimeStart);
-        writeNullableToParcel(dest, eventTimeEnd);
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(hostName);
+        dest.writeString(tags);
+        dest.writeString(imageUrl);
+        dest.writeString(description);
+        dest.writeString(visibility);
+        dest.writeString(location);
+        dest.writeStringList(guestList);
+        dest.writeString(eventDateStart);
+        dest.writeString(eventDateEnd);
+        dest.writeString(eventTimeStart);
+        dest.writeString(eventTimeEnd);
     }
 
     @Override
@@ -111,113 +116,46 @@ public class Event implements Parcelable {
         }
     };
 
-    // Getters
-    public String getId() {
-        return id;
-    }
+    // Getters and Setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getHostName() {
-        return hostName;
-    }
+    public String getHostName() { return hostName; }
+    public void setHostName(String hostName) { this.hostName = hostName; }
 
-    public String getTags() {
-        return tags;
-    }
+    public String getTags() { return tags; }
+    public void setTags(String tags) { this.tags = tags; }
 
-    public int getImageResourceId() {
-        return imageResourceId;
-    }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public String getVisibility() {
-        return visibility;
-    }
+    public String getVisibility() { return visibility; }
+    public void setVisibility(String visibility) { this.visibility = visibility; }
 
-    public String getLocation() {
-        return location;
-    }
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
 
-    public String getGuestList() {
-        return guestList;
-    }
+    public List<String> getGuestList() { return guestList; }
+    public void setGuestList(List<String> guestList) { this.guestList = guestList; }
 
-    public String getEventDateStart() {
-        return eventDateStart;
-    }
+    public String getEventDateStart() { return eventDateStart; }
+    public void setEventDateStart(String eventDateStart) { this.eventDateStart = eventDateStart; }
 
-    public String getEventDateEnd() {
-        return eventDateEnd;
-    }
+    public String getEventDateEnd() { return eventDateEnd; }
+    public void setEventDateEnd(String eventDateEnd) { this.eventDateEnd = eventDateEnd; }
 
-    public String getEventTimeStart() {
-        return eventTimeStart;
-    }
+    public String getEventTimeStart() { return eventTimeStart; }
+    public void setEventTimeStart(String eventTimeStart) { this.eventTimeStart = eventTimeStart; }
 
-    public String getEventTimeEnd() {
-        return eventTimeEnd;
-    }
+    public String getEventTimeEnd() { return eventTimeEnd; }
+    public void setEventTimeEnd(String eventTimeEnd) { this.eventTimeEnd = eventTimeEnd; }
 
-    // Setters
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
-    public void setImageResourceId(int imageResourceId) {
-        this.imageResourceId = imageResourceId;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setVisibility(String visibility) {
-        this.visibility = visibility;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setGuestList(String guestList) {
-        this.guestList = guestList;
-    }
-
-    public void setEventDateStart(String eventDateStart) {
-        this.eventDateStart = eventDateStart;
-    }
-
-    public void setEventDateEnd(String eventDateEnd) {
-        this.eventDateEnd = eventDateEnd;
-    }
-
-    public void setEventTimeStart(String eventTimeStart) {
-        this.eventTimeStart = eventTimeStart;
-    }
-
-    public void setEventTimeEnd(String eventTimeEnd) {
-        this.eventTimeEnd = eventTimeEnd;
-    }
-
-    // Optional: Override toString() for easier debugging
     @Override
     public String toString() {
         return "Event{" +
@@ -225,7 +163,7 @@ public class Event implements Parcelable {
                 ", name='" + name + '\'' +
                 ", hostName='" + hostName + '\'' +
                 ", tags='" + tags + '\'' +
-                ", imageResourceId=" + imageResourceId +
+                ", imageUrl='" + imageUrl + '\'' +
                 ", description='" + description + '\'' +
                 ", visibility='" + visibility + '\'' +
                 ", location='" + location + '\'' +

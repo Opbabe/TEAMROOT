@@ -278,10 +278,11 @@
         </LinearLayout>
 
         <!-- Description Section -->
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:hint="Description of your event"
             android:inputType="textMultiLine"
             android:minLines="4"
