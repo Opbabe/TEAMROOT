@@ -154,7 +154,7 @@ public class SingleEventFragment extends Fragment {
                             ImageView eventPic = view.findViewById(R.id.eventPic);
 
                             String hostUid = documentSnapshot.getString("hostName");
-                            boolean isHost = hostUid.equals(app.getCurrUser().getId());
+                            boolean isHost = hostUid.equals(app.getCurrUser().getName());
                             editBtn.setVisibility(isHost ? View.VISIBLE : View.GONE);
 
                             if (picUrl != null && !picUrl.isEmpty()) {
@@ -197,12 +197,6 @@ public class SingleEventFragment extends Fragment {
      */
     private void fetchGuests() {
         guestList.clear();
-        // TODO: implement mechanism to keep track of matches and replace hardcoded data
-        // guest list: placeholder hardcoded data
-        for (int i = 1; i <= 10; i++) {
-            guestList.add(new User(i));
-        }
-        Log.d("event", "guest list size on create view: " +  guestList.size());
     }
 
     public static void setRecyclerViewHeightBasedOnChildren(RecyclerView recyclerView) {

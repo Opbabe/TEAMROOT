@@ -176,12 +176,7 @@ public class EventCreationFragment extends Fragment {
      */
     private void fetchGuests() {
         userList.clear();
-        // TODO: implement mechanism to keep track of matches and replace hardcoded data
-        // guest list: placeholder hardcoded data
-        for (int i = 1; i <= 5; i++) {
-            userList.add(new User(i));
-        }
-        Log.d("create event", "guest list size on create view: " +  userList.size());
+
     }
 
 
