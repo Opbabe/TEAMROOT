@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -50,6 +51,11 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
     private List<Event> allEvents;
     private List<Event> filteredEvents;
     private HashSet<Button> buttons = new HashSet<>();
+    private EditText searchInput; // need to capture search query
+    Button allTab;
+    Button socialTab;
+    Button musicTab;
+    Button sportsTab;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -88,6 +94,9 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        Button searchBtn = view.findViewById(R.id.searchBtn);
+        searchInput = view.findViewById(R.id.searchInput); //taking in input text
+
         // Initialize views
         eventsRecyclerView = view.findViewById(R.id.eventsRecyclerView);
         FloatingActionButton createEventBtn = view.findViewById(R.id.createBttn);
@@ -110,7 +119,8 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         // Set up button click listeners
         createEventBtn.setOnClickListener(v -> goToEventCreation(v));
 
-
+        // search bar
+        searchBtn.setOnClickListener(this::onClickSearch); //search listener
 
         // Fetch events from Firebase
         fetchEvents();
@@ -118,6 +128,42 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
 
 
         return view;
+    }
+
+    /**
+     * Navigates to User Listing screen.
+     * @param view
+     */
+    //search function, will add friend request option here soon
+    private void onClickSearch(View view) {
+        unClickTabs();
+        String query = searchInput.getText().toString().trim().toLowerCase(); //grab user input
+        if (query.isEmpty()){return;}
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("events")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    allEvents.clear(); // clear any existing data
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        Event event = doc.toObject(Event.class);
+                        event.setId(doc.getId());
+                        String eventName = doc.getString("name").toLowerCase();
+                        if (eventName.contains(query)) {
+                            allEvents.add(event);
+                        }
+                    }
+                    // Refresh the filteredEvents, here we're simply showing all events
+                    filteredEvents.clear();
+                    filteredEvents.addAll(allEvents);
+                    eventAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("HomeFragment", "Error fetching events", e);
+                });
+//        Bundle bundle = new Bundle();
+//        bundle.putString("searchQuery", query); //pass search string to userlisting frag
+//        NavController controller = Navigation.findNavController(view);
+//        controller.navigate(R.id.action_buddyListFragment_to_userListingFragment, bundle);
     }
 
     private void fetchEvents() {
@@ -142,10 +188,10 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
     }
 
     private void setupCategoryChips(View view) {
-        Button allTab = view.findViewById(R.id.allTab);
-        Button socialTab = view.findViewById(R.id.socialTab);
-        Button musicTab = view.findViewById(R.id.musicTab);
-        Button sportsTab = view.findViewById(R.id.sportsTab);
+        allTab = view.findViewById(R.id.allTab);
+        socialTab = view.findViewById(R.id.socialTab);
+        musicTab = view.findViewById(R.id.musicTab);
+        sportsTab = view.findViewById(R.id.sportsTab);
         buttons.add(allTab);
         buttons.add(socialTab);
         buttons.add(musicTab);
@@ -175,11 +221,22 @@ public class HomeFragment extends Fragment implements EventAdapter.OnEventClickL
         eventAdapter.notifyDataSetChanged();
     }
 
+    private void unClickTabs() {
+        for (Button tab: buttons) {
+            tab.setBackground(ContextCompat.getDrawable(tab.getContext(), R.drawable.rounded_tab));
+        }
+    }
+
     private void onClickTab(Button button) {
         for (Button tab: buttons) {
             if (tab == button) {
                 tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab_pressed));
-                filterEvents(tab.getText().toString());
+                if (tab == allTab) {
+                    fetchEvents();
+                }
+                else{
+                    filterEvents(tab.getText().toString());
+                }
             }
             else {
                 tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab));
