@@ -190,6 +190,7 @@
 
             </FrameLayout>
 
+
             <!-- User Info Section -->
             <LinearLayout
                 android:id="@+id/llUserInfo"
@@ -308,6 +309,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- Friend Request Button -->
+            <Button
+                android:id="@+id/btnSendFriendRequest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Send Friend Request"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@android:color/holo_purple"
+                android:textColor="@android:color/white"
+                app:layout_constraintTop_toBottomOf="@id/tvBio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <!-- Event Tabs -->
             <HorizontalScrollView
                 android:id="@+id/hsvTabs"
@@ -315,7 +329,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:scrollbars="none"
-                app:layout_constraintTop_toBottomOf="@id/tvBio"
+                app:layout_constraintTop_toBottomOf="@id/btnSendFriendRequest"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 

@@ -19,6 +19,7 @@ legacySupportV4 = "1.0.0"
 playServicesAuth = "21.3.0"
 playServicesAuthVersion = "20.7.0"
 recyclerview = "1.3.0"
+firebaseDatabase = "21.0.0"
 
 [libraries]
 credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
@@ -41,6 +42,7 @@ play-services-auth = { module = "com.google.android.gms:play-services-auth", ver
 play-services-auth-v2070 = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuthVersion" }
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
