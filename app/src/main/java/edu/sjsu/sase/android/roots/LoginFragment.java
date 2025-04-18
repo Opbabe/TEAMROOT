@@ -242,6 +242,23 @@ public class LoginFragment extends Fragment {
                                 .addOnFailureListener(e -> Log.e("LoginFragment", "Error creating new user", e));
 
                     } else {
+                        db.collection("users").document(currUser.getId())
+                            .get()
+                            .addOnSuccessListener(document -> {
+                                if (document.exists()) {
+                                    // Access specific fields within the document
+                                    currUser.setPronouns(document.getString("pronouns"));
+                                    currUser.setAge(document.getString("age"));
+                                    currUser.setBio(document.getString("bio"));
+                                    currUser.setLocation(document.getString("location"));
+                                    currUser.setInterests(document.getString("interests"));
+                                } else {
+                                    System.out.println("No such document!");
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                System.err.println("Error fetching document: " + e.getMessage());
+                            });
                         // for devs existing acc, edge case
                         Map<String, Object> updates = new HashMap<>();
                         if (!documentSnapshot.contains("friends")) {
