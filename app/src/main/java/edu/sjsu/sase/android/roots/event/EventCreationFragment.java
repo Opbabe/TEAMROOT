@@ -214,12 +214,11 @@ public class EventCreationFragment extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a", Locale.US);
         return dateFormat.format(endTimeCalendar.getTime());
     }
-
+    public String getEventHostName() {return app.getCurrUser().getName();}
     public String getEventHostUid() {
+
         return app.getCurrUser().getId();
     }
-
-    public String getEventHostName() {return app.getCurrUser().getName();}
 
     public String getEventTags() {
         return eventCategories.getText().toString();
@@ -329,7 +328,7 @@ public class EventCreationFragment extends Fragment {
 
         // Create new event object=
         Event event = new Event(generateEventID(), getEventName(),
-                getEventHostUid(), getEventHostName(), getEventTags(),getImageResourceId(),getEventStartDate(),getEventEndDate(),
+                getEventHostName(), getEventHostUid(), getEventTags(),getImageResourceId(),getEventStartDate(),getEventEndDate(),
                 getEventStartTime(),getEventEndTime(), getEventDescription(), getEventVisibility(), getEventLocation());
 
         db.collection("events").document(event.getId()).set(event)
