@@ -332,9 +332,6 @@ public class EventCreationFragment extends Fragment {
         Event event = new Event(generateEventID(), getEventName(),
                 getEventHostUid(), getEventHostName(), getEventTags(),getImageResourceId(),getEventStartDate(),getEventEndDate(),
                 getEventStartTime(),getEventEndTime(), getEventDescription(), getEventVisibility(), getEventLocation(), getPicURL());
-                getEventHostName(), getEventHostUid(), getEventTags(),getImageResourceId(),getEventStartDate(),getEventEndDate(),
-                getEventStartTime(),getEventEndTime(), getEventDescription(), getEventVisibility(), getEventLocation());
-
         db.collection("events").document(event.getId()).set(event)
                 .addOnSuccessListener(aVoid -> {
                     Log.d("EventCreationFragment", "Event " + getEventName() + "saved to successfully");
