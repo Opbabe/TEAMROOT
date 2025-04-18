@@ -203,48 +203,66 @@
         </LinearLayout>
 
         <!-- Interests Section -->
-        <TextView
-            android:id="@+id/tvInterestsLabel"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/llInterests"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Interests"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llLocation" />
+            app:layout_constraintTop_toBottomOf="@id/llLocation">
 
-        <CheckBox
-            android:id="@+id/cbOption1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvInterestsLabel" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/heart"
+                android:contentDescription="Interests icon" />
 
-        <CheckBox
-            android:id="@+id/cbOption2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cbOption1" />
+            <EditText
+                android:id="@+id/interests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_margin"
+                android:hint="Interests"
+                android:textSize="@dimen/regular_text"
+                android:background="@drawable/rounded_container"
+                app:layout_constraintStart_toStartOf="@id/llLocation"
+                app:layout_constraintTop_toBottomOf="@id/llLocation"/>
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/cbOption3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cbOption2" />
+<!--        <CheckBox-->
+<!--            android:id="@+id/cbOption1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Option"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tvInterestsLabel" />-->
 
-        <CheckBox
-            android:id="@+id/cbOption4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Option"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cbOption3" />
+<!--        <CheckBox-->
+<!--            android:id="@+id/cbOption2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Option"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cbOption1" />-->
+
+<!--        <CheckBox-->
+<!--            android:id="@+id/cbOption3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Option"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cbOption2" />-->
+
+<!--        <CheckBox-->
+<!--            android:id="@+id/cbOption4"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Option"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cbOption3" />-->
 
         <!-- Bio Field -->
         <EditText
@@ -259,7 +277,7 @@
             android:gravity="top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cbOption4"/>
+            app:layout_constraintTop_toBottomOf="@id/llInterests"/>
 
         <!-- Contact Info Section -->
         <TextView

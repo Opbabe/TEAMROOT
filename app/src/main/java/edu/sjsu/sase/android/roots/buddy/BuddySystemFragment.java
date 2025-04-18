@@ -151,7 +151,7 @@ public class BuddySystemFragment extends Fragment {
                     //loadProfileData();
                     buddyName.setText(userToDisplay.getName());
                     tvInterests.setText("");
-                    tvBio.setText("");
+                    tvBio.setText(userToDisplay.getBio());
                     String picUrl = userToDisplay.getProfilePicUrl();
                     if (picUrl != null && !picUrl.isEmpty()) {
                         Picasso.with(getContext())
@@ -383,8 +383,8 @@ public class BuddySystemFragment extends Fragment {
 //        newTvBio.setText(bios[currentProfileIndex]);
 //        newBuddyImage.setImageResource(R.drawable.placeholder_image);
         newBuddyName.setText(userToDisplay.getName());
-        newTvInterests.setText("");
-        newTvBio.setText("");
+        newTvInterests.setText(userToDisplay.getInterests());
+        newTvBio.setText(userToDisplay.getBio());
         String picUrl = userToDisplay.getProfilePicUrl();
         if (picUrl != null && !picUrl.isEmpty()) {
             Picasso.with(getContext())

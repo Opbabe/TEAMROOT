@@ -36,7 +36,7 @@ public class EditProfileFragment extends Fragment {
     private User currUser;
     private FirebaseFirestore db;
     private ImageView profilePicture;
-    private EditText name, username, pronouns, age, location, bio;
+    private EditText name, username, pronouns, age, location, interests, bio;
     private EditText email, facebook, instagram, twitter;
     private Button btnSave, btnCancel, btnUploadImage;
     
@@ -101,6 +101,7 @@ public class EditProfileFragment extends Fragment {
         pronouns = view.findViewById(R.id.pronouns);
         age = view.findViewById(R.id.age);
         location = view.findViewById(R.id.location);
+        interests = view.findViewById(R.id.interests);
         bio = view.findViewById(R.id.bio);
         email = view.findViewById(R.id.email);
         facebook = view.findViewById(R.id.facebook);
@@ -146,6 +147,7 @@ public class EditProfileFragment extends Fragment {
             pronouns.setText(currUser.getPronouns());
             age.setText(currUser.getAge());
             location.setText(currUser.getLocation());
+            interests.setText(currUser.getInterests());
             bio.setText(currUser.getBio());
             email.setText(currUser.getEmail());
             facebook.setText(currUser.getFacebook());
@@ -172,6 +174,7 @@ public class EditProfileFragment extends Fragment {
 
         currUser.setAge(age.getText().toString());
         currUser.setPronouns(pronouns.getText().toString());
+        currUser.setInterests(interests.getText().toString());
         currUser.setBio(bio.getText().toString());
         currUser.setEmail(email.getText().toString());
 //        currUser.setProfilePicUrl(selectedImageUri.toString());
@@ -185,6 +188,7 @@ public class EditProfileFragment extends Fragment {
         updates.put("name", currUser.getName());
         updates.put("age", currUser.getAge());
         updates.put("pronouns", currUser.getPronouns());
+        updates.put("interests", currUser.getInterests());
         updates.put("bio", currUser.getBio());
         updates.put("email", currUser.getEmail());
         updates.put("profilePicUrl", currUser.getProfilePicUrl());

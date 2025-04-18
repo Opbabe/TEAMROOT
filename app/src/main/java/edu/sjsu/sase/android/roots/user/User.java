@@ -15,6 +15,7 @@ public class User implements Parcelable {
     private String profilePicUrl;
     private String username;
     private String pronouns, age, location, instagram, twitter, facebook, bio;
+    private String interests;
 
     /**
      * Default constructor (required for Firestore)
@@ -38,6 +39,7 @@ public class User implements Parcelable {
         this.twitter = "";
         this.facebook = "";
         this.bio = "";
+        this.interests = "";
     }
 
     /**
@@ -61,6 +63,7 @@ public class User implements Parcelable {
         this.twitter = "";
         this.facebook = "";
         this.bio = "";
+        this.interests = "";
     }
 
     /**
@@ -80,6 +83,7 @@ public class User implements Parcelable {
         instagram = readNullableString(in);
         twitter = readNullableString(in);
         bio = readNullableString(in);
+        interests = readNullableString(in);
     }
 
     /**
@@ -111,7 +115,7 @@ public class User implements Parcelable {
         writeNullableToParcel(dest, instagram);
         writeNullableToParcel(dest, twitter);
         writeNullableToParcel(dest, bio);
-
+        writeNullableToParcel(dest, interests);
     }
 
     /**
@@ -247,5 +251,13 @@ public class User implements Parcelable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setInterests(String interests) {
+        this.interests = interests;
+    }
+
+    public String getInterests() {
+        return interests;
     }
 }
