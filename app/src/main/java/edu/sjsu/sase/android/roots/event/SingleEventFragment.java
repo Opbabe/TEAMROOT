@@ -121,10 +121,10 @@ public class SingleEventFragment extends Fragment {
                         if(documentSnapshot.exists()){
                             // Extract fields from the document (make sure these keys match your Firestore document)
                             String title = documentSnapshot.getString("name");
-                            String startDate = documentSnapshot.getString("startDate");
-                            String endDate = documentSnapshot.getString("endDate");
-                            String startTime = documentSnapshot.getString("startTime");
-                            String endTime = documentSnapshot.getString("endTime");
+                            String startDate = documentSnapshot.getString("eventDateStart");
+                            String endDate = documentSnapshot.getString("eventDateEnd");
+                            String startTime = documentSnapshot.getString("eventTimeStart");
+                            String endTime = documentSnapshot.getString("eventTimeEnd");
                             String hostName = documentSnapshot.getString("hostName");
                             String visibility = documentSnapshot.getString("visibility");
                             String tags = documentSnapshot.getString("tags");
@@ -133,6 +133,7 @@ public class SingleEventFragment extends Fragment {
 
                             // Now, update your UI elements (assume you have already found them by id)
                             TextView eventTitleTextView = view.findViewById(R.id.eventTitle);
+                            Log.d("single event", "start date: " + startDate);
                             TextView startDateTextView = view.findViewById(R.id.startDate);
                             TextView endDateTextView = view.findViewById(R.id.endDate);
                             TextView startTimeTextView = view.findViewById(R.id.startTime);

@@ -60,7 +60,7 @@ public class EventCreationFragment extends Fragment {
     private Calendar startTimeCalendar = Calendar.getInstance();
     private Calendar endTimeCalendar = Calendar.getInstance();
 
-    private EditText eventTitleInput, eventDescriptionInput, eventLocationInput;;;
+    private EditText eventTitleInput, eventDescriptionInput, eventLocationInput, eventCategories;
     
     private Button btnStartDate, btnEndDate, btnStartTime, btnEndTime;
     private Button btnSave, btnDiscard, btnUploadImage;
@@ -139,6 +139,7 @@ public class EventCreationFragment extends Fragment {
 
         eventDescriptionInput = view.findViewById(R.id.description);
         eventLocationInput = view.findViewById(R.id.etLocation);
+        eventCategories = view.findViewById(R.id.etCategories);
 
         rgVisibility = view.findViewById(R.id.rgVisibility);
         tbPrivate = view.findViewById(R.id.rbPrivate);
@@ -218,8 +219,10 @@ public class EventCreationFragment extends Fragment {
         return app.getCurrUser().getId();
     }
 
+    public String getEventHostName() {return app.getCurrUser().getName();}
+
     public String getEventTags() {
-        return "";
+        return eventCategories.getText().toString();
     }
 
     public int getImageResourceId() {
@@ -326,7 +329,7 @@ public class EventCreationFragment extends Fragment {
 
         // Create new event object=
         Event event = new Event(generateEventID(), getEventName(),
-                getEventHostUid(), getEventTags(),getImageResourceId(),getEventStartDate(),getEventEndDate(),
+                getEventHostUid(), getEventHostName(), getEventTags(),getImageResourceId(),getEventStartDate(),getEventEndDate(),
                 getEventStartTime(),getEventEndTime(), getEventDescription(), getEventVisibility(), getEventLocation());
 
         db.collection("events").document(event.getId()).set(event)
