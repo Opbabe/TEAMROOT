@@ -31,7 +31,7 @@ public class Event implements Parcelable {
     public Event() {
     }
 
-    public Event(String id, String name, String hostId, String hostName, String tags, int imageResourceId,
+    public Event(String id, String name, String hostName, String hostID, String tags, int imageResourceId,
                  String eventDateStart, String eventDateEnd, String eventTimeStart, String eventTimeEnd,
                  String description, String visibility, String location, String picURL) {
         this.id = id;
@@ -54,7 +54,7 @@ public class Event implements Parcelable {
     protected Event(Parcel in) {
         id = in.readString();
         name = in.readString();
-        hostId = in.readString();
+        hostName = in.readString();
         tags = in.readString();
         imageResourceId = in.readInt();
         picURL = in.readString();
@@ -86,7 +86,7 @@ public class Event implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         writeNullableToParcel(dest, id);
         writeNullableToParcel(dest, name);
-        writeNullableToParcel(dest, hostId);
+        writeNullableToParcel(dest, hostName);
         writeNullableToParcel(dest, tags);
         dest.writeInt(imageResourceId);
         writeNullableToParcel(dest, picURL);
@@ -246,7 +246,7 @@ public class Event implements Parcelable {
         return "Event{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", hostName='" + hostId + '\'' +
+                ", hostName='" + hostName + '\'' +
                 ", tags='" + tags + '\'' +
                 ", imageResourceId=" + imageResourceId +
                 ", description='" + description + '\'' +
