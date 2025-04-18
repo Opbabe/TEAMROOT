@@ -43,6 +43,13 @@ public class UserListingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            RequestFragment requestFragment = new RequestFragment();
+            getChildFragmentManager().beginTransaction()
+                    .replace(R.id.userListingFragment, requestFragment)
+                    .commit();
+        }
+
         View view = inflater.inflate(R.layout.fragment_user_listing, container, false);
 
         fetchAllUsers();

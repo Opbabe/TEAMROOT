@@ -42,6 +42,19 @@
             app:destination="@id/startFragment" />
     </fragment>
     <fragment
+        android:id="@+id/FriendRequestsFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.FriendRequestsFragment"
+        android:label="fragment_friend_requests"
+        tools:layout="@layout/fragment_friend_requests" >
+        <action
+            android:id="@+id/action_friendRequestsFragment_to_buddyListFragment"
+            app:destination="@id/buddyListFragment" />
+        <action
+            android:id="@+id/action_friendRequestsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/homeFragment"
         android:name="edu.sjsu.sase.android.roots.HomeFragment"
         android:label="fragment_home"

@@ -14,7 +14,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +24,22 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+import edu.sjsu.sase.android.roots.MyApplication;
 import edu.sjsu.sase.android.roots.R;
+import edu.sjsu.sase.android.roots.user.User;
 
 public class BuddySystemFragment extends Fragment {
+    private FirebaseFirestore db;
+    private MyApplication app;
+    private Queue<User> usersQueue = new LinkedList<>();
+    private User userToDisplay;
 
     private ImageView buddyImage;
     private TextView buddyName, tvInterests, tvBio;
@@ -67,8 +79,16 @@ public class BuddySystemFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        app = MyApplication.getInstance();
+        db = FirebaseFirestore.getInstance();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        fetchAllUsers();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_buddy_system, container, false);
     }
@@ -111,11 +131,40 @@ public class BuddySystemFragment extends Fragment {
         Log.d("on view created", "name: " + profileCard);
         setupSwipeDetection();
 
-        // Load initial profile data
-        loadProfileData();
-
         // Ensure card starts with no rotation or translation
         resetCardPosition();
+    }
+
+    private void fetchAllUsers() {
+        usersQueue.clear();
+
+        // Retrieve all users from Firestore
+        db.collection("users")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot document : queryDocumentSnapshots) {
+                        User user = document.toObject(User.class);
+                        usersQueue.add(user);
+                        Log.d("fetch users for bud syst", "name: " + user.getName());
+                    }
+                    userToDisplay = usersQueue.remove();
+                    //loadProfileData();
+                    buddyName.setText(userToDisplay.getName());
+                    tvInterests.setText("");
+                    tvBio.setText("");
+                    String picUrl = userToDisplay.getProfilePicUrl();
+                    if (picUrl != null && !picUrl.isEmpty()) {
+                        Picasso.with(getContext())
+                                .load(userToDisplay.getProfilePicUrl())
+                                .placeholder(R.drawable.ic_profile)
+                                .error(R.drawable.ic_profile)
+                                .into(buddyImage);
+                    }
+                    Log.d("fetch users for bud syst", "name: " + userToDisplay.getName());
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firestore", "Error fetching users: " + e.getMessage());
+                });
     }
 
     private void resetCardPosition() {
@@ -198,13 +247,25 @@ public class BuddySystemFragment extends Fragment {
     }
 
     private void loadProfileData() {
-        // Load the current profile data
-        buddyName.setText(names[currentProfileIndex]);
-        tvInterests.setText(interests[currentProfileIndex]);
-        tvBio.setText(bios[currentProfileIndex]);
+        buddyName.setText(userToDisplay.getName());
+        tvInterests.setText("");
+        tvBio.setText("");
+        String picUrl = userToDisplay.getProfilePicUrl();
+        if (picUrl != null && !picUrl.isEmpty()) {
+            Picasso.with(getContext())
+                    .load(userToDisplay.getProfilePicUrl())
+                    .placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile)
+                    .into(buddyImage);
+        }
 
-        // Load image (using placeholder for now)
-        buddyImage.setImageResource(R.drawable.placeholder_image);
+//        // Load the current profile data
+//        buddyName.setText(names[currentProfileIndex]);
+//        tvInterests.setText(interests[currentProfileIndex]);
+//        tvBio.setText(bios[currentProfileIndex]);
+//
+//        // Load image (using placeholder for now)
+//        buddyImage.setImageResource(R.drawable.placeholder_image);
     }
 
     private void skipProfile() {
@@ -253,7 +314,8 @@ public class BuddySystemFragment extends Fragment {
 
     private void completeSwipeAnimation(boolean isLiked) {
         final CardView oldCard = profileCard;
-        final String currentName = names[currentProfileIndex];
+        //final String currentName = names[currentProfileIndex];
+        final String currentName = userToDisplay.getName();
 
         // Determine the direction to swipe
         float targetX = isLiked ? cardContainer.getWidth() * 1.5f : -cardContainer.getWidth() * 1.5f;
@@ -276,7 +338,13 @@ public class BuddySystemFragment extends Fragment {
                 cardContainer.removeView(oldCard);
 
                 // Increment profile index here
-                currentProfileIndex = (currentProfileIndex + 1) % names.length;
+                //currentProfileIndex = (currentProfileIndex + 1) % names.length;
+                if (!usersQueue.isEmpty()){
+                    userToDisplay = usersQueue.remove();
+                }
+                else{
+                    cardContainer.setVisibility(View.INVISIBLE);
+                }
 
                 // Create new card with updated profile data
                 createNewCard();
@@ -310,10 +378,22 @@ public class BuddySystemFragment extends Fragment {
         TextView newTvBio = newCardView.findViewById(R.id.tvBio);
 
         // Set data for the new card
-        newBuddyName.setText(names[currentProfileIndex]);
-        newTvInterests.setText(interests[currentProfileIndex]);
-        newTvBio.setText(bios[currentProfileIndex]);
-        newBuddyImage.setImageResource(R.drawable.placeholder_image);
+//        newBuddyName.setText(names[currentProfileIndex]);
+//        newTvInterests.setText(interests[currentProfileIndex]);
+//        newTvBio.setText(bios[currentProfileIndex]);
+//        newBuddyImage.setImageResource(R.drawable.placeholder_image);
+        newBuddyName.setText(userToDisplay.getName());
+        newTvInterests.setText("");
+        newTvBio.setText("");
+        String picUrl = userToDisplay.getProfilePicUrl();
+        if (picUrl != null && !picUrl.isEmpty()) {
+            Picasso.with(getContext())
+                    .load(userToDisplay.getProfilePicUrl())
+                    .placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile)
+                    .into(newBuddyImage);
+        }
+
 
         // Add the new card to the container
         cardContainer.addView(newCardView);

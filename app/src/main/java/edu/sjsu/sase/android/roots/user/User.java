@@ -244,4 +244,8 @@ public class User implements Parcelable {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

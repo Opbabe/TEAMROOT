@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_container"
+    android:paddingVertical="16dp"
+    android:layout_marginVertical="@dimen/list_space">
+
+    <TextView
+        android:id="@+id/usernameText"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:text="Username"
+        android:textSize="@dimen/regular_text"/>
+
+    <Button
+        android:id="@+id/acceptBtn"
+        android:layout_marginHorizontal="@dimen/list_space"
+        android:text="Be Buds"
+        android:textSize="@dimen/regular_text"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+
+    <Button
+        android:id="@+id/declineBtn"
+        android:text="Decline"
+        android:textSize="@dimen/regular_text"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        app:backgroundTint="@null"/>
+</LinearLayout>
