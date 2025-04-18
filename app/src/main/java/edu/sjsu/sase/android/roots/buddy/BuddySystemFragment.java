@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,8 +13,8 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ public class BuddySystemFragment extends Fragment {
     private ImageView buddyImage;
     private TextView buddyName, tvInterests, tvBio;
     private CardView profileCard, skipBtn, digDeeperBtn, beBudsBtn;
-    private ImageButton buddiesBtn, nextBtn;
+    private ImageView buddiesBtn;
     private ImageView likeIndicator, skipIndicator;
     private FrameLayout cardContainer;
 
@@ -91,7 +92,6 @@ public class BuddySystemFragment extends Fragment {
         digDeeperBtn = view.findViewById(R.id.digDeeperBtn);
         beBudsBtn = view.findViewById(R.id.beBudsBtn);
         buddiesBtn = view.findViewById(R.id.buddiesBtn);
-        nextBtn = view.findViewById(R.id.nextBtn);
 
         // Set up click listeners
         skipBtn.setOnClickListener(v -> {
@@ -106,13 +106,9 @@ public class BuddySystemFragment extends Fragment {
             }
         });
         buddiesBtn.setOnClickListener(v -> navigateToMyBuddies());
-        nextBtn.setOnClickListener(v -> {
-            if (!isAnimating) {
-                showNextProfile();
-            }
-        });
 
         // Set up swipe detection
+        Log.d("on view created", "name: " + profileCard);
         setupSwipeDetection();
 
         // Load initial profile data
@@ -130,8 +126,11 @@ public class BuddySystemFragment extends Fragment {
     }
 
     private void setupSwipeDetection() {
+        Log.d("swipe detection profileCard", "name: " + profileCard);
         profileCard.setOnTouchListener((v, event) -> {
+            Log.d("swipe detection", "touch listener");
             if (isAnimating) {
+                Log.d("swipe detection", "isAnimating");
                 return false;
             }
 

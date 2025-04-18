@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import edu.sjsu.sase.android.roots.event.Event;
@@ -42,6 +43,7 @@ public class UserProfileFragment extends Fragment {
     private RecyclerView rvEvents;
     private Button btnUpcoming, btnHosting, btnInvites, btnAttended;
     private ImageButton btnOptions;
+    private HashSet<Button> buttons = new HashSet<>();
 
     public UserProfileFragment() {
         // Required empty public constructor
@@ -88,6 +90,10 @@ public class UserProfileFragment extends Fragment {
         btnHosting = view.findViewById(R.id.btnHosting);
         btnInvites = view.findViewById(R.id.btnInvites);
         btnAttended = view.findViewById(R.id.btnAttended);
+        buttons.add(btnUpcoming);
+        buttons.add(btnHosting);
+        buttons.add(btnInvites);
+        buttons.add(btnAttended);
 
         // Set user data
         name.setText(userToDisplay.getName());
@@ -114,10 +120,13 @@ public class UserProfileFragment extends Fragment {
         setupEventsList();
 
         // Setup tab buttons
-        btnUpcoming.setOnClickListener(v -> updateEventsForTab(0));
-        btnHosting.setOnClickListener(v -> updateEventsForTab(1));
-        btnInvites.setOnClickListener(v -> updateEventsForTab(2));
-        btnAttended.setOnClickListener(v -> updateEventsForTab(3));
+//        btnUpcoming.setOnClickListener(v -> updateEventsForTab(0));
+//        btnHosting.setOnClickListener(v -> updateEventsForTab(1));
+//        btnInvites.setOnClickListener(v -> updateEventsForTab(2));
+//        btnAttended.setOnClickListener(v -> updateEventsForTab(3));
+        for (Button tab : buttons) {
+            tab.setOnClickListener(v -> onClickTab(tab));
+        }
 
         // Bottom navigation buttons
         Button editProfileBtn = view.findViewById(R.id.btnEditProfile);
@@ -271,5 +280,17 @@ public class UserProfileFragment extends Fragment {
     private void onClickEditProfile(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_userProfileFragment_to_editProfileFragment);
+    }
+
+    private void onClickTab(Button button) {
+        for (Button tab: buttons) {
+            if (tab == button) {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab_pressed));
+                // TODO: grab corresponding events from db
+            }
+            else {
+                tab.setBackground(ContextCompat.getDrawable(button.getContext(), R.drawable.rounded_tab));
+            }
+        }
     }
 }
