@@ -13,6 +13,7 @@ public class Event implements Parcelable {
 
     private String id;
     private String name;
+    private String hostId;
     private String hostName;
     private String tags; // Consider changing to a List or Collection if needed.
     private int imageResourceId; // For demo purposes, using resource IDs.
@@ -29,11 +30,12 @@ public class Event implements Parcelable {
     public Event() {
     }
 
-    public Event(String id, String name, String hostName, String tags, int imageResourceId,
+    public Event(String id, String name, String hostId, String hostName, String tags, int imageResourceId,
                  String eventDateStart, String eventDateEnd, String eventTimeStart, String eventTimeEnd,
                  String description, String visibility, String location) {
         this.id = id;
         this.name = name;
+        this.hostId = hostId;
         this.hostName = hostName;
         this.tags = tags;
         this.imageResourceId = imageResourceId;
@@ -50,7 +52,7 @@ public class Event implements Parcelable {
     protected Event(Parcel in) {
         id = in.readString();
         name = in.readString();
-        hostName = in.readString();
+        hostId = in.readString();
         tags = in.readString();
         imageResourceId = in.readInt();
         description = in.readString();
@@ -81,7 +83,7 @@ public class Event implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         writeNullableToParcel(dest, id);
         writeNullableToParcel(dest, name);
-        writeNullableToParcel(dest, hostName);
+        writeNullableToParcel(dest, hostId);
         writeNullableToParcel(dest, tags);
         dest.writeInt(imageResourceId);
         writeNullableToParcel(dest, description);
@@ -120,8 +122,17 @@ public class Event implements Parcelable {
         return name;
     }
 
+    public String getHostId() {
+        return hostId;
+    }
+
     public String getHostName() {
+
         return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
     }
 
     public String getTags() {
@@ -173,8 +184,8 @@ public class Event implements Parcelable {
         this.name = name;
     }
 
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
+    public void setHostId(String hostId) {
+        this.hostId = hostId;
     }
 
     public void setTags(String tags) {
@@ -223,7 +234,7 @@ public class Event implements Parcelable {
         return "Event{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", hostName='" + hostName + '\'' +
+                ", hostName='" + hostId + '\'' +
                 ", tags='" + tags + '\'' +
                 ", imageResourceId=" + imageResourceId +
                 ", description='" + description + '\'' +
