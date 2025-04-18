@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,10 +27,12 @@ public class FriendRequestsFragment extends Fragment {
     private List<User> requestList = new ArrayList<>();
     private String currentUserId;
     private FirebaseFirestore db;
+    private Button accept, decline;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_friend_requests, container, false);
+        View view2 = inflater.inflate(R.layout.item_friend_request, container, false);
 
         recyclerView = view.findViewById(R.id.requestRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -40,7 +43,12 @@ public class FriendRequestsFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
 
+        accept = view2.findViewById(R.id.acceptBtn);
+        decline = view2.findViewById(R.id.declineBtn);
+
         fetchFriendRequests();
+
+//        accept.setOnClickListener(this::onClickAccept);
 
         return view;
     }
