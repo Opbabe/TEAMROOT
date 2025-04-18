@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -135,6 +136,7 @@ public class SingleEventFragment extends Fragment {
                             String tags = documentSnapshot.getString("tags");
                             String location = documentSnapshot.getString("location");
                             String description = documentSnapshot.getString("description");
+                            String picUrl = documentSnapshot.getString("picURL");
 
                             // Now, update your UI elements (assume you have already found them by id)
                             TextView eventTitleTextView = view.findViewById(R.id.eventTitle);
@@ -148,10 +150,22 @@ public class SingleEventFragment extends Fragment {
                             TextView tagsTextView = view.findViewById(R.id.tags);
                             TextView locationTextView = view.findViewById(R.id.location);
                             TextView descriptionTextView = view.findViewById(R.id.description);
+                            ImageView eventPic = view.findViewById(R.id.eventPic);
 
                             String hostUid = documentSnapshot.getString("hostName");
                             boolean isHost = hostUid.equals(app.getCurrUser().getId());
                             editBtn.setVisibility(isHost ? View.VISIBLE : View.GONE);
+
+                            if (picUrl != null && !picUrl.isEmpty()) {
+                                Picasso.with(eventTitleTextView.getContext())
+                                        .load(picUrl)
+                                        .placeholder(R.drawable.placeholder_image)
+                                        .error(R.drawable.placeholder_image)
+                                        .into(eventPic);
+                            }
+                            else {
+                                eventPic.setImageResource(R.drawable.placeholder_image);
+                            }
 
                             eventTitleTextView.setText(title);
                             startDateTextView.setText(startDate);
