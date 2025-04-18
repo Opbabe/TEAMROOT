@@ -32,7 +32,7 @@ public class UserProfileFragment extends Fragment {
     private MyApplication app;
     private User currUser;
     private User userToDisplay;
-    
+
     private TextView tvPronouns, tvAge, tvLocation, tvInterests, tvBio;
     private RecyclerView rvEvents;
     private Button btnUpcoming, btnHosting, btnInvites, btnAttended;
@@ -87,7 +87,12 @@ public class UserProfileFragment extends Fragment {
         // Set user data
         name.setText(userToDisplay.getName());
         username.setText(userToDisplay.getUsername());
-        
+        tvPronouns.setText(userToDisplay.getPronouns());
+        tvAge.setText(userToDisplay.getAge());
+        tvLocation.setText(userToDisplay.getLocation());
+        tvBio.setText(userToDisplay.getBio());
+
+
         // Load profile picture
         String picUrl = userToDisplay.getProfilePicUrl();
         if (picUrl != null && !picUrl.isEmpty()) {
@@ -97,7 +102,7 @@ public class UserProfileFragment extends Fragment {
                     .error(R.drawable.ic_profile)
                     .into(profilePic);
         }
-        
+
         // Set additional user info (fields may need to be added to the User class)
         // tvPronouns.setText(userToDisplay.getPronouns());
         // tvAge.setText(userToDisplay.getAge() + " y/o");
@@ -122,7 +127,7 @@ public class UserProfileFragment extends Fragment {
 
         return view;
     }
-    
+
     /**
      * Sets up the events RecyclerView with sample data
      */
@@ -136,7 +141,7 @@ public class UserProfileFragment extends Fragment {
         });
         rvEvents.setAdapter(adapter);
     }
-    
+
     /**
      * Updates the events list based on the selected tab
      * @param tabPosition The position of the selected tab
@@ -163,10 +168,10 @@ public class UserProfileFragment extends Fragment {
                 btnAttended.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFE0E0FF));
                 break;
         }
-        
+
         // For demonstration, we create sample events for each tab
         List<Event> events = new ArrayList<>();
-        
+
 //        switch (tabPosition) {
 //            case 0: // Upcoming
 //                events.add(new Event("Upcoming Event", "April 10 - 8 pm", "host name", "outdoor, social", "", R.drawable.ic_profile));

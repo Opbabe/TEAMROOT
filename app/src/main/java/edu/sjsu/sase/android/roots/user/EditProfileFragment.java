@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.sjsu.sase.android.roots.MyApplication;
 import edu.sjsu.sase.android.roots.R;
@@ -29,7 +34,7 @@ public class EditProfileFragment extends Fragment {
 
     private MyApplication app;
     private User currUser;
-    
+    private FirebaseFirestore db;
     private ImageView profilePicture;
     private EditText name, username, pronouns, age, location, bio;
     private EditText email, facebook, instagram, twitter;
@@ -68,6 +73,7 @@ public class EditProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         app = MyApplication.getInstance();
         currUser = app.getCurrUser();
+        db = FirebaseFirestore.getInstance();
     }
 
     /**
@@ -137,14 +143,14 @@ public class EditProfileFragment extends Fragment {
             name.setText(currUser.getName());
             username.setText(currUser.getUsername());
             // Additional fields can be set if available in your User class
-            // etPronouns.setText(currUser.getPronouns());
-            // etAge.setText(currUser.getAge());
-            // etLocation.setText(currUser.getLocation());
-            // etBio.setText(currUser.getBio());
-            // etEmail.setText(currUser.getEmail());
-            // etFacebook.setText(currUser.getFacebookLink());
-            // etInstagram.setText(currUser.getInstagramLink());
-            // etTwitter.setText(currUser.getTwitterLink());
+            pronouns.setText(currUser.getPronouns());
+            age.setText(currUser.getAge());
+            location.setText(currUser.getLocation());
+            bio.setText(currUser.getBio());
+            email.setText(currUser.getEmail());
+            facebook.setText(currUser.getFacebook());
+            instagram.setText(currUser.getInstagram());
+            twitter.setText(currUser.getTwitter());
         }
     }
 
@@ -155,10 +161,43 @@ public class EditProfileFragment extends Fragment {
     private void onClickSave(View view) {
         // Update user object with new data (setters removed because they are not available in User class)
         // You may update the fields directly if accessible, e.g.: currUser.name = etName.getText().toString();
-        
+
+
+
         // Save the updated user
         app.setCurrUser(currUser);
-        
+
+        //Update user info
+        currUser.setName(name.getText().toString());
+
+        currUser.setAge(age.getText().toString());
+        currUser.setPronouns(pronouns.getText().toString());
+        currUser.setBio(bio.getText().toString());
+        currUser.setEmail(email.getText().toString());
+//        currUser.setProfilePicUrl(selectedImageUri.toString());
+        currUser.setFacebook(facebook.getText().toString());
+        currUser.setInstagram(instagram.getText().toString());
+        currUser.setTwitter(twitter.getText().toString());
+        currUser.setLocation(location.getText().toString());
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("id", currUser.getId());
+        updates.put("name", currUser.getName());
+        updates.put("age", currUser.getAge());
+        updates.put("pronouns", currUser.getPronouns());
+        updates.put("bio", currUser.getBio());
+        updates.put("email", currUser.getEmail());
+        updates.put("profilePicUrl", currUser.getProfilePicUrl());
+        updates.put("facebook", currUser.getFacebook());
+        updates.put("instagram", currUser.getInstagram());
+        updates.put("twitter", currUser.getTwitter());
+        updates.put("location", currUser.getLocation());
+
+        db.collection("users").document(currUser.getId())
+                .set(updates)
+                .addOnSuccessListener(aVoid -> Log.d("Firestore", "User profile updated"))
+                .addOnFailureListener(e -> Log.w("Firestore", "Error updating profile", e));
+
         Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
         
         // Navigate back to profile

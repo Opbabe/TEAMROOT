@@ -14,6 +14,7 @@ public class User implements Parcelable {
     private String email;
     private String profilePicUrl;
     private String username;
+    private String pronouns, age, location, instagram, twitter, facebook, bio;
 
     /**
      * Default constructor (required for Firestore)
@@ -30,6 +31,13 @@ public class User implements Parcelable {
         this.email = "username" + i + "@gmail.com";
         this.profilePicUrl = "";
         this.username = "username" + i;
+        this.pronouns = "";
+        this.age = "";
+        this.location = "";
+        this.instagram = "";
+        this.twitter = "";
+        this.facebook = "";
+        this.bio = "";
     }
 
     /**
@@ -46,6 +54,13 @@ public class User implements Parcelable {
         this.email = email;
         this.profilePicUrl = profilePicUrl;
         this.username = username;
+        this.pronouns = "";
+        this.age = "";
+        this.location = "";
+        this.instagram = "";
+        this.twitter = "";
+        this.facebook = "";
+        this.bio = "";
     }
 
     /**
@@ -58,6 +73,13 @@ public class User implements Parcelable {
         email = readNullableString(in);
         profilePicUrl = readNullableString(in);
         username = readNullableString(in);
+        pronouns = readNullableString(in);
+        age = readNullableString(in);
+        location = readNullableString(in);
+        facebook = readNullableString(in);
+        instagram = readNullableString(in);
+        twitter = readNullableString(in);
+        bio = readNullableString(in);
     }
 
     /**
@@ -82,6 +104,14 @@ public class User implements Parcelable {
         writeNullableToParcel(dest, email);
         writeNullableToParcel(dest, profilePicUrl);
         writeNullableToParcel(dest, username);
+        writeNullableToParcel(dest, pronouns);
+        writeNullableToParcel(dest, age);
+        writeNullableToParcel(dest, location);
+        writeNullableToParcel(dest, facebook);
+        writeNullableToParcel(dest, instagram);
+        writeNullableToParcel(dest, twitter);
+        writeNullableToParcel(dest, bio);
+
     }
 
     /**
@@ -131,6 +161,8 @@ public class User implements Parcelable {
         return name;
     }
 
+    public void setName(String name) { this.name = name; }
+
     /**
      * Returns the user's email that was used to sign in
      * @return the user's email that was used to sign in
@@ -139,6 +171,7 @@ public class User implements Parcelable {
         return email;
     }
 
+    public void setEmail(String email) { this.email = email; }
     /**
      * Returns the user's profile image url
      * @return the user's profile image url
@@ -146,6 +179,7 @@ public class User implements Parcelable {
     public String getProfilePicUrl() {
         return profilePicUrl;
     }
+    public void setProfilePicUrl(String url) { this.profilePicUrl = url; }
 
     public String getUsername() {
         return username;
@@ -153,5 +187,61 @@ public class User implements Parcelable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPronouns() {
+        return pronouns;
+    }
+
+    public void setPronouns(String pronoun) {
+        this.pronouns = pronoun;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }
