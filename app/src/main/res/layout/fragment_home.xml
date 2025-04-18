@@ -39,7 +39,7 @@
             android:layout_width="269dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_container"
-            android:hint="Search username" />
+            android:hint="Search events" />
 
         <Button
             android:id="@+id/searchBtn"
