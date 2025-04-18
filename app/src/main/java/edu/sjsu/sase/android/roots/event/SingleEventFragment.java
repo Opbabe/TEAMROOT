@@ -71,18 +71,23 @@ public class SingleEventFragment extends Fragment {
         }
 
         db = FirebaseFirestore.getInstance();
+        editBtn = view.findViewById(R.id.editBtn);
 
         if(eventId != null) {
             fetchEvent(db,eventId,view);
         } else {
             Log.e("SingleEventFragment", "No event ID provided");
         }
-
         ImageView backArrow = view.findViewById(R.id.backArrowBtn);
-        Button editBtn = view.findViewById(R.id.editBtn);
+        // if current username is host, show edit button
+        app = MyApplication.getInstance();
 
         backArrow.setOnClickListener(this::goToHome);
-        editBtn.setOnClickListener(this::goToEventCreation);
+
+
+
+
+
 
         // set data
 //        for (int i = 1; i <= 10; i++) {
@@ -143,6 +148,10 @@ public class SingleEventFragment extends Fragment {
                             TextView tagsTextView = view.findViewById(R.id.tags);
                             TextView locationTextView = view.findViewById(R.id.location);
                             TextView descriptionTextView = view.findViewById(R.id.description);
+
+                            String hostUid = documentSnapshot.getString("hostName");
+                            boolean isHost = hostUid.equals(app.getCurrUser().getId());
+                            editBtn.setVisibility(isHost ? View.VISIBLE : View.GONE);
 
                             eventTitleTextView.setText(title);
                             startDateTextView.setText(startDate);
