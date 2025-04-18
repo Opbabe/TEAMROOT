@@ -48,7 +48,7 @@ public class SingleEventFragment extends Fragment {
     private TextView eventTitle, startDate, endDate, startTime, endTime, hostName, visibility, tags, location, description, guestTitle;
     private RecyclerView pictureSection;
     private Button editBtn, deleteBtn;
-    private ImageButton goingBtn, notGoingBtn;
+    private Button goingBtn, notGoingBtn;
 
     public SingleEventFragment() {
         // Required empty public constructor
@@ -74,6 +74,11 @@ public class SingleEventFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         editBtn = view.findViewById(R.id.editBtn);
         editBtn.setOnClickListener(this::goToEventCreation);
+        goingBtn = view.findViewById(R.id.goingBtn);
+        goingBtn.setOnClickListener(this::onClickGoing);
+        notGoingBtn = view.findViewById(R.id.notGoingBtn);
+        notGoingBtn.setOnClickListener(this::onClickNotGoing);
+
 
         if(eventId != null) {
             fetchEvent(db,eventId,view);
@@ -118,6 +123,16 @@ public class SingleEventFragment extends Fragment {
 
     }
 
+    public void onClickGoing(View view) {
+        goingBtn.setVisibility(View.GONE);
+        notGoingBtn.setVisibility(View.VISIBLE);
+    }
+
+    public void onClickNotGoing(View view) {
+        goingBtn.setVisibility(View.VISIBLE);
+        notGoingBtn.setVisibility(View.GONE);
+    }
+
     private void fetchEvent(FirebaseFirestore db, String eventId, View view) {
         // Assume your events are stored in a "events" collection
         db.collection("events").document(eventId)
@@ -156,6 +171,7 @@ public class SingleEventFragment extends Fragment {
                             String hostUid = documentSnapshot.getString("hostName");
                             boolean isHost = hostUid.equals(app.getCurrUser().getName());
                             editBtn.setVisibility(isHost ? View.VISIBLE : View.GONE);
+                            goingBtn.setVisibility(!isHost ? View.VISIBLE : View.GONE);
 
                             if (picUrl != null && !picUrl.isEmpty()) {
                                 Picasso.with(eventTitleTextView.getContext())
