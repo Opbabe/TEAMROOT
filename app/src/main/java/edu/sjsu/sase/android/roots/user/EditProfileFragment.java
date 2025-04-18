@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -198,7 +199,7 @@ public class EditProfileFragment extends Fragment {
         updates.put("location", currUser.getLocation());
 
         db.collection("users").document(currUser.getId())
-                .set(updates)
+                .set(updates, SetOptions.merge())
                 .addOnSuccessListener(aVoid -> Log.d("Firestore", "User profile updated"))
                 .addOnFailureListener(e -> Log.w("Firestore", "Error updating profile", e));
 
