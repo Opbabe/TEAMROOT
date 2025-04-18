@@ -38,12 +38,16 @@ public class UserProfileFragment extends Fragment {
     private MyApplication app;
     private User currUser;
     private User userToDisplay;
+    Button sendRequestBtn;
+    Button unRootBtn;
+    Button editProfileBtn;
 
     private TextView tvPronouns, tvAge, tvLocation, tvInterests, tvBio;
     private RecyclerView rvEvents;
     private Button btnUpcoming, btnHosting, btnInvites, btnAttended;
     private ImageButton btnOptions;
     private HashSet<Button> buttons = new HashSet<>();
+
 
     public UserProfileFragment() {
         // Required empty public constructor
@@ -135,8 +139,9 @@ public class UserProfileFragment extends Fragment {
         }
 
         // Bottom navigation buttons
-        Button editProfileBtn = view.findViewById(R.id.btnEditProfile);
-        Button sendRequestBtn = view.findViewById(R.id.btnSendFriendRequest);
+        editProfileBtn = view.findViewById(R.id.btnEditProfile);
+        sendRequestBtn = view.findViewById(R.id.btnSendFriendRequest);
+        unRootBtn = view.findViewById(R.id.unrootBtn);
 
         //if viewing own profile hide button
         if (userToDisplay.getId().equals(currUser.getId())) {
@@ -144,7 +149,8 @@ public class UserProfileFragment extends Fragment {
             editProfileBtn.setVisibility(View.VISIBLE);
         } else {
             sendRequestBtn.setVisibility(View.VISIBLE);
-            sendRequestBtn.setOnClickListener(v -> sendFriendRequest());
+            sendRequestBtn.setOnClickListener(v -> {sendFriendRequest(); onClickBud();});
+            unRootBtn.setOnClickListener(v -> onClickUnroot());
             editProfileBtn.setVisibility(View.GONE);
         }
 
@@ -154,6 +160,16 @@ public class UserProfileFragment extends Fragment {
         editProfileBtn.setOnClickListener(this::onClickEditProfile);
 
         return view;
+    }
+
+    public void onClickBud(){
+        unRootBtn.setVisibility(View.VISIBLE);
+        sendRequestBtn.setVisibility(View.GONE);
+    }
+
+    public void onClickUnroot(){
+        unRootBtn.setVisibility(View.GONE);
+        sendRequestBtn.setVisibility(View.VISIBLE);
     }
 
 

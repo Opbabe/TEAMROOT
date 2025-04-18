@@ -141,13 +141,22 @@
                     android:id="@+id/btnSendFriendRequest"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="@dimen/page_padding"
                     android:background="@drawable/button_selector"
                     android:visibility="gone"
                     android:text="Be buds"
                     android:textColor="@color/black"
                     android:textSize="@dimen/regular_text"
+                    app:backgroundTint="@null" />
+
+                <Button
+                    android:id="@+id/unrootBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:text="Unroot"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/regular_text"
+                    android:visibility="gone"
                     app:backgroundTint="@null" />
 
                 <LinearLayout
@@ -188,7 +197,7 @@
                     android:visibility="gone">
 
                     <Button
-                        android:id="@+id/unrootBtn"
+                        android:id="@+id/unroot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/button_selector"
