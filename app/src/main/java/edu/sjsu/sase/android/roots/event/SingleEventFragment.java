@@ -73,6 +73,7 @@ public class SingleEventFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
         editBtn = view.findViewById(R.id.editBtn);
+        editBtn.setOnClickListener(this::goToEventCreation);
 
         if(eventId != null) {
             fetchEvent(db,eventId,view);
