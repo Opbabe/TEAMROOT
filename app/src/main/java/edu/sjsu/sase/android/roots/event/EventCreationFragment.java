@@ -229,6 +229,8 @@ public class EventCreationFragment extends Fragment {
         return 0;
     }
 
+    public String getPicURL() {return "";}
+
     public String getEventDescription(){
         return eventDescriptionInput.getText().toString();
     }
@@ -330,7 +332,7 @@ public class EventCreationFragment extends Fragment {
         // Create new event object=
         Event event = new Event(generateEventID(), getEventName(),
                 getEventHostUid(), getEventHostName(), getEventTags(),getImageResourceId(),getEventStartDate(),getEventEndDate(),
-                getEventStartTime(),getEventEndTime(), getEventDescription(), getEventVisibility(), getEventLocation());
+                getEventStartTime(),getEventEndTime(), getEventDescription(), getEventVisibility(), getEventLocation(), getPicURL());
 
         db.collection("events").document(event.getId()).set(event)
                 .addOnSuccessListener(aVoid -> {

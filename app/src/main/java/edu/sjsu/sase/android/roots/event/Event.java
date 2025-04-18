@@ -17,6 +17,7 @@ public class Event implements Parcelable {
     private String hostName;
     private String tags; // Consider changing to a List or Collection if needed.
     private int imageResourceId; // For demo purposes, using resource IDs.
+    private String picURL;
     private String description;
     private String visibility;
     private String location;
@@ -32,13 +33,14 @@ public class Event implements Parcelable {
 
     public Event(String id, String name, String hostId, String hostName, String tags, int imageResourceId,
                  String eventDateStart, String eventDateEnd, String eventTimeStart, String eventTimeEnd,
-                 String description, String visibility, String location) {
+                 String description, String visibility, String location, String picURL) {
         this.id = id;
         this.name = name;
         this.hostId = hostId;
         this.hostName = hostName;
         this.tags = tags;
         this.imageResourceId = imageResourceId;
+        this.picURL = picURL;
         this.eventDateStart = eventDateStart;
         this.eventDateEnd = eventDateEnd;
         this.eventTimeStart = eventTimeStart;
@@ -55,6 +57,7 @@ public class Event implements Parcelable {
         hostId = in.readString();
         tags = in.readString();
         imageResourceId = in.readInt();
+        picURL = in.readString();
         description = in.readString();
         visibility = in.readString();
         location = in.readString();
@@ -86,6 +89,7 @@ public class Event implements Parcelable {
         writeNullableToParcel(dest, hostId);
         writeNullableToParcel(dest, tags);
         dest.writeInt(imageResourceId);
+        writeNullableToParcel(dest, picURL);
         writeNullableToParcel(dest, description);
         writeNullableToParcel(dest, visibility);
         writeNullableToParcel(dest, location);
@@ -133,6 +137,14 @@ public class Event implements Parcelable {
 
     public void setHostName(String hostName) {
         this.hostName = hostName;
+    }
+
+    public String getPicURL() {
+        return picURL;
+    }
+
+    public void setPicURL(String picURL) {
+        this.picURL = picURL;
     }
 
     public String getTags() {

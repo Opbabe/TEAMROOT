@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +98,19 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                     listener.onEventClick(position);
                 }
             });
+
+            // picture
+            String picUrl = event.getPicURL();
+            if (picUrl != null && !picUrl.isEmpty()) {
+                Picasso.with(eventName.getContext())
+                        .load(picUrl)
+                        .placeholder(R.drawable.placeholder_image)
+                        .error(R.drawable.placeholder_image)
+                        .into(eventImage);
+            }
+            else {
+                eventImage.setImageResource(R.drawable.placeholder_image);
+            }
         }
     }
 }
