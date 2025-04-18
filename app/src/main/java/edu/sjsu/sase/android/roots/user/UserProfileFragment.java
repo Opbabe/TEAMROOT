@@ -139,9 +139,7 @@ public class UserProfileFragment extends Fragment {
             sendRequestBtn.setOnClickListener(v -> sendFriendRequest());
         }
 
-        Button logoutBtn = view.findViewById(R.id.logoutBtn);
-        Button homeBtn = view.findViewById(R.id.homeBtn);
-        Button buddiesBtn = view.findViewById(R.id.buddySystemBtn);
+        ImageView logoutBtn = view.findViewById(R.id.logoutBtn);
 
         // Set onClick listeners
         editProfileBtn.setOnClickListener(this::onClickEditProfile);

@@ -187,7 +187,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/requestsFragment"
-        android:name="edu.sjsu.sase.android.roots.buddy.lists.RequestFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.FriendRequestsFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"

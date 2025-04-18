@@ -1,8 +1,5 @@
 package edu.sjsu.sase.android.roots.buddy.lists;
 
-import static edu.sjsu.sase.android.roots.R.*;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -24,6 +21,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import edu.sjsu.sase.android.roots.R;
+import edu.sjsu.sase.android.roots.buddy.FriendRequestsFragment;
 import edu.sjsu.sase.android.roots.user.User;
 
 /**
@@ -174,7 +172,7 @@ public class BuddyListFragment extends Fragment {
         for (int i = 11; i <= 20; i++) {
             requestsList.add(new User(i));
         }
-        Log.d("buddy list", "buds list size on create view: " + requestsList.size());
+        Log.d("buddy list", "requests list size on create view: " + requestsList.size());
         updateRequestsFragment();
     }
 
@@ -182,11 +180,11 @@ public class BuddyListFragment extends Fragment {
      * Update Requests fragment UI
      */
     private void updateRequestsFragment() {
-        RequestFragment requestFragment = (RequestFragment) getChildFragmentManager().findFragmentById(R.id.requestsFragment);
+        FriendRequestsFragment requestFragment = (FriendRequestsFragment) getChildFragmentManager().findFragmentById(R.id.requestsFragment);
         if (requestFragment != null) {
             Log.d("buddy list", "friends list size: " + requestsList.size());
-            requestFragment.setUsersList(requestsList);
-            requestFragment.setNavigationId(R.id.action_buddyListFragment_to_userProfileFragment);
+            //requestFragment.setUsersList(requestsList);
+            //requestFragment.setNavigationId(R.id.action_buddyListFragment_to_userProfileFragment);
         }
     }
 
