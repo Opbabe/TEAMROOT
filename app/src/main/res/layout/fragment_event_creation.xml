@@ -14,21 +14,15 @@
         android:padding="@dimen/page_padding">
 
         <!-- Event Title Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilEventName"
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/eventName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Event Name"
+            android:background="@drawable/rounded_container"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEventName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Event Title"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <!-- Image Upload Area -->
         <FrameLayout
@@ -37,7 +31,7 @@
             android:layout_height="200dp"
             android:layout_marginTop="16dp"
             android:background="#E0E0E0"
-            app:layout_constraintTop_toBottomOf="@id/tilEventName"
+            app:layout_constraintTop_toBottomOf="@id/eventName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -274,34 +268,29 @@
 
             <EditText
                 android:id="@+id/etLocation"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:layout_marginStart="8dp"
-                android:hint="Add a location..."
+                android:hint="Location"
+                android:background="@drawable/rounded_container"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
         <!-- Description Section -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilEventDetails"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Description of your event"
+            android:inputType="textMultiLine"
+            android:minLines="4"
+            android:gravity="top"
+            android:background="@drawable/rounded_container"
             android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@id/llLocation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEventDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Add a description of your event..."
-                android:inputType="textMultiLine"
-                android:minLines="4"
-                android:gravity="top"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <!-- Invite List Section -->
         <TextView
@@ -312,9 +301,10 @@
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/tilEventDetails"
+            app:layout_constraintTop_toBottomOf="@id/description"
             app:layout_constraintStart_toStartOf="parent"/>
 
+        <!-- Invited Users -->
         <TextView
             android:id="@+id/invitees"
             android:layout_width="match_parent"
@@ -325,54 +315,31 @@
             app:layout_constraintStart_toStartOf="@id/tvInviteList"
             app:layout_constraintTop_toBottomOf="@id/tvInviteList"/>
 
-        <!-- Invited Users -->
-
         <!-- Search Users -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilSearchUsers"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:startIconDrawable="@android:drawable/ic_menu_search"
-            app:layout_constraintTop_toBottomOf="@id/invitees"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/section_spacer"
+            app:layout_constraintTop_toBottomOf="@+id/invitees"
+            app:layout_constraintStart_toStartOf="@+id/invitees">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etSearchUsers"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/searchInput"
+                android:layout_width="269dp"
                 android:layout_height="wrap_content"
-                android:hint="Search Users"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:background="@drawable/rounded_container"
+                android:hint="Search username" />
 
-<!--        <LinearLayout-->
-<!--            android:id="@+id/searchBar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:paddingVertical="@dimen/section_spacer"-->
-<!--            android:paddingHorizontal="@dimen/page_padding"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/headerTitle"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/headerTitle"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/headerTitle">-->
-
-<!--            <EditText-->
-<!--                android:id="@+id/searchInput"-->
-<!--                android:layout_width="269dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/rounded_container"-->
-<!--                android:hint="Search username" />-->
-
-<!--            <Button-->
-<!--                android:id="@+id/searchBtn"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/rounded_tab"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:text="Search"/>-->
-<!--        </LinearLayout>-->
-
+            <Button
+                android:id="@+id/searchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_tab"
+                android:layout_marginStart="16dp"
+                android:text="Search"/>
+        </LinearLayout>
 
         <!-- User Search Results -->
         <androidx.recyclerview.widget.RecyclerView
@@ -382,8 +349,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/page_padding"
             android:nestedScrollingEnabled="false"
-            app:layout_constraintStart_toStartOf="@+id/tilSearchUsers"
-            app:layout_constraintTop_toBottomOf="@id/tilSearchUsers" />
+            app:layout_constraintStart_toStartOf="@+id/searchBar"
+            app:layout_constraintTop_toBottomOf="@id/searchBar" />
 
         <!-- Action Buttons -->
         <LinearLayout
