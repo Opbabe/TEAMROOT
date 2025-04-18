@@ -16,10 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
+import edu.sjsu.sase.android.roots.MyApplication;
 import edu.sjsu.sase.android.roots.R;
 import edu.sjsu.sase.android.roots.buddy.FriendRequestsFragment;
 import edu.sjsu.sase.android.roots.user.User;
@@ -37,6 +41,9 @@ public class BuddyListFragment extends Fragment {
     Button budsTab, blossomsTab, requestsTab;
     FragmentContainerView budsFragment, blossomsFragment, requestsFragment;
     HashMap<Button, FragmentContainerView> tabToFragmentMap = new HashMap<>();
+    private FirebaseFirestore db;
+    private User currUser;
+    private MyApplication app;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -71,8 +78,12 @@ public class BuddyListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        app = MyApplication.getInstance();
+        currUser = app.getCurrUser();
+        db = FirebaseFirestore.getInstance();
         // Inflate the layout for this fragment (initializes layout (UI) for fragment)
         View view = inflater.inflate(R.layout.fragment_buddy_list, container, false);
+
 
         // matches and friends list
         fetchBlossoms();
@@ -118,6 +129,9 @@ public class BuddyListFragment extends Fragment {
         blossomsList.clear();
         // TODO: implement mechanism to keep track of matches and replace hardcoded data
         // blossoms list: placeholder hardcoded data
+
+
+
         for (int i = 1; i <= 10; i++) {
             blossomsList.add(new User(i));
         }
@@ -143,9 +157,31 @@ public class BuddyListFragment extends Fragment {
         budsList.clear();
         // TODO: implement mechanism to keep track of friends and replace hardcoded data
         // buds list: placeholder hardcoded data
-        for (int i = 11; i <= 20; i++) {
-            budsList.add(new User(i));
-        }
+
+        db.collection("users").document(currUser.getId())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    //pull all fruebdreqs
+                    List<String> friends = (List<String>) documentSnapshot.get("friends");
+
+                    //ccyle thru each req and fetch id of requester
+                    if (friends != null) {
+                        for (String friend : friends) {
+                            db.collection("users").document(friend)
+                                    .get()
+                                            .addOnSuccessListener(friendDoc -> {
+                                                budsList.add(friendDoc.toObject(User.class));
+                                            })
+                                    .addOnFailureListener(e -> {
+
+                                    });
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // handle error here if you want idk im going to sleep
+                });
+
         Log.d("buddy list", "buds list size on create view: " + budsList.size());
         updateBudFragment();
     }
