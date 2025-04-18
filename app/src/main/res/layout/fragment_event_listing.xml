@@ -150,38 +150,6 @@
         app:layout_constraintStart_toEndOf="@+id/listingToSingle2" />
 
     <Button
-        android:id="@+id/listingToProfile"
-        android:layout_width="88dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="16dp"
-        android:text="profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/listingToBuddy"
-        android:layout_width="88dp"
-        android:layout_height="90dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="16dp"
-        android:text="Buddies"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/listingToHome"
-        android:layout_width="88dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="16dp"
-        android:text="Home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/listingToBuddy"
-        app:layout_constraintStart_toEndOf="@+id/listingToProfile" />
-
-    <Button
         android:id="@+id/listingToCreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

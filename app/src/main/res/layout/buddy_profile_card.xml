@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profileCard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/buddyImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/buddyName"
+            app:layout_constraintHeight_percent="0.7" />
+
+        <!-- Buddy Name -->
+        <TextView
+            android:id="@+id/buddyName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Sandra Le"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif-medium"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/buddyImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Interests -->
+        <LinearLayout
+            android:id="@+id/interestsLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintTop_toBottomOf="@id/buddyName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/btn_star"
+                app:tint="#000000" />
+
+            <TextView
+                android:id="@+id/tvInterests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="social, food, music, outdoor"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:fontFamily="sans-serif"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Bio -->
+        <TextView
+            android:id="@+id/tvBio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="erm this is my user bio for the profile :0"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:fontFamily="sans-serif"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/interestsLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView> 

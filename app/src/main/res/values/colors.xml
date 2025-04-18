@@ -6,4 +6,11 @@
     <color name="media_preview_background">#E0E0E0</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="nav_bar_background">#C1E1C1</color>
+    <color name="nav_bar_item_inactive">#000000</color>
+    <color name="nav_bar_item_active">#3E8F6E</color>
+    <color name="purple">#90759F</color>
+    <color name="periwinkle">#CCCCFF</color>
+    <color name="tea_green">#C1E1C1</color>
+    <color name="sea_green">#3E8F6E</color>
 </resources>

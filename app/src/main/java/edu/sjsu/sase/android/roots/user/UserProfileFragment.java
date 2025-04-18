@@ -1,6 +1,8 @@
 package edu.sjsu.sase.android.roots.user;
 
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -80,14 +82,13 @@ public class UserProfileFragment extends Fragment {
         tvInterests = view.findViewById(R.id.tvInterests);
         tvBio = view.findViewById(R.id.tvBio);
         rvEvents = view.findViewById(R.id.rvEvents);
-        btnOptions = view.findViewById(R.id.btnOptions);
-        
+
         // Initialize tab buttons
         btnUpcoming = view.findViewById(R.id.btnUpcoming);
         btnHosting = view.findViewById(R.id.btnHosting);
         btnInvites = view.findViewById(R.id.btnInvites);
         btnAttended = view.findViewById(R.id.btnAttended);
-        
+
         // Set user data
         name.setText(userToDisplay.getName());
         username.setText(userToDisplay.getUsername());
@@ -111,15 +112,12 @@ public class UserProfileFragment extends Fragment {
 
         // Setup event list
         setupEventsList();
-        
+
         // Setup tab buttons
         btnUpcoming.setOnClickListener(v -> updateEventsForTab(0));
         btnHosting.setOnClickListener(v -> updateEventsForTab(1));
         btnInvites.setOnClickListener(v -> updateEventsForTab(2));
         btnAttended.setOnClickListener(v -> updateEventsForTab(3));
-        
-        // Options menu
-        btnOptions.setOnClickListener(v -> showOptionsMenu());
 
         // Bottom navigation buttons
         Button editProfileBtn = view.findViewById(R.id.btnEditProfile);
@@ -138,12 +136,10 @@ public class UserProfileFragment extends Fragment {
 
         // Set onClick listeners
         editProfileBtn.setOnClickListener(this::onClickEditProfile);
-        logoutBtn.setOnClickListener(this::onClickLogout);
-        homeBtn.setOnClickListener(this::onClickHome);
-        buddiesBtn.setOnClickListener(this::onClickBuddySystem);
 
         return view;
     }
+
 
     /**
      * Handles incoming or outcoming friend requests
@@ -199,18 +195,14 @@ public class UserProfileFragment extends Fragment {
         // In a real app, you would show a popup menu here
         Toast.makeText(getContext(), "Options menu clicked", Toast.LENGTH_SHORT).show();
     }
-    
+
     /**
      * Sets up the events RecyclerView with sample data
      */
     private void setupEventsList() {
         // Create sample events (in a real app, this data would come from a database)
         List<Event> events = new ArrayList<>();
-        
-        // Add sample events
-        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
-        events.add(new Event("Event name", "April 8 - 7 pm", "host name", "outdoor, social, music", "", R.drawable.ic_profile));
-        
+
         // Create and set adapter
         EventAdapter adapter = new EventAdapter(events, event -> {
             // Handle event click if needed
@@ -228,7 +220,7 @@ public class UserProfileFragment extends Fragment {
         btnHosting.setBackgroundTintList(null);
         btnInvites.setBackgroundTintList(null);
         btnAttended.setBackgroundTintList(null);
-        
+
         // Highlight the selected tab
         switch (tabPosition) {
             case 0:
@@ -248,23 +240,23 @@ public class UserProfileFragment extends Fragment {
         // For demonstration, we create sample events for each tab
         List<Event> events = new ArrayList<>();
         
-        switch (tabPosition) {
-            case 0: // Upcoming
-                events.add(new Event("Upcoming Event", "April 10 - 8 pm", "host name", "outdoor, social", "", R.drawable.ic_profile));
-                events.add(new Event("Upcoming Event 2", "April 15 - 6 pm", "host name", "music, food", "", R.drawable.ic_profile));
-                break;
-            case 1: // Hosting
-                events.add(new Event("My Hosted Event", "April 20 - 7 pm", "You", "outdoor, music", "", R.drawable.ic_profile));
-                break;
-            case 2: // Invites
-                events.add(new Event("Invited Event", "April 12 - 9 pm", "friend name", "social, food", "", R.drawable.ic_profile));
-                events.add(new Event("Invited Event 2", "April 18 - 8 pm", "friend name", "music, outdoor", "", R.drawable.ic_profile));
-                break;
-            case 3: // Attended
-                events.add(new Event("Past Event", "March 25 - 7 pm", "host name", "social, music", "", R.drawable.ic_profile));
-                break;
-        }
-        
+//        switch (tabPosition) {
+//            case 0: // Upcoming
+//                events.add(new Event("Upcoming Event", "April 10 - 8 pm", "host name", "outdoor, social", "", R.drawable.ic_profile));
+//                events.add(new Event("Upcoming Event 2", "April 15 - 6 pm", "host name", "music, food", "", R.drawable.ic_profile));
+//                break;
+//            case 1: // Hosting
+//                events.add(new Event("My Hosted Event", "April 20 - 7 pm", "You", "outdoor, music", "", R.drawable.ic_profile));
+//                break;
+//            case 2: // Invites
+//                events.add(new Event("Invited Event", "April 12 - 9 pm", "friend name", "social, food", "", R.drawable.ic_profile));
+//                events.add(new Event("Invited Event 2", "April 18 - 8 pm", "friend name", "music, outdoor", "", R.drawable.ic_profile));
+//                break;
+//            case 3: // Attended
+//                events.add(new Event("Past Event", "March 25 - 7 pm", "host name", "social, music", "", R.drawable.ic_profile));
+//                break;
+//        }
+
         // Update adapter with new events
         EventAdapter adapter = new EventAdapter(events, event -> {
             // Handle event click if needed
@@ -279,32 +271,5 @@ public class UserProfileFragment extends Fragment {
     private void onClickEditProfile(View view) {
         NavController controller = Navigation.findNavController(view);
         controller.navigate(R.id.action_userProfileFragment_to_editProfileFragment);
-    }
-
-    /**
-     * Navigates to start screen.
-     * @param view
-     */
-    private void onClickLogout(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_userProfileFragment_to_startFragment);
-    }
-
-    /**
-     * Navigates to Home screen.
-     * @param view
-     */
-    private void onClickHome(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_userProfileFragment_to_homeFragment);
-    }
-
-    /**
-     * Navigates to Buddy System screen.
-     * @param view
-     */
-    private void onClickBuddySystem(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_userProfileFragment_to_buddySystemFragment);
     }
 }

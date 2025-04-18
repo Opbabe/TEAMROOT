@@ -20,18 +20,18 @@ import edu.sjsu.sase.android.roots.user.User;
 /**
  * A fragment representing a list of friends.
  */
-public class FriendFragment extends Fragment {
+public class RequestFragment extends Fragment {
     ArrayList<User> usersList = new ArrayList<>();
     ArrayList<User> pendingList;
     int pendingNavResId;
-    FriendRecyclerViewAdapter adapter;
+    RequestRecyclerViewAdapter adapter;
     RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public FriendFragment() {
+    public RequestFragment() {
     }
 
     /**
@@ -59,10 +59,10 @@ public class FriendFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_request_list, container, false);
 
         // pass data as argument to construct adapter
-        adapter = new FriendRecyclerViewAdapter(usersList);
+        adapter = new RequestRecyclerViewAdapter(usersList);
         // cast view to RecyclerView and set adapter for RecyclerView
         recyclerView = (RecyclerView) view;
         recyclerView.setAdapter(adapter);
@@ -86,9 +86,9 @@ public class FriendFragment extends Fragment {
      * Sets the adapter's friend list data to the specified ArrayList of data
      * @param usersList ArrayList of data
      */
-    public void setUsersList(ArrayList<edu.sjsu.sase.android.roots.user.User> usersList) {
+    public void setUsersList(ArrayList<User> usersList) {
         if (adapter != null) {
-            Log.d("friend frag", "friends list size: " + usersList.size());
+            Log.d("request frag", "request list size: " + usersList.size());
             adapter.setUsersList(usersList);
         }
         else {

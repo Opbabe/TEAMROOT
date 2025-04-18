@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -149,30 +149,6 @@
         <action
             android:id="@+id/action_buddyListFragment_to_userListingFragment"
             app:destination="@id/userListingFragment" />
-        <action
-            android:id="@+id/action_buddyListFragment_to_friendRequestsFragment"
-            app:destination="@id/friendRequestsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/friendRequestsFragment"
-        android:name="edu.sjsu.sase.android.roots.buddy.FriendRequestsFragment"
-        android:label="fragment_friend_requests"
-        tools:layout="@layout/fragment_friend_requests" >
-        <action
-            android:id="@+id/action_friendRequestsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_friendRequestsFragment_to_buddySystemFragment"
-            app:destination="@id/buddySystemFragment" />
-        <action
-            android:id="@+id/action_friendRequestsFragment_to_eventCreationFragment"
-            app:destination="@id/eventCreationFragment" />
-        <action
-            android:id="@+id/action_friendRequestsFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
-        <action
-            android:id="@+id/action_friendRequestsFragment_to_buddyListFragment"
-            app:destination="@id/buddyListFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventCreationFragment"

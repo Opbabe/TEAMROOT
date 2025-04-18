@@ -1,94 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".buddy.lists.BuddyListFragment"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingHorizontal="@dimen/page_padding"
+    tools:context=".buddy.lists.BuddyListFragment">
 
     <ImageView
         android:id="@+id/backArrowBtn"
-        android:layout_width="@dimen/back_arrow"
-        android:layout_height="@dimen/back_arrow"
-        android:src="@drawable/back_arrow_icon"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back_arrow_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toStartOf="@+id/title"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/screenHeading"
-        android:layout_width="match_parent"
+        android:id="@+id/title"
+        style="@style/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/buddies" />
+        android:text="Community Garden"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.034" />
 
-    <EditText
-        android:id="@+id/searchInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter username" />
-
-    <Button
-        android:id="@+id/searchBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search" />
-
-    <Button
-        android:id="@+id/requestBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/requests" />
-
-    <TextView
-        android:id="@+id/matchesHeading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/matches" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/matchesFragment"
-        android:name="edu.sjsu.sase.android.roots.buddy.lists.MatchFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/friendsHeading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/friends" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/friendsFragment"
-        android:name="edu.sjsu.sase.android.roots.buddy.lists.FriendFragment"
-        android:layout_width="match_parent"
-        android:layout_height="500dp" />
-
-<!-- TODO: replace buttons below with BottomNavigationView-->
-
+    <!-- Search Bar -->
     <LinearLayout
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/section_spacer"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/backArrowBtn"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="269dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_container"
+            android:hint="Search username" />
 
         <Button
-            android:id="@+id/homeBtn"
+            android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="home" />
-
-        <Button
-            android:id="@+id/buddiesBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="buddies" />
-
-        <Button
-            android:id="@+id/userProfileBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="profile" />
+            android:background="@drawable/rounded_tab"
+            android:layout_marginStart="16dp"
+            android:text="Search"/>
     </LinearLayout>
 
-</LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/searchCard"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/searchBar"
+        app:layout_constraintStart_toStartOf="@+id/searchBar"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        app:strokeColor="#E0E0E0"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="331dp"
+            tools:layout_editor_absoluteX="40dp"
+            tools:layout_editor_absoluteY="120dp">
+
+            <ImageView
+                android:id="@+id/searchIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="24dp"
+                tools:layout_conversion_absoluteWidth="24dp"
+                tools:layout_editor_absoluteX="52dp"
+                tools:layout_editor_absoluteY="133dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search events"
+                android:textColor="#757575"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/searchIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="22dp"
+                tools:layout_conversion_absoluteWidth="271dp"
+                tools:layout_editor_absoluteX="88dp"
+                tools:layout_editor_absoluteY="134dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/page_padding"
+        app:layout_constraintEnd_toEndOf="@+id/searchCard"
+        app:layout_constraintStart_toStartOf="@+id/searchCard"
+        app:layout_constraintTop_toBottomOf="@+id/searchCard">
+
+        <Button
+            android:id="@+id/budsTab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_tab"
+            android:text="@string/buds"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/blossomsTab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:layout_marginHorizontal="@dimen/list_space"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_tab_pressed"
+            android:text="@string/blossoms"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/requestsTab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_tab"
+            android:text="@string/requests"
+            android:textColor="@color/black"
+            android:textSize="@dimen/regular_text"
+            app:backgroundTint="@null" />
+
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/budsFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.lists.BudFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tabs"
+        app:layout_constraintStart_toStartOf="@+id/tabs"
+        app:layout_constraintTop_toBottomOf="@+id/tabs"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/blossomsFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.lists.BlossomsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tabs"
+        app:layout_constraintStart_toStartOf="@+id/tabs"
+        app:layout_constraintTop_toBottomOf="@+id/tabs"/>
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/requestsFragment"
+        android:name="edu.sjsu.sase.android.roots.buddy.lists.RequestFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tabs"
+        app:layout_constraintStart_toStartOf="@+id/tabs"
+        app:layout_constraintTop_toBottomOf="@+id/tabs"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

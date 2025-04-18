@@ -68,31 +68,6 @@ public class EventListingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event_listing, container, false);
 
-        Button listingToProfile = view.findViewById(R.id.listingToProfile);
-        Button listingToBuddy = view.findViewById(R.id.listingToBuddy);
-        Button listingToHome = view.findViewById(R.id.listingToHome);
-
-        listingToProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goProfile(view);
-            }
-        });
-
-        listingToBuddy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goBuddy(view);
-            }
-        });
-
-        listingToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goHome(view);
-            }
-        });
-
         Button listingToCreate = view.findViewById(R.id.listingToCreate);
 
         listingToCreate.setOnClickListener(new View.OnClickListener() {
@@ -127,22 +102,6 @@ public class EventListingFragment extends Fragment {
             }
         });
         return view;
-    }
-
-    private void goHome(View view){
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_eventListingFragment_to_homeFragment);
-
-    }
-
-    private void goProfile(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_eventListingFragment_to_userProfileFragment);
-    }
-
-    private void goBuddy(View view) {
-        NavController controller = Navigation.findNavController(view);
-        controller.navigate(R.id.action_eventListingFragment_to_buddySystemFragment);
     }
 
     private void goSingle1(View view) {

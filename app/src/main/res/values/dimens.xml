@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_margin">16dp</dimen>
+    <dimen name="text_margin">20dp</dimen>
     <dimen name="back_arrow">24dp</dimen>
+    <dimen name="page_padding">14dp</dimen>
+    <dimen name="list_space">8dp</dimen>
+    <dimen name="button_horizontal_padding">16dp</dimen>
+    <dimen name="button_vertical_padding">10dp</dimen>
+    <dimen name="big_text">24sp</dimen>
+    <dimen name="regular_text">16sp</dimen>
+    <dimen name="small_text">14sp</dimen>
+    <dimen name="section_spacer">20dp</dimen>
+    <dimen name="profile_pic_list">50dp</dimen>
+    <dimen name="icon">25dp</dimen>
 </resources>

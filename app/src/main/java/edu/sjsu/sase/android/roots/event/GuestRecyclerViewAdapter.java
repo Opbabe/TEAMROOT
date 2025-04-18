@@ -1,10 +1,4 @@
-package edu.sjsu.sase.android.roots.buddy.lists;
-
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
+package edu.sjsu.sase.android.roots.event;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -12,23 +6,30 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.squareup.picasso.Picasso;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
-import edu.sjsu.sase.android.roots.R;
-import edu.sjsu.sase.android.roots.user.User;
-import edu.sjsu.sase.android.roots.databinding.FragmentFriendBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Creates view for each Friend in Friends List of the Buddies List screen.
- */
-public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecyclerViewAdapter.ViewHolder> {
-    private List<User> usersList;
-    private int navigationId;
+import edu.sjsu.sase.android.roots.R;
+import edu.sjsu.sase.android.roots.databinding.FragmentGuestBinding;
+import edu.sjsu.sase.android.roots.user.User;
 
-    public FriendRecyclerViewAdapter(ArrayList<User> items) {
+/**
+ * Creates view for each guest in guest List of the event screen.
+ */
+public class GuestRecyclerViewAdapter extends RecyclerView.Adapter<GuestRecyclerViewAdapter.ViewHolder> {
+    private ArrayList<User> usersList;
+    private int navigationId;
+    boolean isOnSingleEvent;
+
+    public GuestRecyclerViewAdapter(ArrayList<User> items) {
         usersList = items;
     }
 
@@ -42,7 +43,7 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(FragmentFriendBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new ViewHolder(FragmentGuestBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     /**
@@ -53,10 +54,11 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
      */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Log.d("friend adapter", "onbindviewholder: " + position);
+        Log.d("guest adapter", "guest list size on create view: " +  usersList.size());
+        Log.d("guest adapter", "onbindviewholder: " + position);
         // profile user info
         holder.binding.name.setText(usersList.get(position).getName());
-        holder.binding.username.setText(usersList.get(position).getUsername());
+        holder.binding.username.setText(usersList.get(position).getName());
         String picUrl = usersList.get(position).getProfilePicUrl();
         if (picUrl != null && !picUrl.isEmpty()) {
             Picasso.with(holder.binding.name.getContext())
@@ -79,9 +81,9 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         // bind with fragment_friend.xml
-        protected final FragmentFriendBinding binding;
+        protected final FragmentGuestBinding binding;
 
-        public ViewHolder(FragmentFriendBinding binding) {
+        public ViewHolder(FragmentGuestBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -89,16 +91,17 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
             // When the row is clicked, navigate to the appropriate page
             this.binding.getRoot().setOnClickListener(view -> {
                 int position = getLayoutPosition();
-                if (navigationId != 0 && position != RecyclerView.NO_POSITION){
+                // navigate to profile page
+                if (isOnSingleEvent && position != RecyclerView.NO_POSITION){
                     // user clicked on
                     User user = usersList.get(position);
                     // pass user as data to the appropriate page
                     Bundle bundle = new Bundle();
                     bundle.putParcelable(this.binding.name.getContext().getString(R.string.user_argument_key), user);
                     NavController controller = Navigation.findNavController(view);
-                    controller.navigate(navigationId, bundle);
-                    navigationId = 0;
+                    controller.navigate(R.id.action_singleEventFragment_to_userProfileFragment, bundle);
                 }
+                // TODO: add to event guest list
             });
         }
     }
@@ -120,7 +123,15 @@ public class FriendRecyclerViewAdapter extends RecyclerView.Adapter<FriendRecycl
     @SuppressLint("NotifyDataSetChanged")
     public void setUsersList(ArrayList<User> usersList) {
         this.usersList = usersList;
-        Log.d("friend adapter", "friends list size: " + this.usersList.size());
+        Log.d("guest adapter", "guest list size: " + this.usersList.size());
         notifyDataSetChanged(); // Notify the RecyclerView to refresh the UI
+    }
+
+    /**
+     * Set which screen the guest fragment is on.
+     * @param state true is single event screen, otherwise false
+     */
+    public void setIsOnSingleEvent(boolean state) {
+        isOnSingleEvent = state;
     }
 }

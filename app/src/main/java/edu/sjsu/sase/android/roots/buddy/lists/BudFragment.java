@@ -2,6 +2,7 @@ package edu.sjsu.sase.android.roots.buddy.lists;
 
 import android.os.Bundle;
 
+import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,22 +16,23 @@ import java.util.ArrayList;
 import edu.sjsu.sase.android.roots.R;
 import edu.sjsu.sase.android.roots.user.User;
 
+
 /**
- * A fragment representing a list of matches.
+ * A fragment representing a list of friends.
  */
-public class MatchFragment extends Fragment {
+public class BudFragment extends Fragment {
     ArrayList<User> usersList = new ArrayList<>();
     ArrayList<User> pendingList;
-    MatchRecyclerViewAdapter adapter;
+    int pendingNavResId;
+    BudRecyclerViewAdapter adapter;
     RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MatchFragment() {
+    public BudFragment() {
     }
-
 
     /**
      * Starting point for the fragment.
@@ -40,7 +42,6 @@ public class MatchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     /**
@@ -58,10 +59,10 @@ public class MatchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_match_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_bud_list, container, false);
 
         // pass data as argument to construct adapter
-        adapter = new MatchRecyclerViewAdapter(usersList);
+        adapter = new BudRecyclerViewAdapter(usersList);
         // cast view to RecyclerView and set adapter for RecyclerView
         recyclerView = (RecyclerView) view;
         recyclerView.setAdapter(adapter);
@@ -72,16 +73,22 @@ public class MatchFragment extends Fragment {
             pendingList = null;
         }
 
+        // set adapter's navigation to the pending navigation res id
+        if (pendingNavResId != 0) {
+            adapter.setNavigationId(pendingNavResId);
+            pendingNavResId = 0;
+        }
+
         return view;
     }
 
     /**
-     * Sets the matches list data to the specified ArrayList of data
+     * Sets the adapter's friend list data to the specified ArrayList of data
      * @param usersList ArrayList of data
      */
     public void setUsersList(ArrayList<User> usersList) {
         if (adapter != null) {
-            Log.d("match frag", "match list size: " + usersList.size());
+            Log.d("bud frag", "buds list size: " + usersList.size());
             adapter.setUsersList(usersList);
         }
         else {
@@ -89,4 +96,19 @@ public class MatchFragment extends Fragment {
             pendingList = usersList;
         }
     }
+
+    /**
+     * Sets the adapter's navigation id to the specified value.
+     * @param resId an action id or destination id to navigation to
+     */
+    public void setNavigationId(@IdRes int resId) {
+        if (adapter != null) {
+            adapter.setNavigationId(resId);
+        }
+        else {
+            // temporarily store resId until adapter is created
+            pendingNavResId = resId;
+        }
+    }
+
 }
